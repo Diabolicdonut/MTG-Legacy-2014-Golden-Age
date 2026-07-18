@@ -1,0 +1,1249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A historical and strategic guide to Legacy Miracles from Avacyn Restored in 2012 through the pre–Treasure Cruise metagame of September 2014.">
+<title>Legacy Miracles, 2012–2014 — The CounterTop Golden Era</title>
+<style>
+  :root{
+    --ink:#e9edf5;
+    --muted:#aeb8ca;
+    --paper:#101722;
+    --paper-2:#151f2d;
+    --paper-3:#1c2939;
+    --line:#314155;
+    --gold:#d7b86a;
+    --blue:#79b8ff;
+    --ice:#cce5ff;
+    --red:#f49b8e;
+    --green:#9dd6b0;
+    --shadow:0 18px 50px rgba(0,0,0,.34);
+    --radius:18px;
+    --max:1220px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 10% -10%, rgba(80,130,190,.22), transparent 34rem),
+      radial-gradient(circle at 95% 14%, rgba(215,184,106,.13), transparent 28rem),
+      var(--paper);
+    font:17px/1.68 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  a{color:var(--blue);text-decoration-thickness:.08em;text-underline-offset:.18em}
+  a:hover{color:var(--ice)}
+  img{max-width:100%;display:block}
+  .hero{
+    min-height:78vh;
+    position:relative;
+    display:grid;
+    place-items:end center;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+    isolation:isolate;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;inset:0;
+    background:
+      linear-gradient(90deg,rgba(7,12,19,.95) 0%,rgba(7,12,19,.70) 45%,rgba(7,12,19,.26) 75%,rgba(7,12,19,.55) 100%),
+      linear-gradient(0deg,var(--paper) 0%,transparent 50%),
+      url("https://api.scryfall.com/cards/named?exact=Terminus&format=image&version=art_crop") center 30% / cover no-repeat;
+    z-index:-2;
+    filter:saturate(.85) contrast(1.05);
+  }
+  .hero::after{
+    content:"";
+    position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:48px 48px;
+    mask-image:linear-gradient(to bottom,rgba(0,0,0,.7),transparent 75%);
+    z-index:-1;
+  }
+  .hero-inner{width:min(var(--max),calc(100% - 36px));padding:100px 0 62px}
+  .eyebrow{letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--gold);font-size:.78rem}
+  h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;line-height:1.13;margin:0 0 .55em}
+  h1{font-size:clamp(3rem,8vw,7.4rem);max-width:1050px;letter-spacing:-.045em}
+  .dek{font-size:clamp(1.08rem,2vw,1.38rem);max-width:780px;color:#d5deea;margin:0 0 24px}
+  .meta{display:flex;gap:10px;flex-wrap:wrap}
+  .pill{border:1px solid rgba(255,255,255,.22);background:rgba(9,15,24,.66);padding:7px 12px;border-radius:999px;color:#d8e1ed;font-size:.86rem;backdrop-filter:blur(10px)}
+  .caption{font-size:.78rem;color:var(--muted);margin-top:12px}
+  .layout{
+    width:min(var(--max),calc(100% - 36px));
+    margin:42px auto 90px;
+    display:grid;
+    grid-template-columns:265px minmax(0,1fr);
+    gap:44px;
+    align-items:start;
+  }
+  nav.toc{
+    position:sticky;top:22px;
+    background:rgba(21,31,45,.9);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:19px 18px 17px;
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(14px);
+    max-height:calc(100vh - 44px);
+    overflow:auto;
+  }
+  .toc-title{font-weight:850;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem;color:var(--gold);margin-bottom:10px}
+  .toc ol{list-style:none;padding:0;margin:0}
+  .toc li{margin:1px 0}
+  .toc a{display:block;color:var(--muted);text-decoration:none;padding:7px 9px;border-radius:9px;font-size:.91rem;line-height:1.25}
+  .toc a:hover,.toc a.active{background:var(--paper-3);color:white}
+  main{min-width:0}
+  section{scroll-margin-top:28px;margin:0 0 62px}
+  h2{font-size:clamp(2rem,4.2vw,3.55rem);letter-spacing:-.025em;padding-bottom:13px;border-bottom:1px solid var(--line)}
+  h3{font-size:1.55rem;margin-top:1.75em}
+  h4{font-size:1.16rem;margin-top:1.4em;color:var(--ice)}
+  p{margin:.85em 0}
+  .lead{font-size:1.18rem;color:#dce5f1}
+  .dropcap:first-letter{float:left;font-family:Georgia,serif;font-size:4.3rem;line-height:.78;padding:.11em .12em 0 0;color:var(--gold)}
+  .callout{
+    margin:24px 0;padding:20px 22px;
+    border:1px solid var(--line);
+    border-left:4px solid var(--gold);
+    background:linear-gradient(135deg,rgba(215,184,106,.10),rgba(121,184,255,.04));
+    border-radius:0 var(--radius) var(--radius) 0;
+  }
+  .callout strong{color:#fff}
+  .grid-2,.grid-3{display:grid;gap:18px;margin:22px 0}
+  .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .card{
+    background:var(--paper-2);border:1px solid var(--line);
+    border-radius:var(--radius);padding:20px;box-shadow:0 12px 32px rgba(0,0,0,.15)
+  }
+  .card h3,.card h4{margin-top:0}
+  .stat{font:800 2.1rem/1 Georgia,serif;color:var(--gold);margin-bottom:8px}
+  .small{font-size:.9rem;color:var(--muted)}
+  .art-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:25px 0}
+  figure{margin:0}
+  .art-grid figure{background:var(--paper-2);border:1px solid var(--line);border-radius:15px;overflow:hidden}
+  .art-grid img{aspect-ratio:1.25/1;object-fit:cover;background:#0b111a}
+  figcaption{padding:10px 12px;font-size:.78rem;color:var(--muted)}
+  .timeline{position:relative;margin:30px 0 0;padding-left:28px}
+  .timeline::before{content:"";position:absolute;left:6px;top:8px;bottom:7px;width:2px;background:linear-gradient(var(--gold),var(--blue))}
+  .event{position:relative;margin:0 0 26px}
+  .event::before{content:"";position:absolute;left:-28px;top:.48em;width:13px;height:13px;background:var(--paper);border:3px solid var(--gold);border-radius:50%}
+  .date{font-weight:850;color:var(--gold);font-size:.83rem;letter-spacing:.08em;text-transform:uppercase}
+  .deck-shell{background:#0c131e;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin:25px 0}
+  .deck-head{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(121,184,255,.12),rgba(215,184,106,.08))}
+  .deck-head h3{margin:0}
+  button{
+    appearance:none;border:1px solid #516983;color:white;background:#223247;
+    border-radius:10px;padding:9px 12px;font-weight:750;cursor:pointer
+  }
+  button:hover{background:#2c4058}
+  .deck-columns{display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .deck-column{padding:20px}
+  .deck-column + .deck-column{border-left:1px solid var(--line)}
+  .deck-group{margin-bottom:20px}
+  .deck-group h4{font-family:Inter,sans-serif;font-size:.79rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin:0 0 8px}
+  .deck-row{display:flex;justify-content:space-between;gap:18px;padding:3px 0;border-bottom:1px dotted rgba(255,255,255,.08)}
+  .qty{font-variant-numeric:tabular-nums;color:var(--blue);min-width:1.5em}
+  .package{display:flex;gap:15px;align-items:flex-start}
+  .package .number{flex:0 0 39px;height:39px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;color:var(--gold);font-weight:850}
+  ul,ol{padding-left:1.25em}
+  li{margin:.38em 0}
+  .rules{counter-reset:rule}
+  .rules .card{position:relative;padding-left:72px}
+  .rules .card::before{counter-increment:rule;content:counter(rule);position:absolute;left:20px;top:20px;width:35px;height:35px;display:grid;place-items:center;border-radius:50%;background:var(--paper-3);border:1px solid var(--line);color:var(--gold);font-weight:900}
+  .table-wrap{overflow-x:auto;margin:23px 0;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 12px 30px rgba(0,0,0,.12)}
+  table{border-collapse:collapse;width:100%;min-width:830px;background:var(--paper-2);font-size:.91rem}
+  th,td{text-align:left;vertical-align:top;padding:13px 14px;border-bottom:1px solid var(--line)}
+  th{position:sticky;top:0;background:#223044;color:#fff;font-size:.76rem;text-transform:uppercase;letter-spacing:.07em}
+  tr:last-child td{border-bottom:0}
+  tbody tr:hover{background:rgba(121,184,255,.045)}
+  .role{display:inline-block;font-weight:800;border-radius:999px;padding:3px 8px;font-size:.74rem;white-space:nowrap}
+  .control{background:rgba(121,184,255,.14);color:#badeff}
+  .lock{background:rgba(215,184,106,.16);color:#f1d891}
+  .pivot{background:rgba(157,214,176,.14);color:#bcebc9}
+  .danger{color:#ffb6aa}
+  .good{color:#bcebc9}
+  .source-list{padding-left:1.25em}
+  .source-list li{margin:.7em 0}
+  .source-list span{color:var(--muted)}
+  .note{font-size:.88rem;color:var(--muted)}
+  .quote{font-family:Georgia,serif;font-size:1.25rem;color:#dde8f6;border-left:3px solid var(--blue);padding-left:19px;margin:28px 0}
+  .footer{border-top:1px solid var(--line);padding:30px 18px 50px;text-align:center;color:var(--muted);font-size:.86rem}
+  code{background:#0b1119;border:1px solid var(--line);border-radius:6px;padding:.08em .35em}
+  .print-only{display:none}
+
+  .history-deck{margin:18px 0;border:1px solid var(--line);border-radius:var(--radius);background:rgba(21,31,45,.72);overflow:hidden}
+  .history-deck > summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 20px;background:linear-gradient(90deg,rgba(121,184,255,.08),rgba(215,184,106,.05));user-select:none}
+  .history-deck > summary::-webkit-details-marker{display:none}
+  .history-deck > summary strong{display:block;font-family:Georgia,"Times New Roman",serif;font-size:1.22rem;color:#fff}
+  .history-deck > summary small{display:block;margin-top:3px;color:var(--muted);font-size:.82rem}
+  .history-deck .deck-toggle{font-size:1.6rem;color:var(--gold);line-height:1;transition:transform .2s ease}
+  .history-deck[open] .deck-toggle{transform:rotate(45deg)}
+  .deck-body{padding:0 18px 18px}
+  .deck-note{margin:18px 2px 0;padding:14px 16px;border-left:3px solid var(--blue);background:rgba(121,184,255,.055);border-radius:0 10px 10px 0;color:#d7e1ed}
+  .reference-deck{border-color:#51769b}
+  .hindsight-deck{border-color:#a98a43;box-shadow:0 0 0 1px rgba(215,184,106,.08),0 18px 45px rgba(0,0,0,.2)}
+  .hindsight-deck > summary{background:linear-gradient(90deg,rgba(215,184,106,.17),rgba(121,184,255,.06))}
+  .deck-text{white-space:pre-wrap}
+  .card-name{color:#e8eef7;border-bottom:1px dotted rgba(121,184,255,.7);cursor:zoom-in;outline:none}
+  .card-name:hover,.card-name:focus{color:#fff;border-bottom-color:var(--gold);text-shadow:0 0 14px rgba(121,184,255,.42)}
+  #cardPreview{position:fixed;z-index:9999;width:min(310px,calc(100vw - 28px));pointer-events:none;opacity:0;transform:translateY(6px) scale(.98);transition:opacity .12s ease,transform .12s ease;filter:drop-shadow(0 22px 32px rgba(0,0,0,.55))}
+  #cardPreview.visible{opacity:1;transform:translateY(0) scale(1)}
+  #cardPreview img{width:100%;border-radius:4.75% / 3.5%;background:#111;box-shadow:0 0 0 1px rgba(255,255,255,.18)}
+  #cardPreview .preview-label{margin-top:7px;text-align:center;font-size:.76rem;color:#e8eef7;background:rgba(8,13,20,.92);border:1px solid var(--line);border-radius:8px;padding:5px 8px}
+
+  @media (max-width:950px){
+    .layout{grid-template-columns:1fr}
+    nav.toc{position:relative;top:auto;max-height:none}
+    .grid-3{grid-template-columns:1fr}
+    .art-grid{grid-template-columns:1fr 1fr}
+  }
+  @media (hover:none){
+    #cardPreview{left:50%!important;top:50%!important;transform:translate(-50%,-47%) scale(.98)}
+    #cardPreview.visible{transform:translate(-50%,-50%) scale(1)}
+    .card-name{cursor:pointer}
+  }
+  @media (max-width:680px){
+    body{font-size:16px}
+    .hero{min-height:68vh}
+    .layout,.hero-inner{width:min(100% - 24px,var(--max))}
+    .grid-2,.deck-columns{grid-template-columns:1fr}
+    .deck-column + .deck-column{border-left:0;border-top:1px solid var(--line)}
+    .art-grid{grid-template-columns:1fr}
+    .deck-head{align-items:flex-start;flex-direction:column}
+  }
+  @media print{
+    :root{--ink:#111;--muted:#444;--paper:#fff;--paper-2:#fff;--paper-3:#eee;--line:#aaa}
+    body{background:#fff;color:#111;font-size:10pt}
+    .hero{min-height:0;display:block;border:0}
+    .hero::before,.hero::after,nav.toc,button{display:none}
+    .hero-inner{padding:0 0 20px;width:100%}
+    h1{font-size:34pt;color:#111}
+    .dek,.caption,.pill{color:#222}
+    .pill{border-color:#777;background:#fff}
+    .layout{display:block;width:100%;margin:0}
+    section{break-inside:auto}
+    .card,.deck-shell,.table-wrap{box-shadow:none}
+    a{color:#111}
+    .print-only{display:block}
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Legacy archetype dossier · 2012–September 2014</div>
+    <h1>Miracles</h1>
+    <p class="dek">The definitive control deck of pre–Treasure Cruise Legacy: Counterbalance and Sensei’s Divining Top, one-mana sweepers, instant-speed armies, and a pilot rewarded for planning several turns ahead.</p>
+    <div class="meta">
+      <span class="pill">U/W/r control</span>
+      <span class="pill">CounterTop prison</span>
+      <span class="pill">Terminus · Entreat · Jace</span>
+      <span class="pill">Historical rules and card pool</span>
+    </div>
+    <p class="caption">Hero artwork: <em>Terminus</em>, art by James Paick. Card image delivered by Scryfall; Magic artwork © Wizards of the Coast.</p>
+  </div>
+</header>
+
+<div class="layout">
+<nav class="toc" aria-label="Table of contents">
+  <div class="toc-title">Table of contents</div>
+  <ol>
+    <li><a href="#scope">Scope of this guide</a></li>
+    <li><a href="#identity">1. Cover and deck identity</a></li>
+    <li><a href="#what-it-does">2. What this deck does</a></li>
+    <li><a href="#history">3. History and evolution</a></li>
+    <li><a href="#exact-75">4. Historical decklists and final 75</a></li>
+    <li><a href="#mulligans">5. Mulligans and opening turns</a></li>
+    <li><a href="#interactions">6. Key interactions</a></li>
+    <li><a href="#piloting">7. How to pilot the deck</a></li>
+    <li><a href="#sideboarding">8. Sideboarding principles</a></li>
+    <li><a href="#matchups">9. Gauntlet-specific matchup guide</a></li>
+    <li><a href="#historical-notes">10. Historical notes and sources</a></li>
+  </ol>
+</nav>
+
+<main>
+<section id="scope">
+  <div class="callout">
+    <strong>Historical scope.</strong> This guide reconstructs Miracles as it existed from the release of <em>Avacyn Restored</em> in spring 2012 through the established U/W/r “Ponder Miracles” lists of August and early September 2014. The endpoint is deliberately placed before <em>Khans of Tarkir</em> and <em>Treasure Cruise</em> transformed blue Legacy. It is not a guide to current Legacy, and it assumes the card legality, rules, and opposing decks of that period.
+  </div>
+</section>
+
+<section id="identity">
+  <div class="eyebrow">1 · Cover and deck identity</div>
+  <h2>Control the draw, control the game</h2>
+  <p class="lead dropcap">Miracles was a blue-white control deck with a light red splash, but that description understates what made it special. It joined a conventional Legacy control core—Brainstorm, Force of Will, Swords to Plowshares and Jace, the Mind Sculptor—to a repeatable library-manipulation engine. Sensei’s Divining Top selected draws and staged miracle cards. Counterbalance converted knowledge of the top card into a soft lock. Terminus and Entreat the Angels turned a normally awkward timing restriction into an enormous mana advantage.</p>
+
+  <div class="grid-3">
+    <div class="card"><div class="stat">1 mana</div><strong>Reset the battlefield.</strong><p class="small">Terminus answers almost every creature at once and places them on the bottom rather than in the graveyard.</p></div>
+    <div class="card"><div class="stat">2 cards</div><strong>Form the prison engine.</strong><p class="small">Counterbalance plus Sensei’s Divining Top makes cheap spells unreliable and forces the opponent to fight on your terms.</p></div>
+    <div class="card"><div class="stat">1 turn</div><strong>Convert defense into victory.</strong><p class="small">A protected Jace or a miracle Entreat can end a game that looked completely even one turn earlier.</p></div>
+  </div>
+
+  <h3>The deck’s four identities</h3>
+  <div class="grid-2">
+    <div class="card">
+      <h4>Draw-go control</h4>
+      <p>Against Delver, tribal aggro, Maverick, Jund and most creature decks, Miracles is the pure control deck. It trades early, protects its mana, clears the board, then wins after the opponent’s pressure has been exhausted.</p>
+    </div>
+    <div class="card">
+      <h4>Soft-prison deck</h4>
+      <p>Against cantrip-heavy blue decks and spell-based combo, Counterbalance is not merely value. With Top, it can deny broad bands of mana values and compel the opponent to spend resources before attempting a decisive spell.</p>
+    </div>
+    <div class="card">
+      <h4>Tap-out planeswalker deck</h4>
+      <p>In fair, slow games, the goal becomes landing Jace with a clean battlefield and enough protection. Jace’s Brainstorm continuously improves Counterbalance coverage and puts stranded miracles back on top.</p>
+    </div>
+    <div class="card">
+      <h4>Flash threat deck</h4>
+      <p>Post-board Vendilion Clique and end-step Entreat let Miracles pressure combo and control without surrendering its ability to interact. The deck can suddenly change from “do nothing” to a two-turn clock.</p>
+    </div>
+  </div>
+
+  <div class="art-grid" aria-label="Signature Miracles cards">
+    <figure>
+      <img loading="lazy" src="https://api.scryfall.com/cards/named?exact=Sensei%27s%20Divining%20Top&format=image&version=art_crop" alt="Sensei's Divining Top artwork">
+      <figcaption><strong>Sensei’s Divining Top</strong> — selection, miracle setup and Counterbalance control.</figcaption>
+    </figure>
+    <figure>
+      <img loading="lazy" src="https://api.scryfall.com/cards/named?exact=Counterbalance&format=image&version=art_crop" alt="Counterbalance artwork">
+      <figcaption><strong>Counterbalance</strong> — the soft lock that punishes Legacy’s compressed mana curve.</figcaption>
+    </figure>
+    <figure>
+      <img loading="lazy" src="https://api.scryfall.com/cards/named?exact=Terminus&format=image&version=art_crop" alt="Terminus artwork">
+      <figcaption><strong>Terminus</strong> — a one-mana sweeper that attacks graveyard recursion as well as the battlefield.</figcaption>
+    </figure>
+    <figure>
+      <img loading="lazy" src="https://api.scryfall.com/cards/named?exact=Entreat%20the%20Angels&format=image&version=art_crop" alt="Entreat the Angels artwork">
+      <figcaption><strong>Entreat the Angels</strong> — a compact win condition that can be deployed at instant speed through miracle.</figcaption>
+    </figure>
+  </div>
+  <p class="note">Artwork is shown for historical and educational identification. Images are requested from Scryfall’s named-card image endpoint; card names, frames and artwork are property of Wizards of the Coast and the credited artists.</p>
+</section>
+
+<section id="what-it-does">
+  <div class="eyebrow">2 · What this deck does</div>
+  <h2>A three-stage control machine</h2>
+  <p>Miracles does not usually win by answering every card one-for-one. It wins by surviving until its cards begin answering entire classes of opposing cards. Terminus invalidates creature accumulation. CounterTop invalidates clusters of cheap spells. Jace invalidates ordinary draw steps. Entreat invalidates the opponent’s assumption that a stable board means a stable game.</p>
+
+  <div class="rules grid-2">
+    <div class="card"><h4>Stabilize mana and information</h4><p>Fetch basic Island, find Top or Ponder, identify whether the opponent is attacking your life total, your hand, your mana, or the stack. Avoid exposing Tundra or Volcanic Island without a reason.</p></div>
+    <div class="card"><h4>Trade only where necessary</h4><p>Swords, Force, Counterspell and Terminus are not interchangeable. Use the cheapest answer that preserves the resources needed for the opponent’s next axis of attack.</p></div>
+    <div class="card"><h4>Establish an engine</h4><p>Top plus fetchland improves every draw. Counterbalance plus Top constrains the opponent. Jace plus a stable board creates overwhelming selection. The engine matters more than an early clock.</p></div>
+    <div class="card"><h4>Turn the corner decisively</h4><p>Do not Entreat merely because you can. Cast it when the resulting clock is worth tapping mana, when it protects Jace, or when delaying gives the opponent meaningful outs.</p></div>
+  </div>
+
+  <h3>Why the shell fit the 2012–2014 Legacy card pool</h3>
+  <p>Legacy’s best decks were heavily concentrated at one and two mana. Delver shells, Storm, Elves, Stoneblade and tribal decks all relied on efficient spells. That made Counterbalance unusually broad. At the same time, creature strategies frequently relied on protection, recursion or resilient board development; Terminus ignored indestructibility, shroud and death triggers because it neither targeted nor destroyed. The same Top that enabled these cards also made a 21-land control deck function with remarkable consistency.</p>
+
+  <div class="callout">
+    <strong>The central exchange:</strong> Miracles spends small amounts of mana and time arranging the library, then receives disproportionate effects. The opponent’s opportunity is to exploit the setup cost—through Wasteland, Stifle, Abrupt Decay, discard, fast combo, a planeswalker, or the tournament clock—before the engine becomes self-sustaining.
+  </div>
+</section>
+
+<section id="history">
+  <div class="eyebrow">3 · History and evolution</div>
+  <h2>From experimental shells to the format’s reference control deck</h2>
+  <div class="timeline">
+    <div class="event">
+      <div class="date">April–May 2012 · Avacyn Restored</div>
+      <h3>Miracle becomes a tournament mechanic</h3>
+      <p><em>Terminus</em> and <em>Entreat the Angels</em> immediately offered effects Legacy control wanted, but at costs that became absurd when the top of the library could be engineered. The older Counterbalance–Top package supplied exactly that engineering. Brainstorm, Jace and fetchlands completed the bridge between the two engines.</p>
+    </div>
+    <div class="event">
+      <div class="date">July 2012 · Grand Prix Ghent</div>
+      <h3>The archetype arrives before its list is solved</h3>
+      <p>Max Sjöblom and Andrea Milillo both reached the Top 8 of the 1,345-player Legacy Grand Prix. Their lists show how open the archetype still was. Sjöblom played a black splash, Vedalken Shackles and a mixed miracle count. Milillo played 61 cards, Standstill, Mishra’s Factory, Elspeth and only two Swords to Plowshares alongside two Path to Exile. The strategic core was visible, but “the Miracles 75” did not yet exist.</p>
+    </div>
+    <div class="event">
+      <div class="date">2012–2013 · The refinement period</div>
+      <h3>Control pilots test every surrounding shell</h3>
+      <p>Lists explored black discard, Rest in Peace packages, Standstill, Helm of Obedience, Moat, extra Cliques, more lands, fewer cantrips and various removal suites. The stable center remained Top, Brainstorm, Force, Counterbalance, Terminus and Jace. The question was how much of the deck should be devoted to making that center consistent.</p>
+    </div>
+    <div class="event">
+      <div class="date">Late 2013 · True-Name Nemesis</div>
+      <h3>Sweepers and non-targeting answers gain value</h3>
+      <p>True-Name Nemesis strengthened UWR Delver and Stoneblade while making ordinary spot-removal packages less reliable. Terminus was already the cleanest answer. Engineered Explosives, red blasts and later Council’s Judgment gave Miracles additional post-board tools without changing its primary identity.</p>
+    </div>
+    <div class="event">
+      <div class="date">February 2014 · Grand Prix Paris</div>
+      <h3>Miracles becomes a pillar, not a curiosity</h3>
+      <p>Miracles was the second-most represented archetype on Day 2 and placed three pilots in the Top 8. Philipp Schönegger finished in the Top 4. His report and later primer describe a deck that had favorable play across the top tables and rewarded specialist knowledge.</p>
+    </div>
+    <div class="event">
+      <div class="date">Summer 2014 · Ponder Miracles</div>
+      <h3>Consistency wins the internal debate</h3>
+      <p>The streamlined build cut down to 21 lands, removed narrow maindeck creatures, maximized Ponder and Counterbalance, and added a flexible Council’s Judgment. It was less interested in drawing a particular silver bullet and more interested in seeing enough cards to assemble the correct answer package every game.</p>
+    </div>
+    <div class="event">
+      <div class="date">September 2014 · The cutoff</div>
+      <h3>Treasure Cruise opens a different Legacy era</h3>
+      <p><em>Khans of Tarkir</em> introduced delve decks capable of rebuilding with a one-mana draw-three. The resulting Delver metagame belongs to the next historical chapter. This guide stops just before that inflection point.</p>
+    </div>
+  </div>
+
+  <h3>What changed between Ghent and the mature 2014 list?</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Design question</th><th>Early 2012 answers</th><th>Mature pre-Cruise answer</th></tr></thead>
+      <tbody>
+        <tr><td>How many cantrips?</td><td>Brainstorm was universal; Ponder could be absent while Standstill or additional lands carried the draw burden.</td><td>Four Brainstorm and four Ponder, with Top, made 21 lands and a compact threat package dependable.</td></tr>
+        <tr><td>How many miracles?</td><td>Counts varied, often three Terminus and one or two Entreat.</td><td>Four Terminus and two Entreat became the clean default.</td></tr>
+        <tr><td>Which secondary color?</td><td>Black for discard and graveyard cards; red appeared in some sideboards.</td><td>Red became the standard light splash for Red Elemental Blast and Pyroblast.</td></tr>
+        <tr><td>What wins?</td><td>Jace, Entreat, Clique, Mishra’s Factory, Elspeth, Shackles or hybrid packages.</td><td>Three Jace, two Entreat and Snapcaster value; sideboard Clique and Keranos supplied alternate pressure.</td></tr>
+        <tr><td>What fills the flex slots?</td><td>Standstill, Spell Snare, Path, Oblivion Ring, Shackles, Moat.</td><td>More Counterbalance and Ponder, plus Council’s Judgment as a general answer.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="exact-75">
+  <div class="eyebrow">4 · Historical decklists and final 75</div>
+  <h2>Six snapshots of Miracles becoming Miracles</h2>
+  <p class="lead">The archetype did not spring into existence as a solved 75. The lists below show the actual design arguments being tested in public: black discard versus red blasts, Standstill versus cantrips, Enlightened Tutor packages versus redundancy, Karakas–Venser tricks versus clean mana, and finally the four-Ponder build that made the deck operate with the fewest self-inflicted failures.</p>
+  <div class="callout"><strong>Interactive card preview:</strong> hover a card name with a mouse, focus it with the keyboard, or tap it on a touchscreen to display the card image. The preview uses Scryfall’s named-card image service and therefore requires an internet connection.</div>
+
+  <h3>July 2012 — two different answers at Grand Prix Ghent</h3>
+  <p>Both early lists reached the Top 8 of the same 1,345-player Grand Prix, yet they disagree on almost every flex slot. That is exactly why they are useful historical documents.</p>
+  <details class="history-deck">
+      <summary>
+        <span><strong>Max Sjöblom — Miracle Control</strong><small>Grand Prix Ghent · Top 8 · July 22, 2012 · <a href="https://mtgdecks.net/Legacy/miracle-control-decklist-by-max-sjoeblom-34672">source decklist</a></small></span>
+        <span class="deck-toggle" aria-hidden="true">+</span>
+      </summary>
+      <div class="deck-body">
+        <p class="deck-note"><strong>What it represents:</strong> the black-splash branch. Thoughtseize and Duress attack combo; Vedalken Shackles, Moat and extra Cliques give the deck a conventional control character. It has no Ponder and only three Terminus, showing that the miracle package was still an addition to CounterTop rather than the deck’s fully optimized center.</p>
+        <div class="deck-shell">
+          <div class="deck-head"><div><h3>Max Sjöblom — Miracle Control</h3><div class="small">Grand Prix Ghent · Top 8 · July 22, 2012</div></div><button class="copy-deck" data-copy-target="deck-max-2012" type="button">Copy decklist</button></div>
+          <div class="deck-columns"><div class="deck-column"><div class="deck-group"><h4>Creatures · 4</h4><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Snapcaster Mage" tabindex="0">Snapcaster Mage</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Vendilion Clique" tabindex="0">Vendilion Clique</span></span></div></div><div class="deck-group"><h4>Artifacts · 5</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Sensei&#x27;s Divining Top" tabindex="0">Sensei&#x27;s Divining Top</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Vedalken Shackles" tabindex="0">Vedalken Shackles</span></span></div></div><div class="deck-group"><h4>Instants · 16</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Brainstorm" tabindex="0">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Counterspell" tabindex="0">Counterspell</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Force of Will" tabindex="0">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Spell Pierce" tabindex="0">Spell Pierce</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Swords to Plowshares" tabindex="0">Swords to Plowshares</span></span></div></div><div class="deck-group"><h4>Sorceries · 5</h4><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Entreat the Angels" tabindex="0">Entreat the Angels</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Terminus" tabindex="0">Terminus</span></span></div></div></div><div class="deck-column"><div class="deck-group"><h4>Enchantments · 4</h4><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Counterbalance" tabindex="0">Counterbalance</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Oblivion Ring" tabindex="0">Oblivion Ring</span></span></div></div><div class="deck-group"><h4>Planeswalkers · 3</h4><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Jace, the Mind Sculptor" tabindex="0">Jace, the Mind Sculptor</span></span></div></div><div class="deck-group"><h4>Lands · 23</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Flooded Strand" tabindex="0">Flooded Strand</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Glacial Fortress" tabindex="0">Glacial Fortress</span></span></div><div class="deck-row"><span><span class="qty">5</span> <span class="card-name" data-card="Island" tabindex="0">Island</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Karakas" tabindex="0">Karakas</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Marsh Flats" tabindex="0">Marsh Flats</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Plains" tabindex="0">Plains</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Polluted Delta" tabindex="0">Polluted Delta</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Scrubland" tabindex="0">Scrubland</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Tundra" tabindex="0">Tundra</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Underground Sea" tabindex="0">Underground Sea</span></span></div></div><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Counterbalance" tabindex="0">Counterbalance</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Disenchant" tabindex="0">Disenchant</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Duress" tabindex="0">Duress</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Grafdigger&#x27;s Cage" tabindex="0">Grafdigger&#x27;s Cage</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Moat" tabindex="0">Moat</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Nihil Spellbomb" tabindex="0">Nihil Spellbomb</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Spell Pierce" tabindex="0">Spell Pierce</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Surgical Extraction" tabindex="0">Surgical Extraction</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Terminus" tabindex="0">Terminus</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Thoughtseize" tabindex="0">Thoughtseize</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Vendilion Clique" tabindex="0">Vendilion Clique</span></span></div></div></div></div>
+        </div>
+        <pre id="deck-max-2012" class="deck-text" hidden>Max Sjöblom — Miracle Control
+
+Main Deck — 60
+Creatures
+2 Snapcaster Mage
+2 Vendilion Clique
+Artifacts
+4 Sensei&#x27;s Divining Top
+1 Vedalken Shackles
+Instants
+4 Brainstorm
+2 Counterspell
+4 Force of Will
+2 Spell Pierce
+4 Swords to Plowshares
+Sorceries
+2 Entreat the Angels
+3 Terminus
+Enchantments
+3 Counterbalance
+1 Oblivion Ring
+Planeswalkers
+3 Jace, the Mind Sculptor
+Lands
+4 Flooded Strand
+1 Glacial Fortress
+5 Island
+1 Karakas
+1 Marsh Flats
+2 Plains
+4 Polluted Delta
+1 Scrubland
+3 Tundra
+1 Underground Sea
+
+Sideboard — 15
+1 Counterbalance
+1 Disenchant
+1 Duress
+2 Grafdigger&#x27;s Cage
+1 Moat
+1 Nihil Spellbomb
+1 Spell Pierce
+2 Surgical Extraction
+1 Terminus
+3 Thoughtseize
+1 Vendilion Clique</pre>
+      </div>
+    </details>
+  <details class="history-deck">
+      <summary>
+        <span><strong>Andrea Milillo — Standstill Miracles</strong><small>Grand Prix Ghent · Top 8 · July 22, 2012 · <a href="https://mtgdecks.net/Legacy/miracle-control-decklist-by-andrea-milillo-34674">source decklist</a></small></span>
+        <span class="deck-toggle" aria-hidden="true">+</span>
+      </summary>
+      <div class="deck-body">
+        <p class="deck-note"><strong>What it represents:</strong> the Landstill branch. Mishra’s Factory and Standstill provide the long-game engine, while the removal suite is split among Swords, Path, Terminus and Engineered Explosives. The 61st card and single Entreat illustrate how far the shell remained from later consensus.</p>
+        <div class="deck-shell">
+          <div class="deck-head"><div><h3>Andrea Milillo — Standstill Miracles</h3><div class="small">Grand Prix Ghent · Top 8 · July 22, 2012</div></div><button class="copy-deck" data-copy-target="deck-andrea-2012" type="button">Copy decklist</button></div>
+          <div class="deck-columns"><div class="deck-column"><div class="deck-group"><h4>Creatures · 3</h4><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Snapcaster Mage" tabindex="0">Snapcaster Mage</span></span></div></div><div class="deck-group"><h4>Artifacts · 5</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Engineered Explosives" tabindex="0">Engineered Explosives</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Sensei&#x27;s Divining Top" tabindex="0">Sensei&#x27;s Divining Top</span></span></div></div><div class="deck-group"><h4>Instants · 18</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Brainstorm" tabindex="0">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Counterspell" tabindex="0">Counterspell</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Force of Will" tabindex="0">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Path to Exile" tabindex="0">Path to Exile</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Spell Pierce" tabindex="0">Spell Pierce</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Spell Snare" tabindex="0">Spell Snare</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Swords to Plowshares" tabindex="0">Swords to Plowshares</span></span></div></div><div class="deck-group"><h4>Sorceries · 4</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Entreat the Angels" tabindex="0">Entreat the Angels</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Terminus" tabindex="0">Terminus</span></span></div></div></div><div class="deck-column"><div class="deck-group"><h4>Enchantments · 4</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Oblivion Ring" tabindex="0">Oblivion Ring</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Standstill" tabindex="0">Standstill</span></span></div></div><div class="deck-group"><h4>Planeswalkers · 4</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Elspeth, Knight-Errant" tabindex="0">Elspeth, Knight-Errant</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Jace, the Mind Sculptor" tabindex="0">Jace, the Mind Sculptor</span></span></div></div><div class="deck-group"><h4>Lands · 23</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Arid Mesa" tabindex="0">Arid Mesa</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Flooded Strand" tabindex="0">Flooded Strand</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Glacial Fortress" tabindex="0">Glacial Fortress</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Island" tabindex="0">Island</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Karakas" tabindex="0">Karakas</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Mishra&#x27;s Factory" tabindex="0">Mishra&#x27;s Factory</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Misty Rainforest" tabindex="0">Misty Rainforest</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Plains" tabindex="0">Plains</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Polluted Delta" tabindex="0">Polluted Delta</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Scalding Tarn" tabindex="0">Scalding Tarn</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Tundra" tabindex="0">Tundra</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Volcanic Island" tabindex="0">Volcanic Island</span></span></div></div><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Blue Elemental Blast" tabindex="0">Blue Elemental Blast</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Disenchant" tabindex="0">Disenchant</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Gilded Drake" tabindex="0">Gilded Drake</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Red Elemental Blast" tabindex="0">Red Elemental Blast</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Sulfur Elemental" tabindex="0">Sulfur Elemental</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Surgical Extraction" tabindex="0">Surgical Extraction</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Terminus" tabindex="0">Terminus</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Timely Reinforcements" tabindex="0">Timely Reinforcements</span></span></div></div></div></div>
+        </div>
+        <pre id="deck-andrea-2012" class="deck-text" hidden>Andrea Milillo — Standstill Miracles
+
+Main Deck — 61
+Creatures
+3 Snapcaster Mage
+Artifacts
+1 Engineered Explosives
+4 Sensei&#x27;s Divining Top
+Instants
+4 Brainstorm
+2 Counterspell
+4 Force of Will
+2 Path to Exile
+2 Spell Pierce
+2 Spell Snare
+2 Swords to Plowshares
+Sorceries
+1 Entreat the Angels
+3 Terminus
+Enchantments
+1 Oblivion Ring
+3 Standstill
+Planeswalkers
+1 Elspeth, Knight-Errant
+3 Jace, the Mind Sculptor
+Lands
+1 Arid Mesa
+4 Flooded Strand
+1 Glacial Fortress
+3 Island
+1 Karakas
+4 Mishra&#x27;s Factory
+1 Misty Rainforest
+1 Plains
+1 Polluted Delta
+1 Scalding Tarn
+3 Tundra
+2 Volcanic Island
+
+Sideboard — 15
+2 Blue Elemental Blast
+2 Disenchant
+2 Gilded Drake
+2 Red Elemental Blast
+2 Sulfur Elemental
+2 Surgical Extraction
+1 Terminus
+2 Timely Reinforcements</pre>
+      </div>
+    </details>
+
+  <h3>February 2013 — the Enlightened Tutor / Rest in Peace experiment</h3>
+  <details class="history-deck">
+      <summary>
+        <span><strong>Jack Colwell — RIP/Helm Miracles</strong><small>Knight Ware, Los Angeles · 2nd · February 24, 2013 · <a href="https://mtgdecks.net/Legacy/miracle-control-decklist-by-jack-colwell-46660">source decklist</a></small></span>
+        <span class="deck-toggle" aria-hidden="true">+</span>
+      </summary>
+      <div class="deck-body">
+        <p class="deck-note"><strong>What it represents:</strong> Miracles as a tutor-driven prison-combo deck. Rest in Peace pairs with Energy Field for a soft lock and Helm of Obedience for a kill; Enlightened Tutor also locates Top, Counterbalance, Blood Moon or Detention Sphere. The cost is visible in the numbers: 61 cards, only two Counterbalances, three Terminus and many one-ofs that are uneven when naturally drawn.</p>
+        <div class="deck-shell">
+          <div class="deck-head"><div><h3>Jack Colwell — RIP/Helm Miracles</h3><div class="small">Knight Ware, Los Angeles · 2nd · February 24, 2013</div></div><button class="copy-deck" data-copy-target="deck-jack-2013" type="button">Copy decklist</button></div>
+          <div class="deck-columns"><div class="deck-column"><div class="deck-group"><h4>Creatures · 2</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Vendilion Clique" tabindex="0">Vendilion Clique</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Venser, Shaper Savant" tabindex="0">Venser, Shaper Savant</span></span></div></div><div class="deck-group"><h4>Artifacts · 5</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Helm of Obedience" tabindex="0">Helm of Obedience</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Sensei&#x27;s Divining Top" tabindex="0">Sensei&#x27;s Divining Top</span></span></div></div><div class="deck-group"><h4>Instants · 15</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Brainstorm" tabindex="0">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Counterspell" tabindex="0">Counterspell</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Enlightened Tutor" tabindex="0">Enlightened Tutor</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Force of Will" tabindex="0">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Swords to Plowshares" tabindex="0">Swords to Plowshares</span></span></div></div><div class="deck-group"><h4>Sorceries · 6</h4><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Entreat the Angels" tabindex="0">Entreat the Angels</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Portent" tabindex="0">Portent</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Terminus" tabindex="0">Terminus</span></span></div></div></div><div class="deck-column"><div class="deck-group"><h4>Enchantments · 8</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Blood Moon" tabindex="0">Blood Moon</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Counterbalance" tabindex="0">Counterbalance</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Detention Sphere" tabindex="0">Detention Sphere</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Energy Field" tabindex="0">Energy Field</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Rest in Peace" tabindex="0">Rest in Peace</span></span></div></div><div class="deck-group"><h4>Planeswalkers · 4</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Elspeth, Knight-Errant" tabindex="0">Elspeth, Knight-Errant</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Jace, the Mind Sculptor" tabindex="0">Jace, the Mind Sculptor</span></span></div></div><div class="deck-group"><h4>Lands · 21</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Arid Mesa" tabindex="0">Arid Mesa</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Flooded Strand" tabindex="0">Flooded Strand</span></span></div><div class="deck-row"><span><span class="qty">5</span> <span class="card-name" data-card="Island" tabindex="0">Island</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Karakas" tabindex="0">Karakas</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Misty Rainforest" tabindex="0">Misty Rainforest</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Plains" tabindex="0">Plains</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Polluted Delta" tabindex="0">Polluted Delta</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Scalding Tarn" tabindex="0">Scalding Tarn</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Tundra" tabindex="0">Tundra</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Volcanic Island" tabindex="0">Volcanic Island</span></span></div></div><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Counterbalance" tabindex="0">Counterbalance</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Flusterstorm" tabindex="0">Flusterstorm</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Geist of Saint Traft" tabindex="0">Geist of Saint Traft</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Grafdigger&#x27;s Cage" tabindex="0">Grafdigger&#x27;s Cage</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Humility" tabindex="0">Humility</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Jace Beleren" tabindex="0">Jace Beleren</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Moat" tabindex="0">Moat</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Pithing Needle" tabindex="0">Pithing Needle</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Red Elemental Blast" tabindex="0">Red Elemental Blast</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Relic of Progenitus" tabindex="0">Relic of Progenitus</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Vendilion Clique" tabindex="0">Vendilion Clique</span></span></div></div></div></div>
+        </div>
+        <pre id="deck-jack-2013" class="deck-text" hidden>Jack Colwell — RIP/Helm Miracles
+
+Main Deck — 61
+Creatures
+1 Vendilion Clique
+1 Venser, Shaper Savant
+Artifacts
+1 Helm of Obedience
+4 Sensei&#x27;s Divining Top
+Instants
+4 Brainstorm
+1 Counterspell
+2 Enlightened Tutor
+4 Force of Will
+4 Swords to Plowshares
+Sorceries
+2 Entreat the Angels
+1 Portent
+3 Terminus
+Enchantments
+1 Blood Moon
+2 Counterbalance
+1 Detention Sphere
+1 Energy Field
+3 Rest in Peace
+Planeswalkers
+1 Elspeth, Knight-Errant
+3 Jace, the Mind Sculptor
+Lands
+1 Arid Mesa
+4 Flooded Strand
+5 Island
+1 Karakas
+2 Misty Rainforest
+2 Plains
+1 Polluted Delta
+1 Scalding Tarn
+3 Tundra
+1 Volcanic Island
+
+Sideboard — 15
+1 Counterbalance
+2 Flusterstorm
+3 Geist of Saint Traft
+1 Grafdigger&#x27;s Cage
+1 Humility
+1 Jace Beleren
+1 Moat
+1 Pithing Needle
+2 Red Elemental Blast
+1 Relic of Progenitus
+1 Vendilion Clique</pre>
+      </div>
+    </details>
+
+  <h3>February 2014 — the Grand Prix Paris breakthrough</h3>
+  <details class="history-deck">
+      <summary>
+        <span><strong>Philipp Schönegger — GP Paris Miracles</strong><small>Grand Prix Paris · Top 4 · February 16, 2014 · <a href="https://www.eternalcentral.com/there-and-back-again-grand-prix-paris-top-4-report-with-miracles/">source decklist</a></small></span>
+        <span class="deck-toggle" aria-hidden="true">+</span>
+      </summary>
+      <div class="deck-body">
+        <p class="deck-note"><strong>What it represents:</strong> the recognizable mature stock list. Four Terminus and two Entreat are fixed, Snapcaster is established, and the sideboard is a compact suite of blasts, Flusterstorms, Explosives and Rest in Peace. Karakas, Clique and Spell Pierce are the last remnants of a more tactical branch.</p>
+        <div class="deck-shell">
+          <div class="deck-head"><div><h3>Philipp Schönegger — GP Paris Miracles</h3><div class="small">Grand Prix Paris · Top 4 · February 16, 2014</div></div><button class="copy-deck" data-copy-target="deck-paris-2014" type="button">Copy decklist</button></div>
+          <div class="deck-columns"><div class="deck-column"><div class="deck-group"><h4>Creatures · 4</h4><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Snapcaster Mage" tabindex="0">Snapcaster Mage</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Vendilion Clique" tabindex="0">Vendilion Clique</span></span></div></div><div class="deck-group"><h4>Planeswalkers · 3</h4><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Jace, the Mind Sculptor" tabindex="0">Jace, the Mind Sculptor</span></span></div></div><div class="deck-group"><h4>Artifacts · 4</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Sensei&#x27;s Divining Top" tabindex="0">Sensei&#x27;s Divining Top</span></span></div></div><div class="deck-group"><h4>Instants · 16</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Brainstorm" tabindex="0">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Counterspell" tabindex="0">Counterspell</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Force of Will" tabindex="0">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Spell Pierce" tabindex="0">Spell Pierce</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Swords to Plowshares" tabindex="0">Swords to Plowshares</span></span></div></div></div><div class="deck-column"><div class="deck-group"><h4>Sorceries · 8</h4><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Ponder" tabindex="0">Ponder</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Entreat the Angels" tabindex="0">Entreat the Angels</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Terminus" tabindex="0">Terminus</span></span></div></div><div class="deck-group"><h4>Enchantments · 3</h4><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Counterbalance" tabindex="0">Counterbalance</span></span></div></div><div class="deck-group"><h4>Lands · 22</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Karakas" tabindex="0">Karakas</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Flooded Strand" tabindex="0">Flooded Strand</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Scalding Tarn" tabindex="0">Scalding Tarn</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Arid Mesa" tabindex="0">Arid Mesa</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Tundra" tabindex="0">Tundra</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Volcanic Island" tabindex="0">Volcanic Island</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Island" tabindex="0">Island</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Plains" tabindex="0">Plains</span></span></div></div><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Counterspell" tabindex="0">Counterspell</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Red Elemental Blast" tabindex="0">Red Elemental Blast</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Disenchant" tabindex="0">Disenchant</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Pyroblast" tabindex="0">Pyroblast</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Engineered Explosives" tabindex="0">Engineered Explosives</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Vendilion Clique" tabindex="0">Vendilion Clique</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Flusterstorm" tabindex="0">Flusterstorm</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Entreat the Angels" tabindex="0">Entreat the Angels</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Supreme Verdict" tabindex="0">Supreme Verdict</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Rest in Peace" tabindex="0">Rest in Peace</span></span></div></div></div></div>
+        </div>
+        <pre id="deck-paris-2014" class="deck-text" hidden>Philipp Schönegger — GP Paris Miracles
+
+Main Deck — 60
+Creatures
+3 Snapcaster Mage
+1 Vendilion Clique
+Planeswalkers
+3 Jace, the Mind Sculptor
+Artifacts
+4 Sensei&#x27;s Divining Top
+Instants
+4 Brainstorm
+2 Counterspell
+4 Force of Will
+2 Spell Pierce
+4 Swords to Plowshares
+Sorceries
+2 Ponder
+2 Entreat the Angels
+4 Terminus
+Enchantments
+3 Counterbalance
+Lands
+1 Karakas
+4 Flooded Strand
+4 Scalding Tarn
+2 Arid Mesa
+3 Tundra
+2 Volcanic Island
+4 Island
+2 Plains
+
+Sideboard — 15
+1 Counterspell
+2 Red Elemental Blast
+1 Disenchant
+1 Pyroblast
+2 Engineered Explosives
+1 Vendilion Clique
+3 Flusterstorm
+1 Entreat the Angels
+1 Supreme Verdict
+2 Rest in Peace</pre>
+      </div>
+    </details>
+
+  <h3>August 2014 — Ponder Miracles</h3>
+  <p>After Paris, Schönegger’s refinement was subtraction rather than invention: remove Karakas, the maindeck Clique and Spell Pierces; add the fourth Counterbalance, third Snapcaster, two more Ponders and Council’s Judgment; cut to 21 lands. This is the cleanest snapshot of the archetype immediately before <em>Khans of Tarkir</em>.</p>
+  <details class="history-deck reference-deck" open>
+      <summary>
+        <span><strong>Philipp Schönegger — U/W/r Ponder Miracles</strong><small>August 2014 primer reference build · <a href="https://articles.starcitygames.com/articles/the-miracles-primer-part-1/">source decklist</a></small></span>
+        <span class="deck-toggle" aria-hidden="true">+</span>
+      </summary>
+      <div class="deck-body">
+        <p class="deck-note"><strong>Why it became the reference list:</strong> twelve library-manipulation cards made land drops, miracle timing and sideboard access more reliable than silver-bullet packages. Four Counterbalances maximized the matchups where the card was a true lock, while Council’s Judgment supplied a broad maindeck answer without reopening the tutor toolbox.</p>
+        <div class="deck-shell">
+          <div class="deck-head"><div><h3>Philipp Schönegger — U/W/r Ponder Miracles</h3><div class="small">August 2014 primer reference build</div></div><button class="copy-deck" data-copy-target="deck-ponder-2014" type="button">Copy decklist</button></div>
+          <div class="deck-columns"><div class="deck-column"><div class="deck-group"><h4>Creatures · 3</h4><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Snapcaster Mage" tabindex="0">Snapcaster Mage</span></span></div></div><div class="deck-group"><h4>Planeswalkers · 3</h4><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Jace, the Mind Sculptor" tabindex="0">Jace, the Mind Sculptor</span></span></div></div><div class="deck-group"><h4>Artifacts · 4</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Sensei&#x27;s Divining Top" tabindex="0">Sensei&#x27;s Divining Top</span></span></div></div><div class="deck-group"><h4>Instants · 14</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Brainstorm" tabindex="0">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Counterspell" tabindex="0">Counterspell</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Force of Will" tabindex="0">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Swords to Plowshares" tabindex="0">Swords to Plowshares</span></span></div></div></div><div class="deck-column"><div class="deck-group"><h4>Sorceries · 11</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Ponder" tabindex="0">Ponder</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Terminus" tabindex="0">Terminus</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Entreat the Angels" tabindex="0">Entreat the Angels</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Council&#x27;s Judgment" tabindex="0">Council&#x27;s Judgment</span></span></div></div><div class="deck-group"><h4>Enchantments · 4</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Counterbalance" tabindex="0">Counterbalance</span></span></div></div><div class="deck-group"><h4>Lands · 21</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Flooded Strand" tabindex="0">Flooded Strand</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Scalding Tarn" tabindex="0">Scalding Tarn</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Arid Mesa" tabindex="0">Arid Mesa</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Island" tabindex="0">Island</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Plains" tabindex="0">Plains</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Tundra" tabindex="0">Tundra</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Volcanic Island" tabindex="0">Volcanic Island</span></span></div></div><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Counterspell" tabindex="0">Counterspell</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Red Elemental Blast" tabindex="0">Red Elemental Blast</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Pyroblast" tabindex="0">Pyroblast</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Flusterstorm" tabindex="0">Flusterstorm</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Vendilion Clique" tabindex="0">Vendilion Clique</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Rest in Peace" tabindex="0">Rest in Peace</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Engineered Explosives" tabindex="0">Engineered Explosives</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Disenchant" tabindex="0">Disenchant</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Council&#x27;s Judgment" tabindex="0">Council&#x27;s Judgment</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Keranos, God of Storms" tabindex="0">Keranos, God of Storms</span></span></div></div></div></div>
+        </div>
+        <pre id="deck-ponder-2014" class="deck-text" hidden>Philipp Schönegger — U/W/r Ponder Miracles
+
+Main Deck — 60
+Creatures
+3 Snapcaster Mage
+Planeswalkers
+3 Jace, the Mind Sculptor
+Artifacts
+4 Sensei&#x27;s Divining Top
+Instants
+4 Brainstorm
+2 Counterspell
+4 Force of Will
+4 Swords to Plowshares
+Sorceries
+4 Ponder
+4 Terminus
+2 Entreat the Angels
+1 Council&#x27;s Judgment
+Enchantments
+4 Counterbalance
+Lands
+4 Flooded Strand
+4 Scalding Tarn
+2 Arid Mesa
+4 Island
+2 Plains
+3 Tundra
+2 Volcanic Island
+
+Sideboard — 15
+1 Counterspell
+2 Red Elemental Blast
+1 Pyroblast
+2 Flusterstorm
+2 Vendilion Clique
+2 Rest in Peace
+2 Engineered Explosives
+1 Disenchant
+1 Council&#x27;s Judgment
+1 Keranos, God of Storms</pre>
+      </div>
+    </details>
+
+  <h3>Perfect hindsight — my final pre–Treasure Cruise 75</h3>
+  <p>My conclusion is deliberately conservative: <strong>the August Ponder Miracles maindeck was already the correct endpoint.</strong> Perfect hindsight does not justify weakening its consistency to revive Standstill, Helm, black discard, maindeck blasts or the Karakas–Venser package. I would register the same 60 and change one sideboard slot: <strong>Pithing Needle over the third Counterspell.</strong></p>
+  <details class="history-deck hindsight-deck" open>
+      <summary>
+        <span><strong>Perfect-Hindsight Miracles</strong><small>My recommended 75 for the late-summer 2014 pre-Cruise gauntlet</small></span>
+        <span class="deck-toggle" aria-hidden="true">+</span>
+      </summary>
+      <div class="deck-body">
+        <p class="deck-note"><strong>The single change:</strong> Pithing Needle is less powerful in a pure counter war than the third Counterspell, but it covers more of the actual gauntlet: Sensei’s Divining Top and Jace in the mirror, Aether Vial and Rishadan Port, Sneak Attack and Griselbrand, Grindstone, Liliana, Wasteland, equipment activations and miscellaneous prison pieces. Ponder makes a one-of broad answer realistic. The rest of the sideboard remains disciplined: three blasts for blue, two Flusterstorms and two Cliques for combo/control, two Rest in Peace, two Explosives, and three distinct permanent trumps.</p>
+        <div class="deck-shell">
+          <div class="deck-head"><div><h3>Perfect-Hindsight Miracles</h3><div class="small">My recommended 75 for the late-summer 2014 pre-Cruise gauntlet</div></div><button class="copy-deck" data-copy-target="deck-hindsight" type="button">Copy decklist</button></div>
+          <div class="deck-columns"><div class="deck-column"><div class="deck-group"><h4>Creatures · 3</h4><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Snapcaster Mage" tabindex="0">Snapcaster Mage</span></span></div></div><div class="deck-group"><h4>Planeswalkers · 3</h4><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Jace, the Mind Sculptor" tabindex="0">Jace, the Mind Sculptor</span></span></div></div><div class="deck-group"><h4>Artifacts · 4</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Sensei&#x27;s Divining Top" tabindex="0">Sensei&#x27;s Divining Top</span></span></div></div><div class="deck-group"><h4>Instants · 14</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Brainstorm" tabindex="0">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Counterspell" tabindex="0">Counterspell</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Force of Will" tabindex="0">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Swords to Plowshares" tabindex="0">Swords to Plowshares</span></span></div></div></div><div class="deck-column"><div class="deck-group"><h4>Sorceries · 11</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Ponder" tabindex="0">Ponder</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Terminus" tabindex="0">Terminus</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Entreat the Angels" tabindex="0">Entreat the Angels</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Council&#x27;s Judgment" tabindex="0">Council&#x27;s Judgment</span></span></div></div><div class="deck-group"><h4>Enchantments · 4</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Counterbalance" tabindex="0">Counterbalance</span></span></div></div><div class="deck-group"><h4>Lands · 21</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Flooded Strand" tabindex="0">Flooded Strand</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Scalding Tarn" tabindex="0">Scalding Tarn</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Arid Mesa" tabindex="0">Arid Mesa</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" data-card="Island" tabindex="0">Island</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Plains" tabindex="0">Plains</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" data-card="Tundra" tabindex="0">Tundra</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Volcanic Island" tabindex="0">Volcanic Island</span></span></div></div><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Red Elemental Blast" tabindex="0">Red Elemental Blast</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Pyroblast" tabindex="0">Pyroblast</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Flusterstorm" tabindex="0">Flusterstorm</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Vendilion Clique" tabindex="0">Vendilion Clique</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Rest in Peace" tabindex="0">Rest in Peace</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" data-card="Engineered Explosives" tabindex="0">Engineered Explosives</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Disenchant" tabindex="0">Disenchant</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Council&#x27;s Judgment" tabindex="0">Council&#x27;s Judgment</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Keranos, God of Storms" tabindex="0">Keranos, God of Storms</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" data-card="Pithing Needle" tabindex="0">Pithing Needle</span></span></div></div></div></div>
+        </div>
+        <pre id="deck-hindsight" class="deck-text" hidden>Perfect-Hindsight Miracles
+
+Main Deck — 60
+Creatures
+3 Snapcaster Mage
+Planeswalkers
+3 Jace, the Mind Sculptor
+Artifacts
+4 Sensei&#x27;s Divining Top
+Instants
+4 Brainstorm
+2 Counterspell
+4 Force of Will
+4 Swords to Plowshares
+Sorceries
+4 Ponder
+4 Terminus
+2 Entreat the Angels
+1 Council&#x27;s Judgment
+Enchantments
+4 Counterbalance
+Lands
+4 Flooded Strand
+4 Scalding Tarn
+2 Arid Mesa
+4 Island
+2 Plains
+3 Tundra
+2 Volcanic Island
+
+Sideboard — 15
+2 Red Elemental Blast
+1 Pyroblast
+2 Flusterstorm
+2 Vendilion Clique
+2 Rest in Peace
+2 Engineered Explosives
+1 Disenchant
+1 Council&#x27;s Judgment
+1 Keranos, God of Storms
+1 Pithing Needle</pre>
+      </div>
+    </details>
+
+  <div class="grid-2">
+    <div class="card"><h4>What hindsight rejects</h4><p>Standstill asks the deck to support Factories and awkward board states. Enlightened Tutor creates card disadvantage and increases the number of narrow natural draws. Black discard damages the mana base. Karakas–Venser is powerful but consumes too many slots for how infrequently the complete loop matters.</p></div>
+    <div class="card"><h4>What hindsight confirms</h4><p>Four Ponder, four Counterbalance, four Terminus, three Snapcaster and 21 lands are not merely streamlined aesthetics. They minimize the deck’s failure modes while retaining enough broad answers to play against every major strategy of the period.</p></div>
+  </div>
+
+  <h3>Card packages in the final build</h3>
+  <div class="grid-2">
+    <div class="card package"><div class="number">12</div><div><h4>Library manipulation</h4><p><strong>4 Top, 4 Brainstorm, 4 Ponder.</strong> The package finds lands, prevents miracle cards from becoming dead draws, sets Counterbalance, and turns narrow sideboard cards into realistic one- and two-ofs.</p></div></div>
+    <div class="card package"><div class="number">10</div><div><h4>Stack interaction</h4><p><strong>4 Force, 2 Counterspell, 4 Counterbalance.</strong> Force bridges the dangerous opening; Counterspell governs the middle turns; Counterbalance converts setup into recurring advantage.</p></div></div>
+    <div class="card package"><div class="number">9</div><div><h4>Permanent control</h4><p><strong>4 Swords, 4 Terminus, 1 Judgment.</strong> Swords handles exact threats, Terminus punishes development and bypasses protection, and Judgment answers planeswalkers or otherwise awkward permanents.</p></div></div>
+    <div class="card package"><div class="number">8</div><div><h4>Advantage and victory</h4><p><strong>3 Snapcaster, 3 Jace, 2 Entreat.</strong> Snapcaster stretches the cheap interaction. Jace controls future draw steps. Entreat produces the fastest clean finish without occupying many slots.</p></div></div>
+  </div>
+</section>
+
+<section id="mulligans">
+  <div class="eyebrow">5 · Mulligans and opening turns</div>
+  <h2>Keep functional plans, not collections of powerful cards</h2>
+  <p>A Miracles opening hand should answer three questions: <strong>Can it develop mana?</strong> <strong>Can it see more cards?</strong> <strong>Can it survive the opponent’s fastest relevant line?</strong> A hand with Jace, Entreat, Terminus and Force may look powerful while doing almost nothing. A hand with Island, fetchland, Top, Ponder and Swords may contain no explicit victory condition but is exactly what the deck wants.</p>
+
+  <h3>General keeps</h3>
+  <ul>
+    <li><strong>Two lands plus Top or Ponder</strong>, with at least one relevant interaction spell.</li>
+    <li><strong>One land plus multiple cheap looks</strong> when the land casts them and the matchup is not heavily punishing a stumble.</li>
+    <li><strong>Basic-heavy mana</strong> against known Wasteland decks, even when the hand is less glamorous.</li>
+    <li><strong>Top plus Counterbalance</strong> when the hand can cast both on schedule and will not lose immediately while doing so.</li>
+    <li><strong>Force plus blue card and selection</strong> against unknown opponents or fast combo, provided the hand can still develop after pitching a card.</li>
+  </ul>
+
+  <h3>Common mulligans</h3>
+  <ul>
+    <li>No-land hands and most one-land hands without Top, Brainstorm or Ponder.</li>
+    <li>Hands whose only land is a dual against a known Wasteland deck, especially without additional selection.</li>
+    <li>Multiple miracles without Brainstorm, Jace or Top.</li>
+    <li>Reactive hands that cannot cast their answers in the required window.</li>
+    <li>Hands with only expensive finishers and Force of Will: pitching the only functional card often leaves nothing.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Top is not automatically a keep.</strong> Top improves a functioning hand; it does not create mana. A one-land Top hand that misses its second land may spend turns looking at the same three cards. A fetchland makes that hand much better because it provides a shuffle.
+  </div>
+
+  <h3>Opening-turn scripts</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Opponent</th><th>Preferred first development</th><th>What you are protecting against</th></tr></thead>
+      <tbody>
+        <tr><td>Unknown</td><td>Fetch basic Island; cast Top or Ponder if the hand benefits, otherwise preserve Brainstorm.</td><td>Wasteland, a blind combo start, and telegraphing unnecessary information.</td></tr>
+        <tr><td>RUG Delver</td><td>Lead on an uncracked fetch when Stifle is plausible, or fetch basic Island while the window is safe.</td><td>Stifle, Daze and Wasteland chaining into a non-game.</td></tr>
+        <tr><td>BUG / discard</td><td>Deploy Top before discard can strip it when mana allows; prioritize stable basics.</td><td>Thoughtseize/Hymn removing the engine and Abrupt Decay reducing Counterbalance’s lifespan.</td></tr>
+        <tr><td>Storm</td><td>Develop Top or Ponder while representing Force; cantrip toward Counterbalance and additional blue interaction.</td><td>A fast kill before the permanent lock arrives.</td></tr>
+        <tr><td>Show and Tell</td><td>Keep mana untapped when necessary; do not tap out for Counterbalance without understanding their speed.</td><td>Show and Tell or Sneak Attack resolving through a window you voluntarily opened.</td></tr>
+        <tr><td>Death & Taxes</td><td>Fetch basics, answer Mother of Runes or Thalia according to the hand, and plan the first Terminus.</td><td>Thalia plus Port/Wasteland, Aether Vial tempo, and equipment taking over.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Brainstorm discipline in the opening turns</h3>
+  <p>Do not cast Brainstorm merely because one blue mana is unused. Its best early jobs are fixing a genuinely bad hand, hiding key cards from discard, returning a miracle to the library, or responding to a shuffle opportunity. A turn-one Ponder is often the cleaner development spell. Brainstorm becomes stronger as the game reveals which cards are expendable and as fetchlands give it a reliable reset.</p>
+</section>
+
+<section id="interactions">
+  <div class="eyebrow">6 · Key interactions</div>
+  <h2>The mechanics that make Miracles more than “blue-white good cards”</h2>
+
+  <h3>Counterbalance and Sensei’s Divining Top</h3>
+  <p>When the opponent casts a spell, Counterbalance triggers. Before that trigger resolves, activate Top to inspect and rearrange the top three cards. Counterbalance then reveals the chosen top card. If its mana value matches the spell, that spell is countered. Legacy’s density of one- and two-mana spells makes a small number of known cards cover a large portion of the format.</p>
+  <p>Top itself can become a one-mana card on top of the library: activate its draw ability in response to the Counterbalance trigger. You draw a card and place Top on top, allowing Counterbalance to reveal it to counter a spell with mana value one. The cost is losing immediate Top access until the next draw or shuffle sequence.</p>
+
+  <h3>Top, fetchlands and the “six-card” search</h3>
+  <p>Top sees three cards. If none is useful, crack a fetchland and see three different cards. This is not literal card advantage, but it radically improves card quality. Conversely, do not shuffle away a mapped top three without a reason. Miracles rewards remembering the order and planning which draw step, Top draw or fetchland will access each card.</p>
+
+  <h3>Creating a miracle on the opponent’s turn</h3>
+  <p>Miracle checks the first card you draw in <em>each</em> turn, not just your turn. If you have not drawn a card during the opponent’s turn, place Terminus or Entreat on top with Top, then activate Top’s draw ability. Reveal the miracle before mixing it into your hand. The trigger goes on the stack; when it resolves, you may cast the card for its miracle cost even though it is a sorcery.</p>
+  <div class="callout">
+    <strong>Priority matters.</strong> An opponent may respond to the miracle trigger. Stifle can counter it. If that happens, the revealed card remains in your hand and cannot later be cast for its miracle cost from that draw.
+  </div>
+
+  <h3>Brainstorm and Jace as miracle storage</h3>
+  <p>Drawing Terminus or Entreat normally is not fatal. Brainstorm places it back on top, after which a Top draw can cast it during the opponent’s turn or the normal draw step can cast it on yours. Jace’s zero ability performs the same repair repeatedly. This is why “dead miracles in hand” are often delayed resources rather than true blanks.</p>
+
+  <h3>Mana value does not become the miracle cost</h3>
+  <p>Miracle is an alternative cost. It does not change a card’s mana value. Terminus remains mana value six for Counterbalance even when cast for one white. Entreat the Angels has mana value three while it is in the library because X is zero outside the stack. Once Entreat is cast, the chosen X contributes to its mana value on the stack.</p>
+
+  <h3>Counterbalance’s less obvious hits</h3>
+  <ul>
+    <li><strong>A land has mana value zero</strong>, so a revealed land can counter a zero-mana spell such as a suspended Ancestral Vision when it is cast.</li>
+    <li><strong>Terminus provides a six</strong>, occasionally countering expensive spells that most Counterbalance decks could not cover.</li>
+    <li><strong>Force of Will provides a five</strong> even if it is cast for its alternative cost.</li>
+    <li><strong>Jace and Counterbalance provide fours and twos</strong>, while Snapcaster, Counterspell and the broad two-mana package make two easy to cover.</li>
+  </ul>
+
+  <h3>Terminus versus ordinary sweepers</h3>
+  <p>Terminus does not target and does not destroy. It handles True-Name Nemesis, Nimble Mongoose, creatures protected by Mother of Runes, indestructible creatures, and recursive threats without triggering ordinary “dies” abilities. The drawback is timing: drawing it naturally without setup is poor, and casting it too early may permit the opponent to rebuild before your engine is ready.</p>
+
+  <h3>Snapcaster Mage’s limits</h3>
+  <p>Snapcaster gives a card flashback equal to its mana cost, not its miracle cost. A Terminus in the graveyard costs <code>4WW</code> through flashback. Snapcaster is principally additional Brainstorms, Ponders, Swords, Counterspells and sideboard interaction. It also provides a flash blocker or a small clock after the game becomes about protecting a planeswalker.</p>
+
+  <h3>Entreat timing</h3>
+  <p>An end-step Entreat is usually superior to a main-phase Entreat because it preserves interaction and gives the opponent less time to answer the tokens before they attack. But the correct X is strategic, not maximal. Two Angels can be enough to close while retaining Counterspell. Four Angels may be necessary to race. One Angel can protect Jace or ambush a Delver when mana is constrained.</p>
+</section>
+
+<section id="piloting">
+  <div class="eyebrow">7 · How to pilot the deck</div>
+  <h2>Think in future draw steps, not isolated turns</h2>
+  <p class="quote">The deck’s real resource is not merely cards in hand. It is controlled access to the correct card at the correct point in the turn cycle.</p>
+
+  <h3>1. Identify the axis that can actually beat you</h3>
+  <p>Against RUG Delver, the danger is often mana denial plus a modest clock, not any single creature. Against Shardless BUG, it is planeswalker and card-advantage accumulation. Against Storm, it is a protected stack turn. Against Death & Taxes, it is the combination of mana pressure and a permanent that makes your answers clumsy. Choose plays to defeat the axis, not the most visible card.</p>
+
+  <h3>2. Build mana before displaying power</h3>
+  <p>A basic Island, a basic Plains and a Top may look passive, but they make the rest of the deck castable through Wasteland. Fetch Volcanic Island only when a red spell is going to matter. Fetch the second white source before you need to hard-cast Terminus or cast Council’s Judgment through disruption. The strongest spell in hand is irrelevant when the land sequence cannot cast it.</p>
+
+  <h3>3. Use Top with a purpose</h3>
+  <p>Repeatedly activating Top without changing a decision wastes mana and tournament time. Activate when you need to select a draw, set Counterbalance, stage a miracle, respond to discard, or decide whether to fetch. Maintain a mental map of the top three. Announce actions cleanly and resolve them at a consistent pace.</p>
+
+  <h3>4. Make cantrips solve roles</h3>
+  <p>Do not ask, “What is the strongest card in these three?” Ask, “What must my next two turns accomplish?” You may need a basic land more than Jace, a blue card for Force more than Entreat, or a one-mana card on top more than the card you intend to draw. In a Counterbalance game, the order of cards can matter more than their absolute quality.</p>
+
+  <h3>5. Let the opponent commit into Terminus—within reason</h3>
+  <p>The ideal Terminus answers several cards, but greed loses games. Calculate damage, Daze, burn, equipment and haste. If taking one more hit increases the sweep from one creature to three without exposing you to a realistic loss, wait. If the opponent can protect the next threat or shut off your setup, take the safe reset.</p>
+
+  <h3>6. Treat Force of Will as emergency architecture</h3>
+  <p>Force is for spells that invalidate the game plan or arrive before normal interaction is online: a lethal combo spell, a planeswalker that will dominate, a critical Counterbalance in the mirror, or a mana-denial piece that makes the hand collapse. Against attrition decks, indiscriminate Force use turns their ordinary card into a two-for-one.</p>
+
+  <h3>7. Know the turning point</h3>
+  <p>Miracles can lose by remaining defensive after it has gained control. Once the opponent’s meaningful routes are covered, use Clique, Snapcaster attacks, Jace fateseal or Entreat to shorten the game. This is particularly important against combo, inevitability engines such as Punishing Fire, and the round clock.</p>
+
+  <h3>8. Play the match clock as a real resource</h3>
+  <p>Top creates many legal decisions, but the pilot must make them efficiently. Shuffle promptly, communicate Top order clearly, prepare sideboarding before the event, and concede games that are functionally unwinnable. A theoretically favorable matchup is not favorable when every match ends 1–0 or in a draw.</p>
+
+  <h3>A compact decision loop</h3>
+  <div class="grid-3">
+    <div class="card"><h4>Before the turn</h4><p>What is on top? What is the opponent’s best line? Which land must remain untapped?</p></div>
+    <div class="card"><h4>At each spell</h4><p>Must this resolve? Which answer preserves the most important future card? Does Counterbalance need help?</p></div>
+    <div class="card"><h4>At end step</h4><p>Should Top draw, Entreat, fetch, Brainstorm, or simply preserve known cards for the next draw?</p></div>
+  </div>
+</section>
+
+<section id="sideboarding">
+  <div class="eyebrow">8 · Sideboarding principles</div>
+  <h2>Change the texture of the deck without damaging its engine</h2>
+
+  <h3>Force of Will is matchup-dependent, not sacred</h3>
+  <p>Keep Force when the opponent can produce an early, game-ending spell or a permanent you cannot profitably answer after resolution. Trim or remove it against fair attrition decks where trading two cards for one ordinary threat is exactly what the opponent wants. RUG Delver is a historical example where Schönegger removed all four Forces and relied on efficient removal, Rest in Peace, Flusterstorm and permanent answers.</p>
+
+  <h3>Counterbalance is powerful but not universally durable</h3>
+  <p>Counterbalance is at its best against Storm, cantrip decks and opponents whose curve is concentrated at one and two. It becomes less reliable against Abrupt Decay decks, Aether Vial decks, Cavern of Souls, varied permanent curves, or strategies that fight mostly through lands. Do not keep four merely because it is the deck’s namesake card.</p>
+
+  <h3>Preserve enough blue cards</h3>
+  <p>When Force stays in, count the remaining blue cards after sideboarding. Removing Ponders, Counterbalances and Jaces while adding white or artifact cards can leave Force stranded. This matters especially against combo, where a seven-card hand with Force but no pitch is often a mulligan.</p>
+
+  <h3>Board by function</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Sideboard card</th><th>Primary function</th><th>Typical targets</th></tr></thead>
+      <tbody>
+        <tr><td>Red Elemental Blast / Pyroblast</td><td>One-mana stack interaction and permanent removal.</td><td>Jace, True-Name Nemesis, Show and Tell, cantrips, Counterbalance, opposing Cliques.</td></tr>
+        <tr><td>Flusterstorm</td><td>Efficient protection in spell fights; weak against permanents already in play.</td><td>Storm turns, Show and Tell, discard-plus-combo sequences, Delver’s instants and sorceries.</td></tr>
+        <tr><td>Vendilion Clique</td><td>Information, disruption and a clock without tapping out on your own turn.</td><td>Combo, Miracles, Stoneblade, slow blue decks.</td></tr>
+        <tr><td>Rest in Peace</td><td>Turns off graveyard engines and shrinks threshold/Tarmogoyf packages.</td><td>RUG Delver, Reanimator, Dredge, Loam, Punishing Fire, Past in Flames.</td></tr>
+        <tr><td>Engineered Explosives</td><td>Flexible catch-up answer; can be set to zero through three in U/W/r.</td><td>Delver boards, tokens, Counterbalance, Chalice, equipment support permanents, True-Name at three when mana allows.</td></tr>
+        <tr><td>Disenchant</td><td>Clean answer to a narrow but dangerous permanent class.</td><td>Equipment, Counterbalance, Sneak Attack, Blood Moon, Sylvan Library, Choke.</td></tr>
+        <tr><td>Council’s Judgment</td><td>General answer that avoids targeting the chosen permanent.</td><td>Planeswalkers, True-Name, Counterbalance, Emrakul after Show and Tell, troublesome artifacts/enchantments.</td></tr>
+        <tr><td>Keranos, God of Storms</td><td>Hard-to-remove inevitability for slow attrition games.</td><td>Shardless BUG, Jund, Miracles and fair decks that remove creatures efficiently.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Do not overboard</h3>
+  <p>Miracles wins because its maindeck sees many cards and retains broad answers. Bringing in nine cards for a marginal improvement can remove the cantrips and engine pieces that let the deck operate. Sideboard cards should replace genuine blanks or improve a clearly defined battle. A narrow card that might have one target is not automatically better than Ponder.</p>
+
+  <h3>Documented plans versus transferable principles</h3>
+  <p>The exact plans below use the August 2014 75. Several are directly adapted from Schönegger’s 2014 primer; others are reconstructed for the period’s common gauntlet and are marked <strong>typical</strong>. Opposing 75s varied widely. If you see Xantid Swarm, Dark Confidant, Sulfuric Vortex, Choke, Pithing Needle or extra planeswalkers, adjust rather than following a sideboard chart mechanically.</p>
+</section>
+
+<section id="matchups">
+  <div class="eyebrow">9 · Gauntlet-specific matchup guide</div>
+  <h2>The pre–Treasure Cruise Legacy field</h2>
+  <p>“Role” describes the default posture after identifying the opponent. “Bring in” and “trim” are package guidance, not a command to use every listed card. Where a source records a precise historical plan, the note says so.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Matchup</th><th>Role</th><th>Bring in</th><th>Usually trim</th><th>Pilot’s plan</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>RUG Delver</strong></td>
+          <td><span class="role control">Pure control</span></td>
+          <td>2 RIP, 2 Flusterstorm, 2 EE, 2 Clique, 1 Judgment</td>
+          <td>4 Force, 2 Counterspell, all 3 expensive finishers in Schönegger’s documented plan</td>
+          <td>Protect basic mana from Stifle/Wasteland, play around Daze, and avoid spending Swords too early. RIP collapses Mongoose, Tarmogoyf and threshold. Their best game is preventing you from reaching stable mana.</td>
+        </tr>
+        <tr>
+          <td><strong>BUG Delver / Team America</strong></td>
+          <td><span class="role control">Control</span></td>
+          <td>EE, Flusterstorm, Clique, Judgment, Disenchant, Keranos</td>
+          <td>Force; some or all Counterbalance depending on Decay density</td>
+          <td>Abrupt Decay prevents Counterbalance from being a permanent lock. Build basics, answer Dark Confidant quickly, and preserve threats that dominate an empty board. Historical plans often removed both Force and Counterbalance packages.</td>
+        </tr>
+        <tr>
+          <td><strong>UWR Delver</strong></td>
+          <td><span class="role control">Control</span></td>
+          <td>2 EE, Disenchant, 2 Clique, Judgment; blasts if TNN/Jace density warrants</td>
+          <td>Force, a Counterspell, one Jace; adjust for red-blast plan</td>
+          <td>Terminus is the clean answer to True-Name. Disenchant answers equipment. Fetching Volcanic for blasts exposes you to Wasteland, so decide whether the red plan is worth the mana risk.</td>
+        </tr>
+        <tr>
+          <td><strong>Shardless BUG</strong></td>
+          <td><span class="role pivot">Inevitability fight</span></td>
+          <td>Blasts, EE, Clique, Judgment, Keranos, possibly Disenchant</td>
+          <td>Force, Counterbalance, some Swords</td>
+          <td>Do not two-for-one yourself over Ancestral Vision with Force; a land on top can let Counterbalance counter the zero-mana cast. Stop Jace, manage Liliana, and treat Entreat as the premier trump. Keranos is difficult for their normal removal suite.</td>
+        </tr>
+        <tr>
+          <td><strong>Esper Stoneblade</strong></td>
+          <td><span class="role pivot">Control, then pressure</span></td>
+          <td>Blasts, EE, Clique, Judgment, Disenchant, Keranos</td>
+          <td>Force and most/all Swords in the documented framework</td>
+          <td>Stoneforge itself is not the real emergency; equipment, True-Name and Jace are. Preserve Terminus for untargetable pressure and never casually allow Jace to resolve. Post-board Clique lets you fight on the opponent’s end step.</td>
+        </tr>
+        <tr>
+          <td><strong>Deathblade</strong></td>
+          <td><span class="role control">Control</span></td>
+          <td>Blasts, EE, Clique, Judgment, Keranos</td>
+          <td>Force, Counterbalance; retain more Swords for Dark Confidant</td>
+          <td>The mana base is vulnerable, but Miracles normally does not attack lands. Instead, prevent card-advantage permanents from surviving and sweep the board. Their Abrupt Decays make Counterbalance less attractive.</td>
+        </tr>
+        <tr>
+          <td><strong>Death &amp; Taxes</strong></td>
+          <td><span class="role control">Board control</span></td>
+          <td>EE, Disenchant, Judgment; Clique situational</td>
+          <td>Force, Counterbalance, some Counterspells</td>
+          <td><strong>Typical.</strong> Basics are essential. Decide whether Mother, Thalia or equipment is the present bottleneck. Vial and Cavern reduce the value of counters. Terminus breaks creature development, but Port can deny the white mana or Top activation window.</td>
+        </tr>
+        <tr>
+          <td><strong>Elves</strong></td>
+          <td><span class="role lock">Sweep + lock</span></td>
+          <td>EE, Flusterstorm, Clique, extra Counterspell, Judgment</td>
+          <td>Slow finishers; selected Jaces or Swords depending on build</td>
+          <td><strong>Typical.</strong> Terminus is your best card; Counterbalance is potent against the one-mana core but does not stop Natural Order without a four. Respect Wirewood Symbiote and Quirion Ranger lines that rebuild after spot removal. Counter or contain Glimpse and Natural Order.</td>
+        </tr>
+        <tr>
+          <td><strong>Maverick</strong></td>
+          <td><span class="role control">Board control</span></td>
+          <td>EE, Disenchant, Judgment, Keranos</td>
+          <td>Force, some Counterbalance/Counterspell</td>
+          <td><strong>Typical.</strong> Fetch basics around Wasteland and Knight. Terminus ignores Mother protection. Answer Gaddock Teeg because it shuts off Terminus and Jace; Swords is often reserved for Teeg or a fast Knight. Watch for Choke post-board.</td>
+        </tr>
+        <tr>
+          <td><strong>Jund</strong></td>
+          <td><span class="role pivot">Attrition control</span></td>
+          <td>RIP, EE, Judgment, Keranos, possibly Disenchant</td>
+          <td>Force, Counterbalance</td>
+          <td><strong>Typical.</strong> Top is your defense against discard. RIP shuts off Punishing Fire, Deathrite and Tarmogoyf growth. Preserve Jace from haste/burn and use Keranos as a resilient long-game engine. Avoid giving Liliana a clean board.</td>
+        </tr>
+        <tr>
+          <td><strong>Goblins</strong></td>
+          <td><span class="role control">Board control</span></td>
+          <td>EE, Judgment, Disenchant; Clique only if needed</td>
+          <td>Counterbalance, Counterspell, Force in part</td>
+          <td><strong>Typical.</strong> Vial and Cavern make stack interaction unreliable. Terminus is decisive, but Goblin Ringleader can reload. Keep life high enough that haste and Siege-Gang cannot steal the post-sweep turn. Disenchant has Vial targets but should not dilute the deck excessively.</td>
+        </tr>
+        <tr>
+          <td><strong>Merfolk</strong></td>
+          <td><span class="role control">Board control</span></td>
+          <td>EE, Clique, all blasts, Judgment, Keranos, Disenchant</td>
+          <td>Force, Counterbalance, Counterspell in the recorded 2014 approach</td>
+          <td>Vial, Cavern and a varied curve weaken Counterbalance. Red blasts kill lords and True-Name while winning blue stack fights. Keep enough colored mana to set EE to three when necessary.</td>
+        </tr>
+        <tr>
+          <td><strong>Burn</strong></td>
+          <td><span class="role lock">Lock and preserve life</span></td>
+          <td>Counterspell, Flusterstorm, Clique; Judgment only for revealed Vortex-type permanents</td>
+          <td>Terminus; slow cards as necessary</td>
+          <td>A recorded plan removed all four Terminus for the extra counter, two Cliques and a Flusterstorm. Counterbalance plus Top is the key lock. Fetch basics, minimize self-inflicted damage, and do not expose Top to Smash effects without considering the consequence.</td>
+        </tr>
+        <tr>
+          <td><strong>Sneak &amp; Show</strong></td>
+          <td><span class="role lock">Stack control</span></td>
+          <td>Blasts, Flusterstorm, Clique, Counterspell, Judgment, Disenchant</td>
+          <td>Swords and Terminus; some slow finishers</td>
+          <td>Counter the cheat spell, not merely the creature. Cantrip aggressively for interaction. Clique can clear the way or remove the payoff after a setup spell. Judgment can answer Sneak Attack, Pithing Needle, Defense Grid or an Emrakul that entered through Show and Tell.</td>
+        </tr>
+        <tr>
+          <td><strong>Omni-Tell</strong></td>
+          <td><span class="role lock">Stack control</span></td>
+          <td>Blasts, Flusterstorm, Clique, Counterspell, Judgment, Disenchant</td>
+          <td>All creature removal; most Terminus</td>
+          <td><strong>Typical.</strong> Omniscience makes ordinary permanent answers timing-sensitive. Fight Show and Tell and preserve interaction for the spell chain that follows. Clique on the miracle/trigger windows can disrupt a sculpted hand while providing a clock.</td>
+        </tr>
+        <tr>
+          <td><strong>ANT</strong></td>
+          <td><span class="role lock">Counterbalance lock</span></td>
+          <td>Flusterstorm, Clique, Counterspell, blasts</td>
+          <td>Terminus, Judgment; trim Swords but retain some if creature sideboard is expected</td>
+          <td>Game one is about finding Counterbalance without dying. Post-board, combine permanent lock pieces with immediate stack interaction. Retain Swords when Xantid Swarm, Dark Confidant or Young Pyromancer is plausible. Do not tap out simply because Counterbalance is in play.</td>
+        </tr>
+        <tr>
+          <td><strong>TES</strong></td>
+          <td><span class="role lock">Immediate stack control</span></td>
+          <td>Flusterstorm, Clique, Counterspell, blasts</td>
+          <td>Swords; slow removal and finishers</td>
+          <td>TES is faster and more likely to use Empty the Warrens. Terminus therefore has more value than it does against ANT. Counterbalance is still excellent, but Force and Flusterstorm must bridge the turns before it matters.</td>
+        </tr>
+        <tr>
+          <td><strong>Reanimator</strong></td>
+          <td><span class="role lock">Stack + graveyard</span></td>
+          <td>RIP, Flusterstorm, Clique, Counterspell, blasts</td>
+          <td>Terminus and slow finishers; retain Swords for targets it can answer</td>
+          <td><strong>Typical.</strong> Fight both the enabler and the reanimation spell according to hand texture. RIP is powerful but can be too slow on the draw without Force. Karakas is absent from this 75, increasing the need for stack discipline.</td>
+        </tr>
+        <tr>
+          <td><strong>LED Dredge</strong></td>
+          <td><span class="role lock">Graveyard containment</span></td>
+          <td>RIP, EE, Flusterstorm situationally, Clique</td>
+          <td>Counterbalance, Counterspell, Judgment, slow threats</td>
+          <td><strong>Typical.</strong> Terminus can clear tokens and creatures but does not solve the graveyard by itself. Protect Rest in Peace and know whether to Force the discard outlet, draw spell or anti-hate card. EE on zero answers Zombie tokens.</td>
+        </tr>
+        <tr>
+          <td><strong>Lands / Punishing Loam</strong></td>
+          <td><span class="role pivot">Engine control</span></td>
+          <td>RIP, Disenchant, Judgment, Clique, Keranos</td>
+          <td>Swords, Counterbalance in part, some Terminus</td>
+          <td><strong>Typical.</strong> Their primary threats are lands and recursion, so many maindeck answers miss. RIP attacks Loam and Punishing Fire. Preserve basics, answer Exploration/Manabond when it changes the clock, and use Clique/Entreat before a land lock becomes complete.</td>
+        </tr>
+        <tr>
+          <td><strong>12-Post</strong></td>
+          <td><span class="role danger">Pressure required</span></td>
+          <td>Clique, Counterspell, blasts for blue versions, Judgment, Disenchant</td>
+          <td>Swords, Terminus, portions of Counterbalance</td>
+          <td><strong>Typical.</strong> Their mana and threats go over the top of Jace, and Counterbalance poorly covers the curve. Establish a clock with Clique or Entreat and counter the few spells that convert mana into inevitability. This is not a matchup to play endless draw-go.</td>
+        </tr>
+        <tr>
+          <td><strong>MUD / Dragon Stompy</strong></td>
+          <td><span class="role control">Survive prison</span></td>
+          <td>Disenchant, EE, Judgment, Counterspell</td>
+          <td>Counterbalance, some one-mana spells depending on Chalice plan</td>
+          <td><strong>Typical.</strong> Basic lands are essential against Blood Moon. Force the lock piece that your hand cannot function through. EE and Judgment answer Chalice or planeswalkers, but Sol-land starts can occur before Counterspell. Terminus remains relevant against large creature deployment.</td>
+        </tr>
+        <tr>
+          <td><strong>Imperial Painter</strong></td>
+          <td><span class="role control">Combo control</span></td>
+          <td>Disenchant, EE, Judgment, Counterspell, Clique</td>
+          <td>Counterbalance in part; selected creature removal</td>
+          <td><strong>Typical.</strong> Play around Blood Moon with basics and respect Red Elemental Blast once Painter names blue. Stop Grindstone activation or remove the relevant artifact. Top protects card quality but can be shut down by Needle.</td>
+        </tr>
+        <tr>
+          <td><strong>Miracles mirror</strong></td>
+          <td><span class="role pivot">Engine + tempo</span></td>
+          <td>All blasts, Clique, Counterspell, EE, Judgment, Keranos, Disenchant</td>
+          <td>Swords, Terminus and other creature removal</td>
+          <td>Top in the opener is extraordinarily important. Protect or answer Counterbalance according to hand texture, but the highest-impact permanent is often Jace. Post-board, almost every draw is live. Clique and blasts create tempo; Keranos supplies inevitability. Manage the clock from turn one.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Matchup heuristics that transfer across the gauntlet</h3>
+  <ul>
+    <li><strong>Wasteland + soft counters:</strong> prioritize basics and avoid casting into Daze merely to use mana.</li>
+    <li><strong>Abrupt Decay:</strong> Counterbalance becomes a temporary obstacle, not a complete plan; lean into Jace, Entreat, Clique and Keranos.</li>
+    <li><strong>Aether Vial or Cavern:</strong> reduce narrow counters and increase board control.</li>
+    <li><strong>Fast combo:</strong> retain blue density and combine Force with permanent disruption and a clock.</li>
+    <li><strong>Graveyard decks:</strong> Rest in Peace is an engine answer, but do not keep a hand that dies before casting it.</li>
+    <li><strong>Control mirrors:</strong> remove dead creature interaction, fight over Top/Jace, and convert small tempo advantages into a clock.</li>
+  </ul>
+</section>
+
+<section id="historical-notes">
+  <div class="eyebrow">10 · Historical notes and sources</div>
+  <h2>Why this period is remembered as a Golden Era</h2>
+  <p>The label does not mean Miracles was uncontested or universally loved. It means the archetype had reached a rare balance of identity, power and specialist depth. Its central cards were stable; its flex slots still mattered; its matchups rewarded experience; and the opposing field included Delver, Stoneblade, Shardless BUG, Death & Taxes, Elves, Storm, Show and Tell, Reanimator and tribal strategies with sharply different demands.</p>
+  <p>Grand Prix Ghent showed that the miracle cards belonged in Legacy before deck construction had converged. Grand Prix Paris showed the converged strategy could occupy three Top 8 seats in a large, mature field. Schönegger’s 2014 primer then captured the deck at the moment its internal logic was most explicit: four Ponder, four Counterbalance, a disciplined mana base and matchup plans built around role identification rather than generic “good cards.”</p>
+
+  <h3>What happened later</h3>
+  <p><em>Treasure Cruise</em> and delve reshaped the blue tempo decks immediately after this guide’s cutoff. Miracles adapted and remained a premier strategy for years, later incorporating cards such as Monastery Mentor. In April 2017, Wizards banned Sensei’s Divining Top in Legacy, explicitly citing both Miracles’ sustained position as the format’s best deck and the tournament-time burden of repeated Top activations. That later ban confirms how central the CounterTop engine remained, but it should not be read backward into every 2012 list: the first two years were a period of discovery.</p>
+
+  <h3>Primary and contemporary sources</h3>
+  <ol class="source-list">
+    <li><a href="https://magic.wizards.com/en/news/feature/avacyn-restored-mechanics">Wizards of the Coast — “Avacyn Restored Mechanics” (April 9, 2012)</a><br><span>Contemporary explanation of the miracle keyword, including drawing on an opponent’s turn.</span></li>
+    <li><a href="https://mtgtop8.com/event?e=2802&f=LE">MTGTop8 — Grand Prix Ghent 2012 event page</a><br><span>Top 8 placements and archived decklists for Max Sjöblom and Andrea Milillo.</span></li>
+    <li><a href="https://mtgtop8.com/event?d=218091&e=2802&f=LE">MTGTop8 — Andrea Milillo, Standstill Miracles, GP Ghent</a><br><span>An early 61-card list with Standstill, Mishra’s Factory and Elspeth.</span></li>
+    <li><a href="https://articles.starcitygames.com/articles/miracles-in-ghent-9th/">Marc Eric Vogt — “Miracles in Ghent (9th)” (August 7, 2012)</a><br><span>Contemporary tournament report from the archetype’s first major Legacy breakthrough.</span></li>
+    <li><a href="https://www.eternalcentral.com/there-and-back-again-grand-prix-paris-top-4-report-with-miracles/">Philipp Schönegger — “Grand Prix Paris Top 4 Report with Miracles” (February 20, 2014)</a><br><span>Metagame account, exact GP list and the three-Miracles Top 8 result.</span></li>
+
+    <li><a href="https://mtgdecks.net/Legacy/miracle-control-decklist-by-max-sjoeblom-34672">MTGDecks — Max Sjöblom, Miracle Control, GP Ghent 2012</a><br><span>The black-splash Top 8 list with Vedalken Shackles, discard and Moat.</span></li>
+    <li><a href="https://mtgdecks.net/Legacy/miracle-control-decklist-by-andrea-milillo-34674">MTGDecks — Andrea Milillo, Miracle Control, GP Ghent 2012</a><br><span>The 61-card Standstill and Mishra’s Factory Top 8 list.</span></li>
+    <li><a href="https://mtgdecks.net/Legacy/miracle-control-decklist-by-jack-colwell-46660">MTGDecks — Jack Colwell, RIP/Helm Miracle Control (February 24, 2013)</a><br><span>A representative Enlightened Tutor, Rest in Peace, Energy Field and Helm of Obedience branch.</span></li>
+    <li><a href="https://articles.starcitygames.com/articles/the-miracles-primer-part-1/">Philipp Schönegger — “The Miracles Primer: Part 1” (August 7, 2014)</a><br><span>Reference 75, deck construction, Delver matchups and sideboard plans.</span></li>
+    <li><a href="https://articles.starcitygames.com/articles/miracles-primer-part-2/">Philipp Schönegger — “The Miracles Primer: Part 2” (August 14, 2014)</a><br><span>Show and Tell, Storm and the Miracles mirror.</span></li>
+    <li><a href="https://articles.starcitygames.com/articles/miracles-primer-part-3/">Philipp Schönegger — “The Miracles Primer: Part 3” (August 21, 2014)</a><br><span>Stoneblade, Deathblade and Shardless BUG.</span></li>
+    <li><a href="https://magic.wizards.com/en/news/card-image-gallery/ktk-cig-en">Wizards of the Coast — Khans of Tarkir Card Image Gallery (September 12, 2014)</a><br><span>Contemporary marker for the arrival of Treasure Cruise and the guide’s endpoint.</span></li>
+    <li><a href="https://magic.wizards.com/en/news/announcements/april-24-2017-banned-and-restricted-announcement-2017-04-24">Wizards of the Coast — April 24, 2017 Banned and Restricted Announcement</a><br><span>Later historical epilogue explaining the Sensei’s Divining Top ban.</span></li>
+  </ol>
+
+  <h3>Method note</h3>
+  <p class="note">The exact 75 is reproduced as tournament/deck-construction data. Strategic language is paraphrased and synthesized from the contemporary sources above. Matchups identified as “documented” closely track the cited 2014 primer or tournament report. Matchups marked “typical” extrapolate the same 75’s card functions to representative pre-Cruise lists; individual opposing builds can require different trims.</p>
+</section>
+</main>
+</div>
+
+<footer class="footer">
+  <p><strong>Legacy Miracles, 2012–2014</strong> · Historical strategy article prepared for private study and gauntlet construction. Card-hover images are delivered by Scryfall.</p>
+  <p>Magic: The Gathering, card names and artwork are trademarks or property of Wizards of the Coast. This independent article is not affiliated with or endorsed by Wizards of the Coast.</p>
+</footer>
+
+<script>
+const preview = document.createElement('div');
+preview.id = 'cardPreview';
+preview.setAttribute('role','tooltip');
+preview.innerHTML = '<img alt=""><div class="preview-label"></div>';
+document.body.appendChild(preview);
+const previewImg = preview.querySelector('img');
+const previewLabel = preview.querySelector('.preview-label');
+let pinnedCard = null;
+
+function cardImageUrl(name){
+  return 'https://api.scryfall.com/cards/named?exact=' + encodeURIComponent(name) + '&format=image&version=normal';
+}
+function placePreview(x,y){
+  if(window.matchMedia('(hover:none)').matches) return;
+  const pad=18, width=Math.min(310,window.innerWidth-28), height=Math.min(445,window.innerHeight-28);
+  let left=x+24, top=y-80;
+  if(left+width>window.innerWidth-pad) left=x-width-24;
+  if(top+height>window.innerHeight-pad) top=window.innerHeight-height-pad;
+  if(top<pad) top=pad;
+  preview.style.left=left+'px'; preview.style.top=top+'px';
+}
+function showCard(el,evt){
+  const name=el.dataset.card;
+  previewImg.src=cardImageUrl(name);
+  previewImg.alt=name+' card image';
+  previewLabel.textContent=name;
+  preview.classList.add('visible');
+  el.setAttribute('aria-describedby','cardPreview');
+  const r=el.getBoundingClientRect();
+  placePreview(evt?.clientX ?? r.right, evt?.clientY ?? r.top);
+}
+function hideCard(el){
+  if(pinnedCard===el) return;
+  preview.classList.remove('visible');
+  el?.removeAttribute('aria-describedby');
+}
+
+document.querySelectorAll('.card-name').forEach(el=>{
+  el.addEventListener('mouseenter',e=>showCard(el,e));
+  el.addEventListener('mousemove',e=>placePreview(e.clientX,e.clientY));
+  el.addEventListener('mouseleave',()=>hideCard(el));
+  el.addEventListener('focus',e=>showCard(el,e));
+  el.addEventListener('blur',()=>hideCard(el));
+  el.addEventListener('click',e=>{
+    if(!window.matchMedia('(hover:none)').matches) return;
+    e.stopPropagation();
+    if(pinnedCard===el){ pinnedCard=null; preview.classList.remove('visible'); }
+    else { pinnedCard=el; showCard(el,e); }
+  });
+});
+document.addEventListener('click',()=>{pinnedCard=null;preview.classList.remove('visible')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){pinnedCard=null;preview.classList.remove('visible')}});
+
+for(const button of document.querySelectorAll('.copy-deck')){
+  button.addEventListener('click',async function(){
+    const node=document.getElementById(this.dataset.copyTarget);
+    const text=node?.textContent || '';
+    try{ await navigator.clipboard.writeText(text); }
+    catch(e){ const area=document.createElement('textarea');area.value=text;document.body.appendChild(area);area.select();document.execCommand('copy');area.remove(); }
+    const old=this.textContent;this.textContent='Copied';setTimeout(()=>this.textContent=old,1400);
+  });
+}
+
+const sections=[...document.querySelectorAll('main section[id]')];
+const links=[...document.querySelectorAll('.toc a')];
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{if(entry.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id));}});
+},{rootMargin:'-15% 0px -70% 0px',threshold:0});
+sections.forEach(s=>observer.observe(s));
+</script>
+</body>
+</html>
