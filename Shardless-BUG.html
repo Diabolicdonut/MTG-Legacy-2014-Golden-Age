@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A historical and strategic guide to Shardless BUG in Legacy from its 2012 emergence through the pre–Treasure Cruise metagame of September 2014.">
+<title>Shardless BUG, 2012–2014 — Legacy’s Cascade Midrange</title>
+<style>
+:root{
+  --ink:#eaf2ef;--muted:#a7b5b1;--paper:#07100f;--paper-2:#0e1918;--paper-3:#152524;
+  --line:#294440;--ivory:#d5eee3;--gold:#d2b96e;--steel:#77bde4;--red:#ce8172;--green:#82ca9a;--violet:#a78cc6;
+  --shadow:0 18px 52px rgba(0,0,0,.42);--radius:18px;--max:1220px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);background:
+  radial-gradient(circle at 8% -5%,rgba(56,126,137,.20),transparent 32rem),
+  radial-gradient(circle at 94% 8%,rgba(57,121,76,.15),transparent 28rem),
+  var(--paper);font:17px/1.68 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:#d8c88d;text-underline-offset:.18em}
+a:hover{color:#fff2bc}
+img{display:block;max-width:100%}
+.hero{min-height:79vh;position:relative;display:grid;place-items:end center;overflow:hidden;border-bottom:1px solid var(--line);isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:
+  linear-gradient(90deg,rgba(7,7,6,.97),rgba(7,7,6,.72) 48%,rgba(7,7,6,.28) 77%,rgba(7,7,6,.55)),
+  linear-gradient(0deg,var(--paper),transparent 54%),
+  url("https://api.scryfall.com/cards/named?exact=Shardless%20Agent&format=image&version=art_crop") center 28%/cover no-repeat;
+  filter:saturate(.72) contrast(1.1)}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background-image:
+  linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:48px 48px;mask-image:linear-gradient(to bottom,#000,transparent 78%)}
+.hero-inner{width:min(var(--max),calc(100% - 36px));padding:104px 0 62px}
+.archive-link{display:inline-flex;margin-bottom:28px;text-decoration:none;border:1px solid rgba(255,255,255,.2);background:rgba(7,7,6,.66);padding:8px 12px;border-radius:999px;color:#eee9da;font-size:.82rem;font-weight:800;backdrop-filter:blur(9px)}
+.archive-link:hover{color:#fff;border-color:rgba(255,255,255,.4)}
+.eyebrow{letter-spacing:.16em;text-transform:uppercase;font-weight:850;color:var(--gold);font-size:.78rem}
+h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;line-height:1.13;margin:0 0 .55em}
+h1{font-size:clamp(3rem,8vw,7rem);max-width:1080px;letter-spacing:-.05em}
+.dek{font-size:clamp(1.08rem,2vw,1.38rem);max-width:850px;color:#ddd9ce;margin:0 0 24px}
+.meta{display:flex;gap:10px;flex-wrap:wrap}
+.pill{border:1px solid rgba(255,255,255,.2);background:rgba(10,10,9,.7);padding:7px 12px;border-radius:999px;color:#ebe7dc;font-size:.86rem;backdrop-filter:blur(10px)}
+.caption{font-size:.78rem;color:var(--muted);margin-top:12px}
+.layout{width:min(var(--max),calc(100% - 36px));margin:42px auto 90px;display:grid;grid-template-columns:265px minmax(0,1fr);gap:44px;align-items:start}
+nav.toc{position:sticky;top:22px;background:rgba(23,23,20,.92);border:1px solid var(--line);border-radius:var(--radius);padding:19px 18px 17px;box-shadow:var(--shadow);backdrop-filter:blur(14px);max-height:calc(100vh - 44px);overflow:auto}
+.toc-title{font-weight:850;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem;color:var(--gold);margin-bottom:10px}
+.toc ol{list-style:none;padding:0;margin:0}
+.toc a{display:block;color:var(--muted);text-decoration:none;padding:7px 9px;border-radius:9px;font-size:.91rem;line-height:1.25}
+.toc a:hover,.toc a.active{background:var(--paper-3);color:white}
+main{min-width:0}
+section{scroll-margin-top:28px;margin-bottom:62px}
+h2{font-size:clamp(2rem,4.2vw,3.55rem);letter-spacing:-.025em;padding-bottom:13px;border-bottom:1px solid var(--line)}
+h3{font-size:1.55rem;margin-top:1.75em}
+h4{font-size:1.16rem;margin-top:1.4em;color:var(--ivory)}
+p{margin:.85em 0}
+.lead{font-size:1.18rem;color:#e3dfd5}
+.dropcap:first-letter{float:left;font-family:Georgia,serif;font-size:4.3rem;line-height:.78;padding:.11em .12em 0 0;color:var(--gold)}
+.callout{margin:24px 0;padding:20px 22px;border:1px solid var(--line);border-left:4px solid var(--green);background:linear-gradient(135deg,rgba(214,184,110,.11),rgba(174,185,198,.04));border-radius:0 var(--radius) var(--radius) 0}
+.callout strong{color:white}
+.grid-2,.grid-3{display:grid;gap:18px;margin:22px 0}
+.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:0 12px 32px rgba(0,0,0,.18)}
+.card h3,.card h4{margin-top:0}
+.stat{font:800 2.1rem/1 Georgia,serif;color:var(--gold);margin-bottom:8px}
+.small{font-size:.9rem;color:var(--muted)}
+.art-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:25px 0}
+.art-grid figure{margin:0;background:var(--paper-2);border:1px solid var(--line);border-radius:15px;overflow:hidden}
+.art-grid img{aspect-ratio:1.25/1;object-fit:cover;background:#0a0a09}
+figcaption{padding:10px 12px;font-size:.78rem;color:var(--muted)}
+.timeline{position:relative;margin:30px 0 0;padding-left:28px}
+.timeline::before{content:"";position:absolute;left:6px;top:8px;bottom:7px;width:2px;background:linear-gradient(var(--gold),var(--steel),var(--red))}
+.event{position:relative;margin:0 0 26px}
+.event::before{content:"";position:absolute;left:-28px;top:.48em;width:13px;height:13px;background:var(--paper);border:3px solid var(--gold);border-radius:50%}
+.date{font-weight:850;color:var(--gold);font-size:.83rem;letter-spacing:.08em;text-transform:uppercase}
+.deck-accordion{background:rgba(23,23,20,.9);border:1px solid var(--line);border-radius:var(--radius);margin:17px 0;overflow:hidden}
+.deck-accordion summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:18px;align-items:center;padding:17px 20px;background:linear-gradient(90deg,rgba(214,184,110,.09),rgba(174,185,198,.04))}
+.deck-accordion summary::-webkit-details-marker{display:none}
+.deck-accordion summary strong{display:block;font-family:Georgia,serif;font-size:1.13rem}
+.deck-accordion summary small{display:block;color:var(--muted);margin-top:3px}
+.summary-mark{font-size:1.45rem;color:var(--gold);transition:transform .2s}
+.deck-accordion[open] .summary-mark{transform:rotate(45deg)}
+.deck-inside{padding:0 20px 19px}
+.deck-shell{background:#0b0b0a;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin:18px 0}
+.deck-head{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(214,184,110,.1),rgba(174,185,198,.05))}
+.deck-head h3{margin:0}
+button{appearance:none;border:1px solid #676251;color:white;background:#302e27;border-radius:10px;padding:9px 12px;font-weight:750;cursor:pointer}
+button:hover{background:#403d33}
+.deck-columns{display:grid;grid-template-columns:1fr 1fr}
+.deck-column{padding:20px}
+.deck-column + .deck-column{border-left:1px solid var(--line)}
+.deck-group{margin-bottom:20px}
+.deck-group h4{font-family:Inter,sans-serif;font-size:.79rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin:0 0 8px}
+.deck-row{display:flex;justify-content:space-between;gap:18px;padding:3px 0;border-bottom:1px dotted rgba(255,255,255,.08)}
+.qty{font-variant-numeric:tabular-nums;color:#d8c88d;display:inline-block;min-width:1.5em}
+.card-name{border-bottom:1px dotted rgba(255,255,255,.35);cursor:help;outline:none}
+.card-name:hover,.card-name:focus{color:#fff;border-bottom-color:var(--gold)}
+.deck-source{font-size:.82rem;color:var(--muted)}
+.table-wrap{overflow-x:auto;margin:23px 0;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 12px 30px rgba(0,0,0,.14)}
+table{border-collapse:collapse;width:100%;min-width:900px;background:var(--paper-2);font-size:.91rem}
+th,td{text-align:left;vertical-align:top;padding:13px 14px;border-bottom:1px solid var(--line)}
+th{position:sticky;top:0;background:#2b2922;color:#fff;font-size:.76rem;text-transform:uppercase;letter-spacing:.07em}
+tr:last-child td{border-bottom:0}
+tbody tr:hover{background:rgba(214,184,110,.045)}
+.role{display:inline-block;font-weight:800;border-radius:999px;padding:3px 8px;font-size:.74rem;white-space:nowrap}
+.attrition{background:rgba(130,202,154,.15);color:#c9efd4}
+.control{background:rgba(119,189,228,.14);color:#c7eaff}
+.race{background:rgba(167,140,198,.16);color:#e3cef5}
+.danger{background:rgba(206,129,114,.16);color:#ffc4b7}
+.quote{font-family:Georgia,serif;font-size:1.25rem;color:#e9e3d3;border-left:3px solid var(--gold);padding-left:19px;margin:28px 0}
+.source-list{padding-left:1.25em}
+.source-list li{margin:.7em 0}
+.source-list span,.note{color:var(--muted)}
+.note{font-size:.88rem}
+#cardPreview{position:fixed;z-index:9999;width:min(310px,72vw);pointer-events:none;opacity:0;transform:translateY(6px) scale(.98);transition:opacity .12s,transform .12s;filter:drop-shadow(0 18px 30px rgba(0,0,0,.65))}
+#cardPreview.show{opacity:1;transform:translateY(0) scale(1)}
+#cardPreview img{width:100%;max-height:88vh;object-fit:contain;border-radius:4.8%;background:#111}
+.footer{border-top:1px solid var(--line);padding:30px 18px 50px;text-align:center;color:var(--muted);font-size:.86rem}
+code{background:#0b0b0a;border:1px solid var(--line);border-radius:6px;padding:.08em .35em}
+@media(max-width:950px){.layout{grid-template-columns:1fr}nav.toc{position:relative;top:auto;max-height:none}.grid-3{grid-template-columns:1fr}.art-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){body{font-size:16px}.hero{min-height:69vh}.layout,.hero-inner{width:min(100% - 24px,var(--max))}.grid-2,.deck-columns{grid-template-columns:1fr}.deck-column + .deck-column{border-left:0;border-top:1px solid var(--line)}.art-grid{grid-template-columns:1fr}.deck-head{align-items:flex-start;flex-direction:column}#cardPreview{width:min(280px,78vw);left:50%!important;right:auto!important;top:50%!important;transform:translate(-50%,-46%) scale(.98)}#cardPreview.show{transform:translate(-50%,-50%) scale(1)}}
+@media print{:root{--ink:#111;--muted:#444;--paper:#fff;--paper-2:#fff;--paper-3:#eee;--line:#aaa}body{background:#fff;color:#111;font-size:10pt}.hero{min-height:0;display:block;border:0}.hero::before,.hero::after,nav.toc,button,#cardPreview{display:none}.hero-inner{padding:0 0 20px;width:100%}h1{font-size:34pt;color:#111}.dek,.caption,.pill{color:#222}.pill{border-color:#777;background:#fff}.layout{display:block;width:100%;margin:0}.card,.deck-shell,.table-wrap{box-shadow:none}a{color:#111}details{display:block}details>*{display:block!important}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="hero-inner"><a class="archive-link" href="https://diabolicdonut.github.io/MTG-Legacy-2014-Golden-Age/index.html">← Legacy Golden Era Archive</a><div class="eyebrow">Legacy archetype dossier · 2012–September 2014</div><h1>Shardless BUG</h1><p class="dek">Legacy’s cascade midrange engine: trade resources early, then turn a three-mana 2/2 into Ancestral Recall while Deathrite, Tarmogoyf, planeswalkers, and uncounterable removal bury every fair opponent.</p><div class="meta"><span class="pill">BUG / Sultai midrange</span><span class="pill">Cascade control</span><span class="pill">Agent · Vision · Decay</span><span class="pill">Historical rules and card pool</span></div><p class="caption">Hero artwork: <em>Shardless Agent</em>, art by Izzy. Card image delivered by Scryfall; Magic artwork © Wizards of the Coast.</p></div></header>
+
+<div class="layout">
+<nav class="toc" aria-label="Table of contents">
+  <div class="toc-title">Table of contents</div>
+  <ol>
+    <li><a href="#scope">Scope of this guide</a></li>
+    <li><a href="#identity">1. Cover and deck identity</a></li>
+    <li><a href="#what-it-does">2. What this deck does</a></li>
+    <li><a href="#history">3. History and evolution</a></li>
+    <li><a href="#decklists">4. Historical decklists and final 75</a></li>
+    <li><a href="#mulligans">5. Mulligans and opening turns</a></li>
+    <li><a href="#interactions">6. Key interactions</a></li>
+    <li><a href="#piloting">7. How to pilot the deck</a></li>
+    <li><a href="#sideboarding">8. Sideboarding principles</a></li>
+    <li><a href="#matchups">9. Gauntlet-specific matchup guide</a></li>
+    <li><a href="#historical-notes">10. Historical notes and sources</a></li>
+  </ol>
+</nav>
+
+<main>
+<section id="scope"><div class="callout"><strong>Historical scope.</strong> This guide begins with the first serious Shardless Agent control experiments in summer 2012 and follows the archetype through September 2014, immediately before <em>Treasure Cruise</em>. It treats the post–Return to Ravnica Deathrite Shaman/Abrupt Decay shell as the canonical deck while preserving the earlier Deed-and-Top lineage.</div></section>
+
+<section id="identity"><div class="eyebrow">1 · Cover and deck identity</div><h2>The fairest unfair thing in Legacy</h2>
+<p class="lead dropcap">Shardless BUG wins with creatures, discard, removal, and planeswalkers—the ordinary tools of a midrange deck. Its unfair element is the way those cards replace themselves. Shardless Agent always produces another spell. Ancestral Vision draws three. Baleful Strix trades with a creature after drawing. Deathrite Shaman is mana, graveyard disruption, life gain, and reach. The opponent can answer each permanent and still fall behind.</p>
+<div class="grid-3"><div class="card"><div class="stat">0 mana</div><strong>Draw three cards.</strong><p class="small">Cascade ignores Ancestral Vision’s absent mana cost and casts it without paying.</p></div><div class="card"><div class="stat">4 Decays</div><strong>Most cheap permanents are temporary.</strong><p class="small">Counterbalance, Delver, equipment, Vial, Goyf, and hate permanents can be answered without fear of countermagic.</p></div><div class="card"><div class="stat">1 Shaman</div><strong>Hold the whole deck together.</strong><p class="small">Deathrite fixes three colors, accelerates Agent and Jace, checks graveyards, and ends stalled games.</p></div></div>
+<h3>The deck’s four identities</h3><div class="grid-2"><div class="card"><h4>Attrition midrange</h4><p>Against Delver, Stoneblade, Jund, Maverick, and other fair decks, Shardless trades cards and relies on Vision, Agent, Strix, and planeswalkers to win the resource count.</p></div><div class="card"><h4>Tap-out control</h4><p>Against Miracles and slow decks, it develops lands, suspends Vision, removes engines with Decay, and lands Jace or Liliana behind expendable creatures.</p></div><div class="card"><h4>Discard-plus-clock combo opponent</h4><p>Against Storm, Show and Tell, and Reanimator, the fair cards become liabilities. Thoughtseize, Hymn, Force, Deathrite, and Tarmogoyf must create a narrow window to win.</p></div><div class="card"><h4>Board-control engine</h4><p>Strix, Goyf, Decay, Liliana, Pulse, Charm, and Deluge let the deck reshape creature battlefields while its cascade cards keep the hand full.</p></div></div>
+<div class="art-grid"><figure><img loading="lazy" src="https://api.scryfall.com/cards/named?exact=Shardless%20Agent&format=image&version=art_crop" alt="Shardless Agent artwork"><figcaption><strong>Shardless Agent</strong> — a blue card, planeswalker attacker, Liliana shield, and guaranteed cascade.</figcaption></figure><figure><img loading="lazy" src="https://api.scryfall.com/cards/named?exact=Ancestral%20Vision&format=image&version=art_crop" alt="Ancestral Vision artwork"><figcaption><strong>Ancestral Vision</strong> — both a fair turn-one investment and an unfair cascade payoff.</figcaption></figure><figure><img loading="lazy" src="https://api.scryfall.com/cards/named?exact=Deathrite%20Shaman&format=image&version=art_crop" alt="Deathrite Shaman artwork"><figcaption><strong>Deathrite Shaman</strong> — acceleration, fixing, life control, graveyard denial, and reach.</figcaption></figure><figure><img loading="lazy" src="https://api.scryfall.com/cards/named?exact=Abrupt%20Decay&format=image&version=art_crop" alt="Abrupt Decay artwork"><figcaption><strong>Abrupt Decay</strong> — the uncounterable answer that made Counterbalance and tempo boards manageable.</figcaption></figure></div></section>
+
+<section id="what-it-does"><div class="eyebrow">2 · What this deck does</div><h2>Trade, cascade, overwhelm</h2><p>Shardless BUG seeks games where both players exchange cards early. Thoughtseize, Hymn, Force, Decay, Strix, and Liliana reduce the board and hands. The crucial asymmetry is that the Shardless player has suspended Visions, Agents, creature-lands, Deathrite activations, and planeswalkers waiting to refill the game.</p>
+<div class="grid-2"><div class="card"><h4>Stabilize mana first</h4><p>The deck needs black on turn one, double black for Hymn or Liliana, green and blue for Agent, and blue-blue for Jace. Fetch sequencing is a strategic resource.</p></div><div class="card"><h4>Exchange efficiently</h4><p>Decay the permanent that unlocks several opposing cards, discard the spell your deck cannot answer, and save Force for effects that invalidate ordinary play.</p></div><div class="card"><h4>Create delayed advantage</h4><p>Suspending Vision asks the opponent to win before it resolves. Shardless Agent shortens that delay and adds a body that attacks planeswalkers.</p></div><div class="card"><h4>Close before unfair decks rebuild</h4><p>Against combo, the deck cannot merely accumulate cards. Goyf, Deathrite, Tar Pit, and Agents must turn disruption into a finite clock.</p></div></div>
+<div class="callout"><strong>The central bargain:</strong> Shardless accepts less precise cascades and some awkward game-one cards in exchange for being exceptionally difficult to exhaust. It is strongest when the format’s best decks expect to win by trading resources.</div></section>
+
+<section id="history"><div class="eyebrow">3 · History and evolution</div><h2>From cascade experiment to midrange benchmark</h2><div class="timeline">
+<div class="event"><div class="date">June–August 2012 · The first brews</div><h3>Agent meets Ancestral Vision</h3><p>Brian DeMars built around the interaction immediately. The first shell used Top, Jace, Brainstorm, Snapcaster, Pernicious Deed, basics, and traditional removal. It was BUG control first and a refined cascade deck second.</p></div>
+<div class="event"><div class="date">October–December 2012 · Return to Ravnica</div><h3>Deathrite Shaman and Abrupt Decay solve the architecture</h3><p>Deathrite accelerated Agent and Jace while fixing the demanding mana. Abrupt Decay replaced narrower removal and attacked Counterbalance. Gerry Thompson’s December Invitational list already contained the permanent core recognizable throughout 2013–2014.</p></div>
+<div class="event"><div class="date">January 2013 · GP Denver</div><h3>The deck chooses control over tempo</h3><p>Twenty-three lands, only two Forces, four Thoughtseizes, and three Jaces made the philosophy explicit. Wasteland was a utility answer, not a reason to sacrifice land development.</p></div>
+<div class="event"><div class="date">June 2013 · Baleful Strix</div><h3>The fourteen-creature shell emerges</h3><p>Frank Skarren’s SCG Baltimore Top 4 list added two Strixes and demonstrated that the archetype could be piloted successfully even without years of Legacy-specific experience.</p></div>
+<div class="event"><div class="date">November 2013 · Grand Prix Washington, D.C.</div><h3>Another Grand Prix Top 8</h3><p>Ted McCluskie placed seventh in the same event won by UWR Delver. The archetype was now a known foil to Stoneblade, Miracles, and fair blue decks rather than an experimental strategy.</p></div>
+<div class="event"><div class="date">Late 2013–March 2014 · True-Name Nemesis</div><h3>The untargetable creature changes the planeswalker balance</h3><p>Abrupt Decay and Pulse could not remove True-Name itself. Lists reduced Jace, increased Liliana, and adopted Golgari Charm, Toxic Deluge, and Night of Souls’ Betrayal—cards useful beyond the single matchup.</p></div>
+<div class="event"><div class="date">Summer 2014 · A trophy-converting pillar</div><h3>Strix counts and sideboards diversify</h3><p>Some lists played four Strix; others retained two and more planeswalkers. The deck was widely regarded as a premier answer to the established fair metagame, with combo and Blood Moon remaining the central risks.</p></div>
+<div class="event"><div class="date">September 2014 · The mature primer</div><h3>The 2/2 Jace–Liliana split becomes the reference</h3><p>Gerry Thompson’s final pre-Cruise primer presented a balanced open-field list with eleven fetchlands, a basic Swamp, two Wastelands, flexible removal, and a modular sideboard.</p></div>
+<div class="event"><div class="date">September 2014 · The cutoff</div><h3>Treasure Cruise alters the attrition equation</h3><p>Shardless’s advantage was that it refilled more effectively than other fair decks. A one-mana draw-three available to Delver strategies fundamentally changed that comparison.</p></div></div>
+<h3>What remained stable—and what did not</h3><div class="table-wrap"><table><thead><tr><th>Package</th><th>Stable core</th><th>Evolutionary debate</th></tr></thead><tbody><tr><td>Cascade</td><td>Four Shardless Agent and usually four Ancestral Vision.</td><td>Whether to shave a Vision, add Ponder/Top, or accept more variable cascades.</td></tr><tr><td>Creatures</td><td>Four Deathrite and four Tarmogoyf after Return to Ravnica.</td><td>Zero to four Baleful Strix; occasional Clique, Snapcaster, Confidant, or Ooze.</td></tr><tr><td>Planeswalkers</td><td>Three to four endgame cards.</td><td>Three Jace early; later 2/2 Jace–Liliana or Liliana-heavy configurations.</td></tr><tr><td>Disruption</td><td>Brainstorm, Decay, discard, and some Force.</td><td>The exact Thoughtseize/Hymn/Force mixture and how much game-one combo respect to retain.</td></tr><tr><td>Mana</td><td>Twenty-two or twenty-three lands and many fetchlands.</td><td>Basic Swamp, one or two Tar Pits, and two or three Wastelands.</td></tr></tbody></table></div></section>
+
+<section id="decklists"><div class="eyebrow">4 · Historical decklists and final 75</div><h2>Eight snapshots of the archetype</h2><p>These lists trace the deck from the pre-Deathrite prototype to its mature September 2014 form. Hover a card name—or tap/focus it on mobile—to display the card. Each 75 can be copied independently.</p><details class="deck-accordion" ><summary><span><strong>August 2012 · The prototype</strong><small>Brian DeMars — Shardless BUG Control, August 2012</small></span><span class="summary-mark">+</span></summary><div class="deck-inside"><p>The first recognizable build was a true BUG control deck built to maximize cascade. Top, Brainstorm, and Jace staged Ancestral Vision while Pernicious Deed cleared cheaper boards and often left Shardless Agent alive.</p><div class="deck-shell"><div class="deck-head"><div><h3>Brian DeMars — Shardless BUG Control, August 2012</h3><div class="small">Before Deathrite Shaman and Abrupt Decay: Top, Snapcaster, Pernicious Deed, and basics</div></div><button class="copy-deck" data-copy-target="text-demars-2012" type="button">Copy decklist</button></div><div class="deck-columns"><div class="deck-column"><div class="deck-group"><h4>Creatures · 12</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Tarmogoyf">Tarmogoyf</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Shardless Agent">Shardless Agent</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Vendilion Clique">Vendilion Clique</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Snapcaster Mage">Snapcaster Mage</span></span></div></div><div class="deck-group"><h4>Planeswalkers · 2</h4><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Jace, the Mind Sculptor">Jace, the Mind Sculptor</span></span></div></div><div class="deck-group"><h4>Spells · 24</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Ancestral Vision">Ancestral Vision</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Brainstorm">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Hymn to Tourach">Hymn to Tourach</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Pernicious Deed">Pernicious Deed</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Ghastly Demise">Ghastly Demise</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Sensei&#x27;s Divining Top">Sensei&#x27;s Divining Top</span></span></div></div><div class="deck-group"><h4>Lands · 22</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Wasteland">Wasteland</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Polluted Delta">Polluted Delta</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Misty Rainforest">Misty Rainforest</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Verdant Catacombs">Verdant Catacombs</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Underground Sea">Underground Sea</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Tropical Island">Tropical Island</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Bayou">Bayou</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Island">Island</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Swamp">Swamp</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Forest">Forest</span></span></div></div></div><div class="deck-column"><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Umezawa&#x27;s Jitte">Umezawa&#x27;s Jitte</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Ghastly Demise">Ghastly Demise</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Tormod&#x27;s Crypt">Tormod&#x27;s Crypt</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Krosan Grip">Krosan Grip</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Thoughtseize">Thoughtseize</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Vendilion Clique">Vendilion Clique</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Nihil Spellbomb">Nihil Spellbomb</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Go for the Throat">Go for the Throat</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Scavenging Ooze">Scavenging Ooze</span></span></div></div></div></div></div><pre id="text-demars-2012" hidden>Brian DeMars — Shardless BUG Control, August 2012
+
+Creatures · 12
+4 Tarmogoyf
+4 Shardless Agent
+2 Vendilion Clique
+2 Snapcaster Mage
+
+Planeswalkers · 2
+2 Jace, the Mind Sculptor
+
+Spells · 24
+4 Ancestral Vision
+4 Brainstorm
+4 Force of Will
+4 Hymn to Tourach
+3 Pernicious Deed
+3 Ghastly Demise
+2 Sensei&#x27;s Divining Top
+
+Lands · 22
+4 Wasteland
+3 Polluted Delta
+3 Misty Rainforest
+3 Verdant Catacombs
+2 Underground Sea
+2 Tropical Island
+2 Bayou
+1 Island
+1 Swamp
+1 Forest
+
+Sideboard · 15
+2 Umezawa&#x27;s Jitte
+1 Ghastly Demise
+1 Tormod&#x27;s Crypt
+2 Krosan Grip
+3 Thoughtseize
+1 Vendilion Clique
+2 Nihil Spellbomb
+1 Go for the Throat
+2 Scavenging Ooze</pre><p class="deck-source"><a href="https://articles.starcitygames.com/articles/legacy-avant-garde-bug-is-not-a-shard-its-shardless/">Historical source</a></p></div></details>
+<details class="deck-accordion" ><summary><span><strong>December 2012 · Return to Ravnica transformation</strong><small>Gerry Thompson — 13th, SCG Invitational 2012</small></span><span class="summary-mark">+</span></summary><div class="deck-inside"><p>Return to Ravnica solved several structural problems at once. Deathrite accelerated the expensive cards, stabilized life, and attacked graveyards; Abrupt Decay gave the deck an uncounterable answer to nearly every cheap permanent.</p><div class="deck-shell"><div class="deck-head"><div><h3>Gerry Thompson — 13th, SCG Invitational 2012</h3><div class="small">Deathrite Shaman and Abrupt Decay create the canonical shell</div></div><button class="copy-deck" data-copy-target="text-gerry-invitational-2012" type="button">Copy decklist</button></div><div class="deck-columns"><div class="deck-column"><div class="deck-group"><h4>Creatures · 12</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Deathrite Shaman">Deathrite Shaman</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Tarmogoyf">Tarmogoyf</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Shardless Agent">Shardless Agent</span></span></div></div><div class="deck-group"><h4>Planeswalkers · 3</h4><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Jace, the Mind Sculptor">Jace, the Mind Sculptor</span></span></div></div><div class="deck-group"><h4>Spells · 23</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Ancestral Vision">Ancestral Vision</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Brainstorm">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Abrupt Decay">Abrupt Decay</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Thoughtseize">Thoughtseize</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Hymn to Tourach">Hymn to Tourach</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Ponder">Ponder</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Dismember">Dismember</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Umezawa&#x27;s Jitte">Umezawa&#x27;s Jitte</span></span></div></div><div class="deck-group"><h4>Lands · 22</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Underground Sea">Underground Sea</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Misty Rainforest">Misty Rainforest</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Verdant Catacombs">Verdant Catacombs</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Polluted Delta">Polluted Delta</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Tropical Island">Tropical Island</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Creeping Tar Pit">Creeping Tar Pit</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Wasteland">Wasteland</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Bayou">Bayou</span></span></div></div></div><div class="deck-column"><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Umezawa&#x27;s Jitte">Umezawa&#x27;s Jitte</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Hymn to Tourach">Hymn to Tourach</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Blue Elemental Blast">Blue Elemental Blast</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Engineered Plague">Engineered Plague</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Ghastly Demise">Ghastly Demise</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Krosan Grip">Krosan Grip</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Inquisition of Kozilek">Inquisition of Kozilek</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Nihil Spellbomb">Nihil Spellbomb</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Dismember">Dismember</span></span></div></div></div></div></div><pre id="text-gerry-invitational-2012" hidden>Gerry Thompson — 13th, SCG Invitational 2012
+
+Creatures · 12
+4 Deathrite Shaman
+4 Tarmogoyf
+4 Shardless Agent
+
+Planeswalkers · 3
+3 Jace, the Mind Sculptor
+
+Spells · 23
+4 Ancestral Vision
+4 Brainstorm
+4 Abrupt Decay
+3 Force of Will
+3 Thoughtseize
+2 Hymn to Tourach
+1 Ponder
+1 Dismember
+1 Umezawa&#x27;s Jitte
+
+Lands · 22
+4 Underground Sea
+4 Misty Rainforest
+4 Verdant Catacombs
+3 Polluted Delta
+2 Tropical Island
+2 Creeping Tar Pit
+2 Wasteland
+1 Bayou
+
+Sideboard · 15
+1 Umezawa&#x27;s Jitte
+1 Hymn to Tourach
+1 Force of Will
+2 Blue Elemental Blast
+3 Engineered Plague
+1 Ghastly Demise
+1 Krosan Grip
+1 Inquisition of Kozilek
+3 Nihil Spellbomb
+1 Dismember</pre><p class="deck-source"><a href="https://articles.starcitygames.com/articles/everything-you-need-to-know-about-shardless-bug/">Historical source</a></p></div></details>
+<details class="deck-accordion" ><summary><span><strong>January 2013 · Discard-heavy control</strong><small>Gerry Thompson — 38th, Grand Prix Denver 2013</small></span><span class="summary-mark">+</span></summary><div class="deck-inside"><p>This version emphasized land drops and proactive disruption over permission. Wasteland was utility removal rather than a tempo plan, while Tar Pit and Jace supplied inevitability.</p><div class="deck-shell"><div class="deck-head"><div><h3>Gerry Thompson — 38th, Grand Prix Denver 2013</h3><div class="small">Twenty-three lands, four Thoughtseize, and only two Forces</div></div><button class="copy-deck" data-copy-target="text-gerry-denver-2013" type="button">Copy decklist</button></div><div class="deck-columns"><div class="deck-column"><div class="deck-group"><h4>Creatures · 12</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Deathrite Shaman">Deathrite Shaman</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Tarmogoyf">Tarmogoyf</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Shardless Agent">Shardless Agent</span></span></div></div><div class="deck-group"><h4>Planeswalkers · 3</h4><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Jace, the Mind Sculptor">Jace, the Mind Sculptor</span></span></div></div><div class="deck-group"><h4>Spells · 22</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Ancestral Vision">Ancestral Vision</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Brainstorm">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Abrupt Decay">Abrupt Decay</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Thoughtseize">Thoughtseize</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Hymn to Tourach">Hymn to Tourach</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Maelstrom Pulse">Maelstrom Pulse</span></span></div></div><div class="deck-group"><h4>Lands · 23</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Misty Rainforest">Misty Rainforest</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Verdant Catacombs">Verdant Catacombs</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Polluted Delta">Polluted Delta</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Underground Sea">Underground Sea</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Wasteland">Wasteland</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Tropical Island">Tropical Island</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Bayou">Bayou</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Creeping Tar Pit">Creeping Tar Pit</span></span></div></div></div><div class="deck-column"><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Hymn to Tourach">Hymn to Tourach</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Chill">Chill</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Perish">Perish</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Engineered Plague">Engineered Plague</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Submerge">Submerge</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Maelstrom Pulse">Maelstrom Pulse</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Mindbreak Trap">Mindbreak Trap</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Liliana of the Veil">Liliana of the Veil</span></span></div></div></div></div></div><pre id="text-gerry-denver-2013" hidden>Gerry Thompson — 38th, Grand Prix Denver 2013
+
+Creatures · 12
+4 Deathrite Shaman
+4 Tarmogoyf
+4 Shardless Agent
+
+Planeswalkers · 3
+3 Jace, the Mind Sculptor
+
+Spells · 22
+4 Ancestral Vision
+4 Brainstorm
+4 Abrupt Decay
+4 Thoughtseize
+2 Hymn to Tourach
+2 Force of Will
+2 Maelstrom Pulse
+
+Lands · 23
+4 Misty Rainforest
+4 Verdant Catacombs
+3 Polluted Delta
+3 Underground Sea
+3 Wasteland
+2 Tropical Island
+2 Bayou
+2 Creeping Tar Pit
+
+Sideboard · 15
+2 Hymn to Tourach
+3 Chill
+1 Perish
+2 Engineered Plague
+2 Submerge
+1 Maelstrom Pulse
+2 Mindbreak Trap
+2 Liliana of the Veil</pre><p class="deck-source"><a href="https://articles.starcitygames.com/articles/everything-you-need-to-know-about-shardless-bug/">Historical source</a></p></div></details>
+<details class="deck-accordion" ><summary><span><strong>June 2013 · Baleful Strix enters the core</strong><small>Frank Skarren — 3rd, SCG Legacy Open Baltimore</small></span><span class="summary-mark">+</span></summary><div class="deck-inside"><p>Baleful Strix added another immediate two-for-one and a clean answer to Delver, Tarmogoyf, Griselbrand, and other large attackers. Skarren reached the Top 4 in his first Legacy event.</p><div class="deck-shell"><div class="deck-head"><div><h3>Frank Skarren — 3rd, SCG Legacy Open Baltimore</h3><div class="small">The familiar fourteen-creature shell and a broad sideboard</div></div><button class="copy-deck" data-copy-target="text-skarren-2013" type="button">Copy decklist</button></div><div class="deck-columns"><div class="deck-column"><div class="deck-group"><h4>Creatures · 14</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Deathrite Shaman">Deathrite Shaman</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Tarmogoyf">Tarmogoyf</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Shardless Agent">Shardless Agent</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Baleful Strix">Baleful Strix</span></span></div></div><div class="deck-group"><h4>Planeswalkers · 3</h4><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Jace, the Mind Sculptor">Jace, the Mind Sculptor</span></span></div></div><div class="deck-group"><h4>Spells · 21</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Ancestral Vision">Ancestral Vision</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Brainstorm">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Abrupt Decay">Abrupt Decay</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Hymn to Tourach">Hymn to Tourach</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Thoughtseize">Thoughtseize</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Maelstrom Pulse">Maelstrom Pulse</span></span></div></div><div class="deck-group"><h4>Lands · 22</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Underground Sea">Underground Sea</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Misty Rainforest">Misty Rainforest</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Verdant Catacombs">Verdant Catacombs</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Polluted Delta">Polluted Delta</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Tropical Island">Tropical Island</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Bayou">Bayou</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Wasteland">Wasteland</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Creeping Tar Pit">Creeping Tar Pit</span></span></div></div></div><div class="deck-column"><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Hymn to Tourach">Hymn to Tourach</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Sower of Temptation">Sower of Temptation</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Thoughtseize">Thoughtseize</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Maelstrom Pulse">Maelstrom Pulse</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Nihil Spellbomb">Nihil Spellbomb</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Liliana of the Veil">Liliana of the Veil</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Baleful Strix">Baleful Strix</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Notion Thief">Notion Thief</span></span></div></div></div></div></div><pre id="text-skarren-2013" hidden>Frank Skarren — 3rd, SCG Legacy Open Baltimore
+
+Creatures · 14
+4 Deathrite Shaman
+4 Tarmogoyf
+4 Shardless Agent
+2 Baleful Strix
+
+Planeswalkers · 3
+3 Jace, the Mind Sculptor
+
+Spells · 21
+4 Ancestral Vision
+4 Brainstorm
+4 Abrupt Decay
+3 Hymn to Tourach
+3 Force of Will
+2 Thoughtseize
+1 Maelstrom Pulse
+
+Lands · 22
+4 Underground Sea
+4 Misty Rainforest
+4 Verdant Catacombs
+2 Polluted Delta
+2 Tropical Island
+2 Bayou
+2 Wasteland
+2 Creeping Tar Pit
+
+Sideboard · 15
+1 Hymn to Tourach
+1 Force of Will
+2 Sower of Temptation
+2 Thoughtseize
+1 Maelstrom Pulse
+3 Nihil Spellbomb
+2 Liliana of the Veil
+2 Baleful Strix
+1 Notion Thief</pre><p class="deck-source"><a href="https://articles.starcitygames.com/articles/leaving-a-legacy-buggin-out/">Historical source</a></p></div></details>
+<details class="deck-accordion" ><summary><span><strong>March 2014 · The True-Name response</strong><small>Frank Skarren — Invitational test list, March 2014</small></span><span class="summary-mark">+</span></summary><div class="deck-inside"><p>True-Name Nemesis could not be targeted by Decay or Pulse, but discard and Force could stop it, Liliana could remove it, and Golgari Charm swept it while remaining useful against enchantments and creature swarms.</p><div class="deck-shell"><div class="deck-head"><div><h3>Frank Skarren — Invitational test list, March 2014</h3><div class="small">Liliana replaces Jaces and Golgari Charm becomes a premier sideboard card</div></div><button class="copy-deck" data-copy-target="text-skarren-2014" type="button">Copy decklist</button></div><div class="deck-columns"><div class="deck-column"><div class="deck-group"><h4>Creatures · 14</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Deathrite Shaman">Deathrite Shaman</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Tarmogoyf">Tarmogoyf</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Shardless Agent">Shardless Agent</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Baleful Strix">Baleful Strix</span></span></div></div><div class="deck-group"><h4>Planeswalkers · 3</h4><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Liliana of the Veil">Liliana of the Veil</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Jace, the Mind Sculptor">Jace, the Mind Sculptor</span></span></div></div><div class="deck-group"><h4>Spells · 21</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Ancestral Vision">Ancestral Vision</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Brainstorm">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Abrupt Decay">Abrupt Decay</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Hymn to Tourach">Hymn to Tourach</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Thoughtseize">Thoughtseize</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div></div><div class="deck-group"><h4>Lands · 22</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Underground Sea">Underground Sea</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Misty Rainforest">Misty Rainforest</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Verdant Catacombs">Verdant Catacombs</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Polluted Delta">Polluted Delta</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Tropical Island">Tropical Island</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Bayou">Bayou</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Wasteland">Wasteland</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Creeping Tar Pit">Creeping Tar Pit</span></span></div></div></div><div class="deck-column"><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Sower of Temptation">Sower of Temptation</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Thoughtseize">Thoughtseize</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Maelstrom Pulse">Maelstrom Pulse</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Jace, the Mind Sculptor">Jace, the Mind Sculptor</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Nihil Spellbomb">Nihil Spellbomb</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Liliana of the Veil">Liliana of the Veil</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Baleful Strix">Baleful Strix</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Golgari Charm">Golgari Charm</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Notion Thief">Notion Thief</span></span></div></div></div></div></div><pre id="text-skarren-2014" hidden>Frank Skarren — Invitational test list, March 2014
+
+Creatures · 14
+4 Deathrite Shaman
+4 Tarmogoyf
+4 Shardless Agent
+2 Baleful Strix
+
+Planeswalkers · 3
+2 Liliana of the Veil
+1 Jace, the Mind Sculptor
+
+Spells · 21
+4 Ancestral Vision
+4 Brainstorm
+4 Abrupt Decay
+3 Hymn to Tourach
+3 Thoughtseize
+3 Force of Will
+
+Lands · 22
+4 Underground Sea
+4 Misty Rainforest
+4 Verdant Catacombs
+2 Polluted Delta
+2 Tropical Island
+2 Bayou
+2 Wasteland
+2 Creeping Tar Pit
+
+Sideboard · 15
+1 Force of Will
+2 Sower of Temptation
+1 Thoughtseize
+1 Maelstrom Pulse
+1 Jace, the Mind Sculptor
+3 Nihil Spellbomb
+1 Liliana of the Veil
+1 Baleful Strix
+3 Golgari Charm
+1 Notion Thief</pre><p class="deck-source"><a href="https://articles.starcitygames.com/articles/no-shards-no-problem/">Historical source</a></p></div></details>
+<details class="deck-accordion" ><summary><span><strong>August 2014 · The Strix-heavy branch</strong><small>Andrew Tenjum — SCG Syracuse Top 8, August 2014</small></span><span class="summary-mark">+</span></summary><div class="deck-inside"><p>Tenjum maximized Strix for the fair creature field and used the sideboard to pivot toward combo disruption, sweepers, graveyard hate, and Dark Confidant for selected attrition games.</p><div class="deck-shell"><div class="deck-head"><div><h3>Andrew Tenjum — SCG Syracuse Top 8, August 2014</h3><div class="small">Four Baleful Strix and a compact disruption suite</div></div><button class="copy-deck" data-copy-target="text-tenjum-2014" type="button">Copy decklist</button></div><div class="deck-columns"><div class="deck-column"><div class="deck-group"><h4>Creatures · 16</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Deathrite Shaman">Deathrite Shaman</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Tarmogoyf">Tarmogoyf</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Shardless Agent">Shardless Agent</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Baleful Strix">Baleful Strix</span></span></div></div><div class="deck-group"><h4>Planeswalkers · 3</h4><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Liliana of the Veil">Liliana of the Veil</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Jace, the Mind Sculptor">Jace, the Mind Sculptor</span></span></div></div><div class="deck-group"><h4>Spells · 19</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Ancestral Vision">Ancestral Vision</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Brainstorm">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Abrupt Decay">Abrupt Decay</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Thoughtseize">Thoughtseize</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Hymn to Tourach">Hymn to Tourach</span></span></div></div><div class="deck-group"><h4>Lands · 22</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Verdant Catacombs">Verdant Catacombs</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Polluted Delta">Polluted Delta</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Underground Sea">Underground Sea</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Misty Rainforest">Misty Rainforest</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Tropical Island">Tropical Island</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Bayou">Bayou</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Wasteland">Wasteland</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Creeping Tar Pit">Creeping Tar Pit</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Swamp">Swamp</span></span></div></div></div><div class="deck-column"><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Thoughtseize">Thoughtseize</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Hymn to Tourach">Hymn to Tourach</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Toxic Deluge">Toxic Deluge</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Grafdigger&#x27;s Cage">Grafdigger&#x27;s Cage</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Nihil Spellbomb">Nihil Spellbomb</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Pithing Needle">Pithing Needle</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Spell Pierce">Spell Pierce</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Dark Confidant">Dark Confidant</span></span></div></div></div></div></div><pre id="text-tenjum-2014" hidden>Andrew Tenjum — SCG Syracuse Top 8, August 2014
+
+Creatures · 16
+4 Deathrite Shaman
+4 Tarmogoyf
+4 Shardless Agent
+4 Baleful Strix
+
+Planeswalkers · 3
+2 Liliana of the Veil
+1 Jace, the Mind Sculptor
+
+Spells · 19
+4 Ancestral Vision
+4 Brainstorm
+4 Abrupt Decay
+3 Force of Will
+2 Thoughtseize
+2 Hymn to Tourach
+
+Lands · 22
+4 Verdant Catacombs
+4 Polluted Delta
+3 Underground Sea
+2 Misty Rainforest
+2 Tropical Island
+2 Bayou
+2 Wasteland
+2 Creeping Tar Pit
+1 Swamp
+
+Sideboard · 15
+1 Force of Will
+1 Thoughtseize
+1 Hymn to Tourach
+2 Toxic Deluge
+2 Grafdigger&#x27;s Cage
+2 Nihil Spellbomb
+2 Pithing Needle
+2 Spell Pierce
+2 Dark Confidant</pre><p class="deck-source"><a href="https://www.quietspeculation.com/2014/08/insider-legacy-metagame-report/">Historical source</a></p></div></details>
+<details class="deck-accordion" ><summary><span><strong>September 2014 · The mature primer list</strong><small>Gerry Thompson — Shardless BUG Primer, September 2014</small></span><span class="summary-mark">+</span></summary><div class="deck-inside"><p>This was the clearest pre-Cruise reference list. Thompson emphasized efficient mana use, lowering the curve against tempo, separating Force and discard roles, and using flexible sideboard cards instead of narrow hate.</p><div class="deck-shell"><div class="deck-head"><div><h3>Gerry Thompson — Shardless BUG Primer, September 2014</h3><div class="small">A basic Swamp, eleven fetchlands, and a 2/2 planeswalker split</div></div><button class="copy-deck" data-copy-target="text-gerry-primer-2014" type="button">Copy decklist</button></div><div class="deck-columns"><div class="deck-column"><div class="deck-group"><h4>Creatures · 14</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Deathrite Shaman">Deathrite Shaman</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Tarmogoyf">Tarmogoyf</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Shardless Agent">Shardless Agent</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Baleful Strix">Baleful Strix</span></span></div></div><div class="deck-group"><h4>Planeswalkers · 4</h4><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Jace, the Mind Sculptor">Jace, the Mind Sculptor</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Liliana of the Veil">Liliana of the Veil</span></span></div></div><div class="deck-group"><h4>Spells · 20</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Brainstorm">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Abrupt Decay">Abrupt Decay</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Ancestral Vision">Ancestral Vision</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Hymn to Tourach">Hymn to Tourach</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Thoughtseize">Thoughtseize</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Ponder">Ponder</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Maelstrom Pulse">Maelstrom Pulse</span></span></div></div><div class="deck-group"><h4>Lands · 22</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Polluted Delta">Polluted Delta</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Verdant Catacombs">Verdant Catacombs</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Misty Rainforest">Misty Rainforest</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Underground Sea">Underground Sea</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Tropical Island">Tropical Island</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Bayou">Bayou</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Wasteland">Wasteland</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Creeping Tar Pit">Creeping Tar Pit</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Swamp">Swamp</span></span></div></div></div><div class="deck-column"><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Hymn to Tourach">Hymn to Tourach</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Night of Souls&#x27; Betrayal">Night of Souls&#x27; Betrayal</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Pithing Needle">Pithing Needle</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Seal of Primordium">Seal of Primordium</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Thoughtseize">Thoughtseize</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Disfigure">Disfigure</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Nihil Spellbomb">Nihil Spellbomb</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Scavenging Ooze">Scavenging Ooze</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Baleful Strix">Baleful Strix</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Golgari Charm">Golgari Charm</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Toxic Deluge">Toxic Deluge</span></span></div></div></div></div></div><pre id="text-gerry-primer-2014" hidden>Gerry Thompson — Shardless BUG Primer, September 2014
+
+Creatures · 14
+4 Deathrite Shaman
+4 Tarmogoyf
+4 Shardless Agent
+2 Baleful Strix
+
+Planeswalkers · 4
+2 Jace, the Mind Sculptor
+2 Liliana of the Veil
+
+Spells · 20
+4 Brainstorm
+4 Abrupt Decay
+3 Ancestral Vision
+3 Force of Will
+2 Hymn to Tourach
+2 Thoughtseize
+1 Ponder
+1 Maelstrom Pulse
+
+Lands · 22
+4 Polluted Delta
+4 Verdant Catacombs
+3 Misty Rainforest
+3 Underground Sea
+2 Tropical Island
+2 Bayou
+2 Wasteland
+1 Creeping Tar Pit
+1 Swamp
+
+Sideboard · 15
+1 Hymn to Tourach
+1 Force of Will
+1 Night of Souls&#x27; Betrayal
+2 Pithing Needle
+1 Seal of Primordium
+1 Thoughtseize
+2 Disfigure
+2 Nihil Spellbomb
+1 Scavenging Ooze
+1 Baleful Strix
+1 Golgari Charm
+1 Toxic Deluge</pre><p class="deck-source"><a href="https://articles.starcitygames.com/articles/the-shardless-bug-primer/">Historical source</a></p></div></details>
+<details class="deck-accordion" open><summary><span><strong>Final take · Perfect hindsight</strong><small>Perfect-Hindsight Shardless BUG</small></span><span class="summary-mark">+</span></summary><div class="deck-inside"><p>The September primer was already very close. I restore the fourth Ancestral Vision, remove the lone Ponder, and use the final sideboard slot for Flusterstorm. The list keeps its fair-matchup identity without conceding that combo interaction is optional.</p><div class="deck-shell"><div class="deck-head"><div><h3>Perfect-Hindsight Shardless BUG</h3><div class="small">My recommended 75 for late-summer 2014 before Treasure Cruise</div></div><button class="copy-deck" data-copy-target="text-hindsight" type="button">Copy decklist</button></div><div class="deck-columns"><div class="deck-column"><div class="deck-group"><h4>Creatures · 14</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Deathrite Shaman">Deathrite Shaman</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Tarmogoyf">Tarmogoyf</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Shardless Agent">Shardless Agent</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Baleful Strix">Baleful Strix</span></span></div></div><div class="deck-group"><h4>Planeswalkers · 4</h4><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Jace, the Mind Sculptor">Jace, the Mind Sculptor</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Liliana of the Veil">Liliana of the Veil</span></span></div></div><div class="deck-group"><h4>Spells · 20</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Ancestral Vision">Ancestral Vision</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Brainstorm">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Abrupt Decay">Abrupt Decay</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Hymn to Tourach">Hymn to Tourach</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Thoughtseize">Thoughtseize</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Maelstrom Pulse">Maelstrom Pulse</span></span></div></div><div class="deck-group"><h4>Lands · 22</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Polluted Delta">Polluted Delta</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Verdant Catacombs">Verdant Catacombs</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Misty Rainforest">Misty Rainforest</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Underground Sea">Underground Sea</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Tropical Island">Tropical Island</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Bayou">Bayou</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Wasteland">Wasteland</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Creeping Tar Pit">Creeping Tar Pit</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Swamp">Swamp</span></span></div></div></div><div class="deck-column"><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Hymn to Tourach">Hymn to Tourach</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Thoughtseize">Thoughtseize</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Flusterstorm">Flusterstorm</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Pithing Needle">Pithing Needle</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Disfigure">Disfigure</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Nihil Spellbomb">Nihil Spellbomb</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Seal of Primordium">Seal of Primordium</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Night of Souls&#x27; Betrayal">Night of Souls&#x27; Betrayal</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Golgari Charm">Golgari Charm</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Toxic Deluge">Toxic Deluge</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Baleful Strix">Baleful Strix</span></span></div></div></div></div></div><pre id="text-hindsight" hidden>Perfect-Hindsight Shardless BUG
+
+Creatures · 14
+4 Deathrite Shaman
+4 Tarmogoyf
+4 Shardless Agent
+2 Baleful Strix
+
+Planeswalkers · 4
+2 Jace, the Mind Sculptor
+2 Liliana of the Veil
+
+Spells · 20
+4 Ancestral Vision
+4 Brainstorm
+4 Abrupt Decay
+3 Force of Will
+2 Hymn to Tourach
+2 Thoughtseize
+1 Maelstrom Pulse
+
+Lands · 22
+4 Polluted Delta
+4 Verdant Catacombs
+3 Misty Rainforest
+3 Underground Sea
+2 Tropical Island
+2 Bayou
+2 Wasteland
+1 Creeping Tar Pit
+1 Swamp
+
+Sideboard · 15
+1 Force of Will
+1 Hymn to Tourach
+1 Thoughtseize
+1 Flusterstorm
+2 Pithing Needle
+2 Disfigure
+2 Nihil Spellbomb
+1 Seal of Primordium
+1 Night of Souls&#x27; Betrayal
+1 Golgari Charm
+1 Toxic Deluge
+1 Baleful Strix</pre><p class="deck-source"><span>Author’s reconstruction</span></p></div></details></section>
+
+<section id="mulligans"><div class="eyebrow">5 · Mulligans and opening turns</div><h2>Keep mana, purpose, and a plan for the first crisis</h2><p>Shardless is powerful but not forgiving of mana failure. A hand with Agent, Liliana, Jace, and Vision can be rich in card quality while functionally doing nothing. The first requirement is a sequence of colored lands; the second is an early play that addresses the matchup’s speed.</p>
+<h3>General keeps</h3><ul><li><strong>Deathrite plus two lands</strong>, especially when the lands or fetches provide black and a second color.</li><li><strong>Turn-one suspended Vision</strong> with removal or discard to survive until it resolves.</li><li><strong>Two or three lands, Brainstorm, and interaction</strong> against unknown opponents.</li><li><strong>Thoughtseize into Hymn or Goyf</strong> against known combo, provided the mana is secure.</li><li><strong>Decay plus Strix/Goyf</strong> against Delver when the land sequence can absorb Wasteland.</li></ul>
+<h3>Common mulligans</h3><ul><li>One-land hands without Deathrite or Brainstorm plus a credible shuffle.</li><li>Hands whose only mana source is a Deathrite with no land likely to reach a graveyard.</li><li>Four-mana-heavy hands against tempo.</li><li>Fair-card hands against combo with no discard, Force, or fast Goyf.</li><li>Multiple Visions without early interaction when the opponent can win before suspend resolves.</li></ul>
+<h3>Opening-turn scripts</h3><div class="table-wrap"><table><thead><tr><th>Opponent</th><th>Preferred development</th><th>Central question</th></tr></thead><tbody><tr><td>Unknown</td><td>Fetch black for Deathrite or Thoughtseize; suspend Vision when immediate information is less important.</td><td>Is this a game where delayed cards matter, or must turn one interact?</td></tr><tr><td>RUG Delver</td><td>Use fetchlands deliberately, avoid exposing the only colored source, and kill Delver when convenient.</td><td>Can you make land drops through Stifle/Wasteland/Daze?</td></tr><tr><td>Miracles</td><td>Develop Deathrite or suspend Vision; preserve Decay for Counterbalance.</td><td>Which permanent gives them inevitability, and which threat pressures Jace?</td></tr><tr><td>Storm</td><td>Thoughtseize before Vision; follow with Hymn, Force, Liliana, or Goyf.</td><td>Does the hand disrupt twice and create a clock?</td></tr><tr><td>Show and Tell</td><td>Discard the enabler or payoff according to redundancy; preserve Force.</td><td>Can your cards beat a resolved permanent, or must every key spell be stopped?</td></tr><tr><td>Death &amp; Taxes</td><td>Fetch basic Swamp when useful, kill Mother/Thalia, and develop Strix/Goyf.</td><td>Will Vial or mana denial make your three- and four-drops uncastable?</td></tr></tbody></table></div><div class="callout"><strong>Deathrite is not a land.</strong> It can be Bolted, Swordsed, Decayed, Revoked, or deprived of fetchlands. Keep hands that still function when the opponent removes it.</div></section>
+
+<section id="interactions"><div class="eyebrow">6 · Key interactions</div><h2>Cascade turns deck construction into a rules engine</h2>
+<h3>Shardless Agent and Ancestral Vision</h3><p>Cascade triggers when Agent is cast, before the creature resolves. It exiles cards until it finds a nonland card with mana value less than three. Vision has mana value zero, and cascade allows it to be cast without paying its nonexistent mana cost.</p>
+<h3>Countering Agent does not stop cascade</h3><p>Once Agent has been cast, its cascade trigger exists independently. Force of Will on Agent stops the 2/2 but not the cascade spell. Stifle can counter the cascade trigger itself.</p>
+<h3>Brainstorm and Jace stage the cascade</h3><p>Put Ancestral Vision from hand on top, then cast Agent. Cascade encounters Vision first. Brainstorm also turns excess Visions, discard, or expensive cards into future draw steps.</p>
+<h3>A cascade is not always usable</h3><p>You may cast the exiled card; you are not required to. If Agent finds Abrupt Decay and there is no legal target, it cannot be cast. The unused card and the other exiled cards go randomly to the bottom.</p>
+<h3>Chalice and Counterbalance see Vision as zero</h3><p>Casting Vision through cascade still casts a mana-value-zero spell. Chalice at zero counters it. Counterbalance can counter it by revealing a land, because lands have mana value zero.</p>
+<h3>Suspending Vision</h3><p>When the final time counter is removed, a trigger instructs its owner to cast Vision. Stifling that trigger leaves Vision exiled with no counters and no ordinary way to cast it later.</p>
+<h3>Deathrite Shaman’s multiple jobs</h3><p>Its mana ability can exile a land from either graveyard. Its other abilities attack Snapcaster, threshold, Punishing Fire, Loam, Past in Flames, and Reanimator while controlling life totals.</p>
+<h3>Baleful Strix changes Tarmogoyf</h3><p>Strix is both artifact and creature. Once it reaches a graveyard, it may add two card types to Goyf’s calculation. It also replaces itself before trading with nearly any attacker.</p>
+<h3>Liliana versus True-Name and giant creatures</h3><p>Liliana’s sacrifice ability does not target. If True-Name, Emrakul, or another protected creature is the opponent’s only creature, it can be removed.</p>
+<h3>Abrupt Decay and Counterbalance</h3><p>Decay cannot be countered by spells or abilities and targets a nonland permanent with mana value three or less. It is the premier answer to Counterbalance, Vial, equipment, Delver threats, Rest in Peace, and many prison pieces.</p>
+<h3>Maelstrom Pulse and tokens</h3><p>Pulse destroys the target and every other nonland permanent with the same name. Multiple Angel, Goblin, or Zombie tokens often share a name. Pulse still targets, so it cannot remove True-Name.</p>
+<h3>Golgari Charm’s modes</h3><p>The -1/-1 mode sweeps True-Name, Elves, Death &amp; Taxes creatures, Goblin tokens, and Pyromancer armies. The enchantment mode answers Blood Moon only if green mana remains available. Regeneration does not stop Terminus, exile, sacrifice, or toughness reduction.</p>
+<h3>Wasteland is utility removal</h3><p>Unlike Delver, Shardless wants three and four mana. Wasteland is primarily for Maze, Tar Pit, Grove, Dark Depths, Cloudpost, or a genuinely vulnerable color—not a mandatory activation.</p></section>
+
+<section id="piloting"><div class="eyebrow">7 · How to pilot the deck</div><h2>Win the resource war without forgetting the game can end</h2><p class="quote">Shardless is built to win long games, but “long” is not the same as “slow.” Use mana every turn, place the opponent under a clock, and force their answers to line up poorly.</p>
+<h3>1. Map the mana before fetching</h3><p>Turn-one black, turn-two double black, turn-three green-blue, and turn-four double blue can all matter. Fetch for the next several turns while accounting for Wasteland, Blood Moon, Port, and the possibility Deathrite dies.</p>
+<h3>2. Spend mana proactively</h3><p>If the choice is Agent or Goyf on an empty board, Agent may be correct because a future Wasteland could remove the third mana. The deck often wins by deploying value before tempo can constrict mana.</p>
+<h3>3. Separate card advantage from survival</h3><p>Suspending Vision is powerful, but it does not answer Delver, Thalia, Show and Tell, or a lethal Storm turn. Spend a card inefficiently when necessary to reach the turn where Vision matters.</p>
+<h3>4. Use Force selectively</h3><p>Force is poor in ordinary attrition but necessary against Blood Moon, Natural Order, Counterbalance in certain hands, combo, and four-mana permanents the maindeck cannot answer.</p>
+<h3>5. Discard the card your answers cannot cover</h3><p>Thoughtseize should take the spell that invalidates the existing hand, not simply the most expensive card. Hymn is strongest before Brainstorm can protect key cards and when Goyf or Liliana capitalizes on an empty hand.</p>
+<h3>6. Protect planeswalkers with disposable value</h3><p>Agent and Strix have already generated value. Trade their bodies to preserve Jace or Liliana, which can convert a small advantage into a lock.</p>
+<h3>7. Know when Deathrite is the win condition</h3><p>Repeated drains ignore blockers and planeswalker combat. Preserve creatures in graveyards and calculate the drain clock before exposing Shaman.</p>
+<h3>8. Lower the curve against tempo</h3><p>Bring in Disfigure and Strix while removing some Jaces, discard, or slow cards. Become hellbent through productive casts rather than holding value cards while Daze and Wasteland dictate the game.</p>
+<h3>9. End combo games</h3><p>Thoughtseize into Hymn into Liliana is not enough if the opponent gets unlimited draw steps. Deploy Goyf, activate Tar Pit, and drain with Deathrite.</p></section>
+
+<section id="sideboarding"><div class="eyebrow">8 · Sideboarding principles</div><h2>Change which half of the deck matters</h2>
+<h3>Force and discard have different jobs</h3><p>Force is best against speed, must-answer permanents, and games where card advantage is irrelevant. Discard is best before combo, planeswalkers, sweepers, or equipment can be protected. In topdeck games, both decay.</p>
+<h3>Ancestral Vision is not untouchable</h3><p>Vision is exceptional against fair decks and control. Against fast combo it may be too slow. Do not remove it merely because the matchup is aggressive; drawing three often wins if cheap sideboard cards buy time.</p>
+<h3>Preserve enough blue cards</h3><p>When Force remains, count Agent, Strix, Brainstorm, Vision, and Jace after sideboarding. Replacing too many blue cards with black and green answers creates Forces that cannot be cast.</p>
+<h3>Prefer flexible cards</h3><p>Golgari Charm, Needle, Spellbomb, Seal, Pulse, and Deluge each cover several matchups. The deck sees many cards, so one- and two-copy answers matter.</p>
+<h3>The hindsight sideboard by function</h3><div class="table-wrap"><table><thead><tr><th>Package</th><th>Cards</th><th>Purpose</th></tr></thead><tbody><tr><td>Combo disruption</td><td>Force, Hymn, Thoughtseize, Flusterstorm</td><td>Storm, Show and Tell, Reanimator, High Tide, and stack-focused decks.</td></tr><tr><td>Cheap creature interaction</td><td>2 Disfigure, extra Strix</td><td>Delver, Deathrite, Mother, Stoneforge, Infect, Elves, and mana-sensitive games.</td></tr><tr><td>Graveyard control</td><td>2 Nihil Spellbomb</td><td>Reanimator, Dredge, Loam, Punishing Fire, threshold, Snapcaster, and Past in Flames.</td></tr><tr><td>Activated permanents</td><td>2 Pithing Needle</td><td>Top, planeswalkers, Sneak Attack, Vial, equipment, Grindstone, and utility lands.</td></tr><tr><td>Board sweepers</td><td>Golgari Charm, Toxic Deluge, Night of Souls’ Betrayal</td><td>True-Name, Elves, D&amp;T, Goblins, Pyromancer, and token swarms.</td></tr><tr><td>Artifacts/enchantments</td><td>Seal of Primordium</td><td>Blood Moon, equipment, Counterbalance, Rest in Peace, Sneak Attack, and Chalice.</td></tr></tbody></table></div></section>
+
+<section id="matchups"><div class="eyebrow">9 · Gauntlet-specific matchup guide</div><h2>The pre–Treasure Cruise field</h2><p>The recommendations assume the perfect-hindsight 75. “Trim” indicates priorities rather than a rigid fifteen-card script.</p>
+<div class="table-wrap"><table><thead><tr><th>Matchup</th><th>Role</th><th>Bring in</th><th>Usually trim</th><th>Plan</th></tr></thead><tbody>
+<tr><td><strong>Miracles</strong></td><td><span class="role attrition">Attrition</span></td><td>Needles, Seal, Hymn, Thoughtseize, Force situationally</td><td>Disfigure, some Strix/Decay</td><td>Suspend Vision, Decay Counterbalance, Needle Top or Jace, and attack planeswalkers with Agent/Tar Pit. Do not overextend into Terminus.</td></tr>
+<tr><td><strong>RUG Delver</strong></td><td><span class="role control">Stabilize</span></td><td>Disfigure, Strix, Spellbombs</td><td>Jaces, discard in part, some Force</td><td>Make land drops, lower the curve, kill Delver, and recognize Goyf as the threat they cannot remove cleanly. Spellbomb shrinks Mongoose/Goyf.</td></tr>
+<tr><td><strong>BUG Delver</strong></td><td><span class="role attrition">Attrition-control</span></td><td>Disfigure, Strix, Spellbombs, Hymn</td><td>Force, Thoughtseize, a Jace</td><td>Agent and Vision dominate if mana survives. Kill Deathrite, play around Daze, and use Strix to trade with Goyf or Tombstalker.</td></tr>
+<tr><td><strong>UWR Delver</strong></td><td><span class="role control">Board control</span></td><td>Disfigure, Strix, Charm, Deluge, Needle, Seal</td><td>Force in part, slow discard, some Jace</td><td>True-Name and equipment are the dangerous cards. Charm/Deluge answer True-Name; Decay/Seal handle equipment.</td></tr>
+<tr><td><strong>UR Delver</strong></td><td><span class="role control">Stabilize</span></td><td>Disfigure, Strix, Charm, Deluge</td><td>Thoughtseize, Jace, Force in part</td><td>Control Delver and Pyromancer, protect life, and use Goyf as a wall. Deathrite life gain matters.</td></tr>
+<tr><td><strong>Shardless mirror</strong></td><td><span class="role attrition">Maximum attrition</span></td><td>Hymn, Strix, Spellbombs, Needle</td><td>Force, excess removal, late Thoughtseize</td><td>Vision and planeswalkers decide the game. Land drops are more important than speculative Wastelands.</td></tr>
+<tr><td><strong>Esper Stoneblade</strong></td><td><span class="role attrition">Attrition</span></td><td>Seal, Needle, Hymn, Strix, Charm if Souls/TNN</td><td>Force, late Thoughtseize, selected Decays</td><td>Stop equipment, Jace, and True-Name rather than fighting every creature. Agent and Vision outdraw Snapcaster.</td></tr>
+<tr><td><strong>Deathblade</strong></td><td><span class="role attrition">Attrition</span></td><td>Disfigure, Seal, Needle, Strix, Spellbomb</td><td>Force, some Thoughtseize</td><td>Kill Deathrite to expose greedy mana. Crusader and True-Name require Liliana, Charm, or Deluge.</td></tr>
+<tr><td><strong>Death &amp; Taxes</strong></td><td><span class="role control">Board control</span></td><td>Disfigure, Strix, Charm, Deluge, Night, Seal, Needle</td><td>Force, Thoughtseize, some Visions/Jaces</td><td>Kill Mother and Thalia, answer Vial/equipment, fetch Swamp, and punish creature density with sweepers.</td></tr>
+<tr><td><strong>Elves</strong></td><td><span class="role control">Sweep and disrupt</span></td><td>Disfigure, Charm, Deluge, Night, Needle, Flusterstorm</td><td>Jaces, slow Visions, some Hymn</td><td>Kill Symbiote and mana engines, Needle key activations, and preserve Force/Flusterstorm for Glimpse or Natural Order.</td></tr>
+<tr><td><strong>Maverick</strong></td><td><span class="role control">Board control</span></td><td>Disfigure, Strix, Deluge, Needle, Seal</td><td>Force, some discard, slow Jace</td><td>Decay Mother, Library, equipment, or hate permanents. Strix stops Knight. Vision wins once the board is contained.</td></tr>
+<tr><td><strong>Jund</strong></td><td><span class="role attrition">Attrition</span></td><td>Spellbombs, Strix, Hymn, Needle</td><td>Force, Thoughtseize, selected Decay</td><td>Spellbomb and Deathrite contest Punishing Fire. Vision is the most important card; protect planeswalkers from haste and burn.</td></tr>
+<tr><td><strong>Goblins / Merfolk</strong></td><td><span class="role control">Sweepers</span></td><td>Disfigure, Charm, Deluge, Night, Needle</td><td>Discard, some Force, slow Jace</td><td>Needle Vial and sweep before tribal card advantage or lords make combat impossible.</td></tr>
+<tr><td><strong>Burn</strong></td><td><span class="role danger">Survive and race</span></td><td>Flusterstorm, Force, Disfigure if creatures, Seal for Vortex</td><td>Thoughtseize, Jace, Liliana, some Vision</td><td>Deathrite life gain is central. Fetch carefully. Goyf is the clock and blocker; stop Price, Fireblast, or Vortex.</td></tr>
+<tr><td><strong>Infect</strong></td><td><span class="role control">Removal-control</span></td><td>Disfigure, Charm, Deluge, Needle, Flusterstorm, Strix</td><td>Jace, some Visions, slow Hymn</td><td>Kill creatures around protection, Needle/Waste Inkmoth, and avoid tapping out into lethal pump.</td></tr>
+<tr><td><strong>Sneak &amp; Show</strong></td><td><span class="role race">Disruption + clock</span></td><td>Force, Hymn, Thoughtseize, Flusterstorm, Needles, Seal</td><td>Decay, Strix, sweepers</td><td>Discard and counter the enabler, Needle Sneak Attack or Griselbrand, and use Liliana if a lone creature resolves.</td></tr>
+<tr><td><strong>Omni-Tell</strong></td><td><span class="role race">Disruption + clock</span></td><td>Force, Hymn, Thoughtseize, Flusterstorm, Seal</td><td>Decay, Strix, sweepers, some Jace</td><td>Fight Show and Tell and the follow-up chain. Seal is timing-sensitive. Goyf must end the game.</td></tr>
+<tr><td><strong>ANT / TES</strong></td><td><span class="role race">Hand attack + clock</span></td><td>Force, Hymn, Thoughtseize, Flusterstorm, Spellbombs; sweeper for Empty</td><td>Decay, Strix, Pulse, slow planeswalkers</td><td>Thoughtseize into Hymn into Liliana is ideal, but deploy Goyf. Spellbomb attacks Past in Flames; respect Empty from TES.</td></tr>
+<tr><td><strong>Reanimator</strong></td><td><span class="role race">Stack + graveyard</span></td><td>Force, Thoughtseize, Flusterstorm, Spellbombs, Needle</td><td>Decay, some Strix, Jace, Pulse</td><td>Deathrite and Spellbomb are active answers but may be too slow without Force. Needle Griselbrand and close quickly.</td></tr>
+<tr><td><strong>LED Dredge</strong></td><td><span class="role danger">Graveyard containment</span></td><td>Spellbombs, Force, Charm, Deluge, Needle</td><td>Hymn, Liliana, Jace, Decay</td><td>Deathrite alone is rarely enough. Spellbomb at the correct point and sweep Zombie tokens.</td></tr>
+<tr><td><strong>Lands / Loam</strong></td><td><span class="role attrition">Engine control</span></td><td>Spellbombs, Needles, Seal, Hymn</td><td>Strix, Disfigure, some Decay</td><td>Attack Loam and Punishing Fire, Needle Stage or Maze, and save Wasteland for utility lands.</td></tr>
+<tr><td><strong>12-Post</strong></td><td><span class="role race">Disrupt mana and race</span></td><td>Needles, Seal, Force, Hymn, Thoughtseize</td><td>Strix, Disfigure, some Decay</td><td>Wasteland Cloudpost, Needle Map/Candelabra/Top, and deploy Goyf. Their late game is larger.</td></tr>
+<tr><td><strong>MUD / Dragon Stompy</strong></td><td><span class="role danger">Survive prison</span></td><td>Force, Seal, Needles, Thoughtseize</td><td>Vision, Strix, Decay depending targets</td><td>Force Blood Moon, Chalice, or an unanswerable threat. Basic Swamp helps discard but does not cast Decay.</td></tr>
+<tr><td><strong>Imperial Painter</strong></td><td><span class="role control">Combo control</span></td><td>Seal, Needles, Force, Thoughtseize, Charm</td><td>Strix, some Vision/Jace</td><td>Needle Grindstone, Decay Painter, and respect Blood Moon. Charm destroys Moon only if green remains available.</td></tr>
+<tr><td><strong>High Tide</strong></td><td><span class="role race">Discard + Force</span></td><td>Force, Hymn, Thoughtseize, Flusterstorm, Needle</td><td>Decay, Strix, sweepers, Pulse</td><td>Wasteland has no target. Needle Candelabra or Top, attack their hand, and establish Goyf.</td></tr>
+</tbody></table></div></section>
+
+<section id="historical-notes"><div class="eyebrow">10 · Historical notes and sources</div><h2>Why Shardless BUG belongs at the center of the era</h2><p>Shardless BUG was Legacy’s answer to a format dominated by efficient one-for-one spells. It made Swords, Bolt, Decay, Force, and discard look insufficient by attaching extra cards to creatures and delayed draw engines. It pressured planeswalkers, answered Counterbalance without fighting on the stack, and forced Delver decks to win before the first Vision resolved.</p><p>Its weakness was equally defining: it was fair. Cascade excluded ordinary cheap counterspells from the maindeck, its clock was slower than Delver or combo, and its three-color mana was exposed to Stifle, Wasteland, Blood Moon, Port, and Choke. The archetype rewarded metagame judgment as much as technical play.</p>
+<h3>My final verdict</h3><p>With perfect hindsight, I would begin with Gerry Thompson’s September 2014 architecture and restore the fourth Ancestral Vision. The reason to register Shardless rather than BUG Delver is that Agent and Vision provide a uniquely powerful long-game engine. The singleton Ponder improves consistency, but it dilutes that identity and is a mediocre cascade relative to the fourth draw-three.</p><p>I would retain three Force of Will and four total discard spells game one. Abandoning combo entirely squanders one of BUG’s advantages: unlike Jund, it can interact on the stack. The sideboard’s Flusterstorm is the one hindsight addition.</p>
+<h3>Primary and contemporary sources</h3><ol class="source-list"><li><a href="https://articles.starcitygames.com/articles/legacy-avant-garde-bug-is-not-a-shard-its-shardless/">Brian DeMars — “Legacy Avant-Garde: BUG Is Not a Shard, It’s Shardless” (August 7, 2012)</a><br><span>The early Deed/Top/Snapcaster prototype and original cascade construction theory.</span></li><li><a href="https://articles.starcitygames.com/articles/everything-you-need-to-know-about-shardless-bug/">Gerry Thompson — “Everything You Need to Know About Shardless BUG” (January 7, 2013)</a><br><span>The Return to Ravnica transformation, December Invitational and GP Denver lists, and early matchup theory.</span></li><li><a href="https://articles.starcitygames.com/articles/leaving-a-legacy-buggin-out/">Frank Skarren — “Leaving a Legacy: BUGgin’ Out” (June 6, 2013)</a><br><span>SCG Baltimore Top 4 report and the emerging Strix shell.</span></li><li><a href="https://www.tcdecks.net/deck.php?id=12214&iddeck=89515">TC Decks — Grand Prix Washington, D.C. 2013</a><br><span>Ted McCluskie’s seventh-place finish.</span></li><li><a href="https://articles.starcitygames.com/articles/no-shards-no-problem/">Frank Skarren — “No Shards? No Problem” (March 28, 2014)</a><br><span>The True-Name-era Liliana and Golgari Charm adaptation.</span></li><li><a href="https://www.quietspeculation.com/2014/08/insider-legacy-metagame-report/">Quiet Speculation — “Legacy Metagame Report” (August 22, 2014)</a><br><span>Andrew Tenjum’s Strix-heavy Syracuse list and metagame position.</span></li><li><a href="https://articles.starcitygames.com/articles/the-shardless-bug-primer/">Gerry Thompson — “The Shardless BUG Primer” (September 3, 2014)</a><br><span>The mature pre-Cruise reference list, weaknesses, and matchup priorities.</span></li><li><a href="https://magic.wizards.com/en/news/card-image-gallery/ktk-cig-en">Wizards of the Coast — Khans of Tarkir Card Image Gallery (September 12, 2014)</a><br><span>The historical endpoint marking Treasure Cruise.</span></li></ol><p class="note">Historical lists are reproduced as tournament and deck-construction data. Strategic text is synthesized and paraphrased from the linked contemporary sources. The matchup table is written for the perfect-hindsight 75 rather than copied from one sideboard chart.</p></section>
+</main>
+</div>
+
+<div id="cardPreview" aria-hidden="true"><img alt=""></div>
+
+<footer class="footer"><p><strong>Shardless BUG, 2012–2014</strong> · Legacy Golden Era Archive.</p><p>Magic: The Gathering, card names, frames, and artwork are property of Wizards of the Coast and the credited artists. This independent historical article is not affiliated with or endorsed by Wizards of the Coast.</p></footer>
+
+<script>
+document.querySelectorAll('.copy-deck').forEach(button => {
+  button.addEventListener('click', async () => {
+    const target=document.getElementById(button.dataset.copyTarget);
+    const text=target.textContent;
+    try{await navigator.clipboard.writeText(text);}
+    catch(e){const area=document.createElement('textarea');area.value=text;document.body.appendChild(area);area.select();document.execCommand('copy');area.remove();}
+    const original=button.textContent;button.textContent='Copied';setTimeout(()=>button.textContent=original,1300);
+  });
+});
+
+const preview=document.getElementById('cardPreview');
+const previewImg=preview.querySelector('img');
+let pinned=false;
+function imageUrl(name){
+  return 'https://api.scryfall.com/cards/named?exact='+encodeURIComponent(name)+'&format=image&version=normal';
+}
+function positionPreview(x,y){
+  if(window.matchMedia('(max-width: 680px)').matches){
+    preview.style.left='50%';preview.style.top='50%';return;
+  }
+  const pad=14,w=preview.offsetWidth||300,h=preview.offsetHeight||418;
+  let left=x+18,top=y+18;
+  if(left+w>window.innerWidth-pad) left=x-w-18;
+  if(top+h>window.innerHeight-pad) top=window.innerHeight-h-pad;
+  left=Math.max(pad,Math.min(left,window.innerWidth-w-pad));
+  top=Math.max(pad,Math.min(top,window.innerHeight-h-pad));
+  preview.style.left=left+'px';preview.style.top=top+'px';
+}
+function showPreview(el,x,y,pin=false){
+  const name=el.dataset.card;previewImg.src=imageUrl(name);previewImg.alt=name;
+  preview.classList.add('show');preview.setAttribute('aria-hidden','false');positionPreview(x,y);pinned=pin;
+}
+function hidePreview(){if(pinned)return;preview.classList.remove('show');preview.setAttribute('aria-hidden','true');}
+document.querySelectorAll('.card-name').forEach(el=>{
+  el.addEventListener('mouseenter',e=>showPreview(el,e.clientX,e.clientY));
+  el.addEventListener('mousemove',e=>positionPreview(e.clientX,e.clientY));
+  el.addEventListener('mouseleave',hidePreview);
+  el.addEventListener('focus',()=>{const r=el.getBoundingClientRect();showPreview(el,r.right,r.top);});
+  el.addEventListener('blur',hidePreview);
+  el.addEventListener('click',e=>{
+    if(window.matchMedia('(hover: none)').matches){
+      e.preventDefault();pinned=!preview.classList.contains('show')||!pinned;
+      showPreview(el,e.clientX||window.innerWidth/2,e.clientY||window.innerHeight/3,true);
+    }
+  });
+});
+document.addEventListener('click',e=>{if(pinned&&!e.target.closest('.card-name')){pinned=false;preview.classList.remove('show');}});
+
+const sections=[...document.querySelectorAll('main section[id]')];
+const tocLinks=[...document.querySelectorAll('.toc a')];
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting)tocLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id));
+  });
+},{rootMargin:'-15% 0px -70% 0px',threshold:0});
+sections.forEach(s=>observer.observe(s));
+</script>
+</body>
+</html>
