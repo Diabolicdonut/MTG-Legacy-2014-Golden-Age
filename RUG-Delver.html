@@ -1,0 +1,938 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A historical and strategic guide to RUG Delver, or Canadian Threshold, in Legacy from 2012 through the pre–Treasure Cruise metagame of September 2014.">
+<title>RUG Delver, 2012–2014 — Legacy’s Razor Edge</title>
+<style>
+:root{
+  --ink:#eef3f8;--muted:#a8b4c2;--paper:#0b1118;--paper-2:#111a24;--paper-3:#172433;
+  --line:#304154;--blue:#71b9ff;--red:#ee8b78;--green:#88c99a;--gold:#d9bd74;
+  --shadow:0 18px 52px rgba(0,0,0,.36);--radius:18px;--max:1220px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);background:
+  radial-gradient(circle at 7% -5%,rgba(61,124,184,.22),transparent 31rem),
+  radial-gradient(circle at 94% 9%,rgba(195,72,56,.13),transparent 27rem),
+  radial-gradient(circle at 74% 100%,rgba(54,132,76,.11),transparent 34rem),
+  var(--paper);font:17px/1.68 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:var(--blue);text-underline-offset:.18em}
+a:hover{color:#c7e6ff}
+img{display:block;max-width:100%}
+.hero{min-height:79vh;position:relative;display:grid;place-items:end center;overflow:hidden;border-bottom:1px solid var(--line);isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:
+  linear-gradient(90deg,rgba(5,9,14,.97),rgba(5,9,14,.70) 48%,rgba(5,9,14,.24) 77%,rgba(5,9,14,.52)),
+  linear-gradient(0deg,var(--paper),transparent 54%),
+  url("https://api.scryfall.com/cards/named?exact=Delver%20of%20Secrets&format=image&version=art_crop") center 28%/cover no-repeat;
+  filter:saturate(.82) contrast(1.08)}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background-image:
+  linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:48px 48px;mask-image:linear-gradient(to bottom,#000,transparent 78%)}
+.hero-inner{width:min(var(--max),calc(100% - 36px));padding:104px 0 62px}
+.archive-link{display:inline-flex;margin-bottom:28px;text-decoration:none;border:1px solid rgba(255,255,255,.2);background:rgba(7,12,18,.62);padding:8px 12px;border-radius:999px;color:#dce7f2;font-size:.82rem;font-weight:800;backdrop-filter:blur(9px)}
+.eyebrow{letter-spacing:.16em;text-transform:uppercase;font-weight:850;color:var(--gold);font-size:.78rem}
+h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;line-height:1.13;margin:0 0 .55em}
+h1{font-size:clamp(3rem,8vw,7.2rem);max-width:1070px;letter-spacing:-.05em}
+.dek{font-size:clamp(1.08rem,2vw,1.38rem);max-width:830px;color:#d7e0ea;margin:0 0 24px}
+.meta{display:flex;gap:10px;flex-wrap:wrap}
+.pill{border:1px solid rgba(255,255,255,.22);background:rgba(8,14,21,.68);padding:7px 12px;border-radius:999px;color:#dce6f0;font-size:.86rem;backdrop-filter:blur(10px)}
+.caption{font-size:.78rem;color:var(--muted);margin-top:12px}
+.layout{width:min(var(--max),calc(100% - 36px));margin:42px auto 90px;display:grid;grid-template-columns:265px minmax(0,1fr);gap:44px;align-items:start}
+nav.toc{position:sticky;top:22px;background:rgba(17,26,36,.91);border:1px solid var(--line);border-radius:var(--radius);padding:19px 18px 17px;box-shadow:var(--shadow);backdrop-filter:blur(14px);max-height:calc(100vh - 44px);overflow:auto}
+.toc-title{font-weight:850;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem;color:var(--gold);margin-bottom:10px}
+.toc ol{list-style:none;padding:0;margin:0}
+.toc a{display:block;color:var(--muted);text-decoration:none;padding:7px 9px;border-radius:9px;font-size:.91rem;line-height:1.25}
+.toc a:hover,.toc a.active{background:var(--paper-3);color:white}
+main{min-width:0}
+section{scroll-margin-top:28px;margin-bottom:62px}
+h2{font-size:clamp(2rem,4.2vw,3.55rem);letter-spacing:-.025em;padding-bottom:13px;border-bottom:1px solid var(--line)}
+h3{font-size:1.55rem;margin-top:1.75em}
+h4{font-size:1.16rem;margin-top:1.4em;color:#d8ebff}
+p{margin:.85em 0}
+.lead{font-size:1.18rem;color:#dce6ef}
+.dropcap:first-letter{float:left;font-family:Georgia,serif;font-size:4.3rem;line-height:.78;padding:.11em .12em 0 0;color:var(--gold)}
+.callout{margin:24px 0;padding:20px 22px;border:1px solid var(--line);border-left:4px solid var(--red);background:linear-gradient(135deg,rgba(238,139,120,.10),rgba(113,185,255,.04));border-radius:0 var(--radius) var(--radius) 0}
+.callout strong{color:white}
+.grid-2,.grid-3{display:grid;gap:18px;margin:22px 0}
+.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:0 12px 32px rgba(0,0,0,.15)}
+.card h3,.card h4{margin-top:0}
+.stat{font:800 2.1rem/1 Georgia,serif;color:var(--gold);margin-bottom:8px}
+.small{font-size:.9rem;color:var(--muted)}
+.art-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:25px 0}
+.art-grid figure{margin:0;background:var(--paper-2);border:1px solid var(--line);border-radius:15px;overflow:hidden}
+.art-grid img{aspect-ratio:1.25/1;object-fit:cover;background:#090e14}
+figcaption{padding:10px 12px;font-size:.78rem;color:var(--muted)}
+.timeline{position:relative;margin:30px 0 0;padding-left:28px}
+.timeline::before{content:"";position:absolute;left:6px;top:8px;bottom:7px;width:2px;background:linear-gradient(var(--blue),var(--green),var(--red))}
+.event{position:relative;margin:0 0 26px}
+.event::before{content:"";position:absolute;left:-28px;top:.48em;width:13px;height:13px;background:var(--paper);border:3px solid var(--gold);border-radius:50%}
+.date{font-weight:850;color:var(--gold);font-size:.83rem;letter-spacing:.08em;text-transform:uppercase}
+.deck-accordion{background:rgba(17,26,36,.88);border:1px solid var(--line);border-radius:var(--radius);margin:17px 0;overflow:hidden}
+.deck-accordion summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:18px;align-items:center;padding:17px 20px;background:linear-gradient(90deg,rgba(113,185,255,.09),rgba(136,201,154,.05),rgba(238,139,120,.06))}
+.deck-accordion summary::-webkit-details-marker{display:none}
+.deck-accordion summary strong{display:block;font-family:Georgia,serif;font-size:1.13rem}
+.deck-accordion summary small{display:block;color:var(--muted);margin-top:3px}
+.summary-mark{font-size:1.45rem;color:var(--gold);transition:transform .2s}
+.deck-accordion[open] .summary-mark{transform:rotate(45deg)}
+.deck-inside{padding:0 20px 19px}
+.deck-shell{background:#080f17;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin:18px 0}
+.deck-head{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(113,185,255,.11),rgba(238,139,120,.07))}
+.deck-head h3{margin:0}
+button{appearance:none;border:1px solid #536a83;color:white;background:#24374c;border-radius:10px;padding:9px 12px;font-weight:750;cursor:pointer}
+button:hover{background:#304762}
+.deck-columns{display:grid;grid-template-columns:1fr 1fr}
+.deck-column{padding:20px}
+.deck-column + .deck-column{border-left:1px solid var(--line)}
+.deck-group{margin-bottom:20px}
+.deck-group h4{font-family:Inter,sans-serif;font-size:.79rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin:0 0 8px}
+.deck-row{display:flex;justify-content:space-between;gap:18px;padding:3px 0;border-bottom:1px dotted rgba(255,255,255,.08)}
+.qty{font-variant-numeric:tabular-nums;color:var(--blue);display:inline-block;min-width:1.5em}
+.card-name{border-bottom:1px dotted rgba(255,255,255,.35);cursor:help;outline:none}
+.card-name:hover,.card-name:focus{color:#fff;border-bottom-color:var(--gold)}
+.deck-source{font-size:.82rem;color:var(--muted)}
+.table-wrap{overflow-x:auto;margin:23px 0;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 12px 30px rgba(0,0,0,.12)}
+table{border-collapse:collapse;width:100%;min-width:890px;background:var(--paper-2);font-size:.91rem}
+th,td{text-align:left;vertical-align:top;padding:13px 14px;border-bottom:1px solid var(--line)}
+th{position:sticky;top:0;background:#213145;color:#fff;font-size:.76rem;text-transform:uppercase;letter-spacing:.07em}
+tr:last-child td{border-bottom:0}
+tbody tr:hover{background:rgba(113,185,255,.045)}
+.role{display:inline-block;font-weight:800;border-radius:999px;padding:3px 8px;font-size:.74rem;white-space:nowrap}
+.tempo{background:rgba(113,185,255,.14);color:#badeff}
+.race{background:rgba(238,139,120,.15);color:#ffc5b9}
+.pivot{background:rgba(136,201,154,.14);color:#c0e9ca}
+.danger{color:#ffb2a5}
+.good{color:#bde7c8}
+.quote{font-family:Georgia,serif;font-size:1.25rem;color:#deebf8;border-left:3px solid var(--green);padding-left:19px;margin:28px 0}
+.source-list{padding-left:1.25em}
+.source-list li{margin:.7em 0}
+.source-list span,.note{color:var(--muted)}
+.note{font-size:.88rem}
+#cardPreview{position:fixed;z-index:9999;width:min(310px,72vw);pointer-events:none;opacity:0;transform:translateY(6px) scale(.98);transition:opacity .12s,transform .12s;filter:drop-shadow(0 18px 30px rgba(0,0,0,.58))}
+#cardPreview.show{opacity:1;transform:translateY(0) scale(1)}
+#cardPreview img{width:100%;max-height:88vh;object-fit:contain;border-radius:4.8%;background:#111}
+.footer{border-top:1px solid var(--line);padding:30px 18px 50px;text-align:center;color:var(--muted);font-size:.86rem}
+code{background:#080e15;border:1px solid var(--line);border-radius:6px;padding:.08em .35em}
+@media(max-width:950px){.layout{grid-template-columns:1fr}nav.toc{position:relative;top:auto;max-height:none}.grid-3{grid-template-columns:1fr}.art-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){body{font-size:16px}.hero{min-height:69vh}.layout,.hero-inner{width:min(100% - 24px,var(--max))}.grid-2,.deck-columns{grid-template-columns:1fr}.deck-column + .deck-column{border-left:0;border-top:1px solid var(--line)}.art-grid{grid-template-columns:1fr}.deck-head{align-items:flex-start;flex-direction:column}#cardPreview{width:min(280px,78vw);left:50%!important;right:auto!important;top:50%!important;transform:translate(-50%,-46%) scale(.98)}#cardPreview.show{transform:translate(-50%,-50%) scale(1)}}
+@media print{:root{--ink:#111;--muted:#444;--paper:#fff;--paper-2:#fff;--paper-3:#eee;--line:#aaa}body{background:#fff;color:#111;font-size:10pt}.hero{min-height:0;display:block;border:0}.hero::before,.hero::after,nav.toc,button,#cardPreview{display:none}.hero-inner{padding:0 0 20px;width:100%}h1{font-size:34pt;color:#111}.dek,.caption,.pill{color:#222}.pill{border-color:#777;background:#fff}.layout{display:block;width:100%;margin:0}.card,.deck-shell,.table-wrap{box-shadow:none}a{color:#111}details{display:block}details>*{display:block!important}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-inner">
+    <a class="archive-link" href="https://diabolicdonut.github.io/MTG-Legacy-2014-Golden-Age/index.html">← Legacy Golden Era Archive</a>
+    <div class="eyebrow">Legacy archetype dossier · 2012–September 2014</div>
+    <h1>RUG Delver</h1>
+    <p class="dek">Legacy played on the razor’s edge: one-mana threats, free countermagic, Wasteland and Stifle, with every card chosen to make the opponent operate one turn behind.</p>
+    <div class="meta">
+      <span class="pill">Canadian Threshold</span>
+      <span class="pill">Temur tempo</span>
+      <span class="pill">Delver · Mongoose · Goyf</span>
+      <span class="pill">Historical rules and card pool</span>
+    </div>
+    <p class="caption">Hero artwork: <em>Delver of Secrets</em>, art by Nils Hamm. Card image delivered by Scryfall; Magic artwork © Wizards of the Coast.</p>
+  </div>
+</header>
+
+<div class="layout">
+<nav class="toc" aria-label="Table of contents">
+  <div class="toc-title">Table of contents</div>
+  <ol>
+    <li><a href="#scope">Scope of this guide</a></li>
+    <li><a href="#identity">1. Cover and deck identity</a></li>
+    <li><a href="#what-it-does">2. What this deck does</a></li>
+    <li><a href="#history">3. History and evolution</a></li>
+    <li><a href="#decklists">4. Historical decklists and final 75</a></li>
+    <li><a href="#mulligans">5. Mulligans and opening turns</a></li>
+    <li><a href="#interactions">6. Key interactions</a></li>
+    <li><a href="#piloting">7. How to pilot the deck</a></li>
+    <li><a href="#sideboarding">8. Sideboarding principles</a></li>
+    <li><a href="#matchups">9. Gauntlet-specific matchup guide</a></li>
+    <li><a href="#historical-notes">10. Historical notes and sources</a></li>
+  </ol>
+</nav>
+
+<main>
+<section id="scope">
+  <div class="callout">
+    <strong>Historical scope.</strong> This guide focuses on RUG Delver—also called Canadian Threshold—from the point when <em>Delver of Secrets</em> had fully replaced the older threshold threat packages through September 2014, immediately before <em>Treasure Cruise</em> changed the blue tempo arms race. It uses the card legality, opposing decks, rules, and strategic assumptions of that period.
+  </div>
+</section>
+
+<section id="identity">
+  <div class="eyebrow">1 · Cover and deck identity</div>
+  <h2>The deck that makes one land feel like none</h2>
+  <p class="lead dropcap">RUG Delver is not simply an aggro deck with counterspells. It is a deck built to compress the game. Delver of Secrets, Nimble Mongoose, and Tarmogoyf present clocks that require almost no mana. Daze, Force of Will, Spell Pierce, Stifle, and Wasteland prevent the opponent from converting cards into a stable battlefield. Brainstorm and Ponder keep an eighteen-land deck functional while finding whichever half—pressure or disruption—is missing.</p>
+
+  <div class="grid-3">
+    <div class="card"><div class="stat">18 lands</div><strong>Operate on almost nothing.</strong><p class="small">Eight cantrips and a curve concentrated at one mana allow RUG to develop while denying both players resources.</p></div>
+    <div class="card"><div class="stat">12 threats</div><strong>Every creature is a real clock.</strong><p class="small">Delver attacks through the air, Mongoose dodges targeting, and Tarmogoyf dominates ordinary combat.</p></div>
+    <div class="card"><div class="stat">1 turn</div><strong>That is often the entire margin.</strong><p class="small">A Stifled fetchland, a Dazed removal spell, or a Wasteland activation can convert three damage into the winning attack.</p></div>
+  </div>
+
+  <h3>The name “Canadian Threshold”</h3>
+  <p>The strategy predates Delver. Older Canadian Threshold decks used threshold creatures, cheap cantrips, burn, Daze, Force, Stifle, and Wasteland to play an aggro-control game. <em>Innistrad</em> supplied the missing threat: a one-mana creature that routinely became a three-power flyer without asking the deck to change its spell-heavy construction. By 2012, “RUG Delver” described the new card, while “Canadian Threshold” described the lineage and philosophy.</p>
+
+  <div class="art-grid" aria-label="Signature RUG Delver cards">
+    <figure><img loading="lazy" src="https://api.scryfall.com/cards/named?exact=Delver%20of%20Secrets&format=image&version=art_crop" alt="Delver of Secrets artwork"><figcaption><strong>Delver of Secrets</strong> — the one-mana airborne clock that made the shell faster.</figcaption></figure>
+    <figure><img loading="lazy" src="https://api.scryfall.com/cards/named?exact=Nimble%20Mongoose&format=image&version=art_crop" alt="Nimble Mongoose artwork"><figcaption><strong>Nimble Mongoose</strong> — the removal-resistant threat and defining card of the old threshold lineage.</figcaption></figure>
+    <figure><img loading="lazy" src="https://api.scryfall.com/cards/named?exact=Stifle&format=image&version=art_crop" alt="Stifle artwork"><figcaption><strong>Stifle</strong> — fetchland denial, tactical trick, and the card that turns soft counters back on.</figcaption></figure>
+    <figure><img loading="lazy" src="https://api.scryfall.com/cards/named?exact=Wasteland&format=image&version=art_crop" alt="Wasteland artwork"><figcaption><strong>Wasteland</strong> — a land drop that functions as tempo, disruption, and sometimes a complete game plan.</figcaption></figure>
+  </div>
+</section>
+
+<section id="what-it-does">
+  <div class="eyebrow">2 · What this deck does</div>
+  <h2>Threat, denial, protection, burn</h2>
+  <p>RUG seeks to create a battlefield where the opponent is technically still playing Magic but cannot sequence spells efficiently enough to catch up. Its cards are individually modest. The power lies in making them overlap: Stifle denies a fetchland, which makes Daze live, which protects Delver, which makes Lightning Bolt become a finishing spell instead of removal.</p>
+
+  <div class="grid-2">
+    <div class="card"><h4>Deploy a clock cheaply</h4><p>Spend one mana on Delver or Mongoose, or two on Tarmogoyf. From that point forward, most mana can remain available for interaction.</p></div>
+    <div class="card"><h4>Attack the opponent’s sequence</h4><p>Wasteland and Stifle are strongest when they prevent a color, delay a key mana threshold, or force a spell into Daze—not when activated automatically.</p></div>
+    <div class="card"><h4>Protect the winning resource</h4><p>Sometimes that resource is a creature. Sometimes it is the opponent being stuck on one land. Sometimes it is your life total in a race. The deck changes priorities rapidly.</p></div>
+    <div class="card"><h4>End the game before cards age badly</h4><p>Daze, Spell Pierce, and Stifle depreciate as lands accumulate. RUG must convert their early value into damage before the opponent reaches an unrestricted late game.</p></div>
+  </div>
+
+  <h3>The tempo equation</h3>
+  <p>RUG is willing to trade cards unevenly when the exchange preserves its clock and denies an entire opposing turn. Force of Will protecting a Delver from Swords to Plowshares can be correct despite losing two cards, because the remaining attacks may end the game before the missing card matters. Conversely, Force on an ordinary value spell can be disastrous when the game is likely to continue.</p>
+
+  <div class="callout">
+    <strong>The real win condition is constrained time.</strong> Delver, Mongoose, Goyf, Bolt, and Wasteland are the visible cards. The invisible resource is the number of useful turns the opponent has left before the clock kills them.
+  </div>
+</section>
+
+<section id="history">
+  <div class="eyebrow">3 · History and evolution</div>
+  <h2>A stable core with a permanent identity crisis</h2>
+  <div class="timeline">
+    <div class="event"><div class="date">Before 2012 · Canadian Threshold</div><h3>The engine already exists</h3><p>Cheap green threats, burn, cantrips, Daze, Force, Wasteland, and Stifle had long formed a recognizable Legacy archetype. Delver did not invent its strategy; it gave the strategy a superior one-mana threat.</p></div>
+    <div class="event"><div class="date">2011–early 2012 · Delver takes over</div><h3>A three-power flyer changes the clock</h3><p>Delver of Secrets rewarded exactly what Canadian Threshold was already doing: playing many instants and sorceries. The deck could now threaten lethal damage without reaching threshold or committing two mana.</p></div>
+    <div class="event"><div class="date">May–July 2012 · Stifle versus no Stifle</div><h3>The foundational deckbuilding debate appears immediately</h3><p>Carsten Linden’s early build played four Stifles and four Spell Snares. Gaudenis Vidugiris won GP Atlanta after cutting Stifle for Spell Pierce, Thought Scour, and Fire // Ice. Jonathan Alexander returned to Stifle at GP Ghent while trimming Tarmogoyfs and adding Sylvan Library.</p></div>
+    <div class="event"><div class="date">Late 2012–2013 · Deathrite Shaman and Abrupt Decay</div><h3>The format acquires cards engineered to resist RUG</h3><p>Deathrite attacked threshold, fixed mana through Wasteland, and raced small threats. Abrupt Decay cleanly removed Delver and Tarmogoyf through countermagic. BUG and Jund reduced RUG’s ability to rely on one-for-one exchanges and forced more removal into the flex slots.</p></div>
+    <div class="event"><div class="date">2013 · Death & Taxes and Shardless rise</div><h3>Basic lands, Vial, Decay, and card advantage stretch the deck</h3><p>Death & Taxes made Stifle and soft counters awkward through basics, Vial, and Cavern. Shardless BUG could trade early and then cascade into extra cards. RUG remained viable, but metagame positioning mattered more.</p></div>
+    <div class="event"><div class="date">Late 2013–summer 2014 · True-Name and Miracles</div><h3>The fair decks become harder to answer</h3><p>True-Name Nemesis entered UWR Delver and Stoneblade while Miracles refined its basic-heavy Ponder builds. RUG experimented with its own True-Name, more direct burn, Gitaxian Probe, and sideboards increasingly devoted to Pyroblast and Krosan Grip.</p></div>
+    <div class="event"><div class="date">August 2014 · Two mature branches</div><h3>Pressure RUG and denial RUG coexist</h3><p>Kale Thompson reached an SCG Open final with no Stifles, thirteen creatures, and seven burn spells. Weeks later, Drew Levin advocated full Stifle, twelve threats, three Force, six burn, and two Probes. Both were coherent answers to the same metagame.</p></div>
+    <div class="event"><div class="date">September 2014 · The cutoff</div><h3>Treasure Cruise changes what “running out of cards” means</h3><p>RUG’s historical bargain was that both players would lose resources and its cheaper deck would function better. A one-mana draw-three changed that bargain. This article stops immediately before the delve era.</p></div>
+  </div>
+
+  <h3>The Stifle fault line</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Question</th><th>Stifle RUG</th><th>No-Stifle RUG</th></tr></thead>
+    <tbody>
+      <tr><td>Primary advantage</td><td>Steals games through mana denial and keeps Daze/Pierce relevant longer.</td><td>Draws more threats, burn, and hard interaction in games where opponents fetch basics or play around Stifle.</td></tr>
+      <tr><td>Opening posture</td><td>Often passes with an uncracked fetch or blue mana available, creating ambiguity.</td><td>More freely taps out for Ponder, threat deployment, or proactive burn.</td></tr>
+      <tr><td>Best targets</td><td>Greedy manabases, fetchlands, miracle triggers, cascade, suspend, equipment triggers, planeswalker abilities.</td><td>Basic-heavy control, board-centric decks, and long games where Stifle would become a poor topdeck.</td></tr>
+      <tr><td>Hidden cost</td><td>Holding up mana can conflict with developing pressure; experienced opponents can sequence around it.</td><td>Daze and Spell Pierce age faster, and RUG loses its most explosive free-win draws.</td></tr>
+      <tr><td>Historical verdict</td><td>The archetype’s most distinctive and strategically demanding configuration.</td><td>A legitimate branch that won major events and often improved immediate card quality.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="decklists">
+  <div class="eyebrow">4 · Historical decklists and final 75</div>
+  <h2>Seven snapshots of the archetype</h2>
+  <p>These lists are arranged as an evolutionary sequence rather than a ranking. Hover a card name—or tap/focus it on mobile—to display the card. Each list can be copied independently.</p>
+  
+    <details class="deck-accordion" >
+      <summary>
+        <span><strong>May 2012 · The early Delver conversion</strong><small>Carsten Linden — Bazaar of Moxen Trial, May 2012</small></span>
+        <span class="summary-mark">+</span>
+      </summary>
+      <div class="deck-inside">
+        <p>This list preserves the old Canadian Threshold philosophy: twelve threats were unnecessary, hard counters such as Spell Snare were plentiful, and seven removal spells protected a very small creature package.</p>
+        <div class="deck-shell">
+          <div class="deck-head">
+            <div><h3>Carsten Linden — Bazaar of Moxen Trial, May 2012</h3><div class="small">A clean Stifle shell immediately after Delver transformed Canadian Threshold</div></div>
+            <button class="copy-deck" data-copy-target="text-linden-2012" type="button">Copy decklist</button>
+          </div>
+          <div class="deck-columns">
+            <div class="deck-column"><div class="deck-group"><h4>Creatures · 11</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Delver of Secrets">Delver of Secrets</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Nimble Mongoose">Nimble Mongoose</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Tarmogoyf">Tarmogoyf</span></span></div></div><div class="deck-group"><h4>Spells · 31</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Brainstorm">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Ponder">Ponder</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Daze">Daze</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Stifle">Stifle</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Lightning Bolt">Lightning Bolt</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Spell Snare">Spell Snare</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Magma Spray">Magma Spray</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Dismember">Dismember</span></span></div></div><div class="deck-group"><h4>Lands · 18</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Wasteland">Wasteland</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Volcanic Island">Volcanic Island</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Tropical Island">Tropical Island</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Polluted Delta">Polluted Delta</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Scalding Tarn">Scalding Tarn</span></span></div></div></div>
+            <div class="deck-column"><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Tormod&#x27;s Crypt">Tormod&#x27;s Crypt</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Mind Harness">Mind Harness</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Flusterstorm">Flusterstorm</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Red Elemental Blast">Red Elemental Blast</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Spell Pierce">Spell Pierce</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Submerge">Submerge</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Surgical Extraction">Surgical Extraction</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Rough // Tumble">Rough // Tumble</span></span></div></div></div>
+          </div>
+        </div>
+        <pre id="text-linden-2012" class="deck-text" hidden>Carsten Linden — Bazaar of Moxen Trial, May 2012
+
+Creatures · 11
+4 Delver of Secrets
+4 Nimble Mongoose
+3 Tarmogoyf
+
+Spells · 31
+4 Brainstorm
+4 Ponder
+4 Force of Will
+4 Daze
+4 Stifle
+4 Lightning Bolt
+4 Spell Snare
+2 Magma Spray
+1 Dismember
+
+Lands · 18
+4 Wasteland
+4 Volcanic Island
+3 Tropical Island
+4 Polluted Delta
+3 Scalding Tarn
+
+Sideboard · 15
+2 Tormod&#x27;s Crypt
+2 Mind Harness
+2 Flusterstorm
+2 Red Elemental Blast
+2 Spell Pierce
+2 Submerge
+1 Surgical Extraction
+2 Rough // Tumble</pre>
+        <p class="deck-source"><a href="https://theweeklywars.wordpress.com/2013/11/13/delver-of-secrets-in-legacy-part-1-rug-deckbuilding-theory/">Contemporary source</a></p>
+      </div>
+    </details>
+    
+
+    <details class="deck-accordion" >
+      <summary>
+        <span><strong>July 2012 · Grand Prix champion</strong><small>Gaudenis Vidugiris — 1st, Grand Prix Atlanta 2012</small></span>
+        <span class="summary-mark">+</span>
+      </summary>
+      <div class="deck-inside">
+        <p>Vidugiris consciously rejected Stifle because holding up blue conflicted with deploying one-drops. The result won the Grand Prix, showing that RUG&#x27;s tempo engine could be built around pressure and permission rather than fetchland ambushes.</p>
+        <div class="deck-shell">
+          <div class="deck-head">
+            <div><h3>Gaudenis Vidugiris — 1st, Grand Prix Atlanta 2012</h3><div class="small">The famous no-Stifle experiment: more live topdecks, four Spell Pierce, Thought Scour, and Fire // Ice</div></div>
+            <button class="copy-deck" data-copy-target="text-vidugiris-2012" type="button">Copy decklist</button>
+          </div>
+          <div class="deck-columns">
+            <div class="deck-column"><div class="deck-group"><h4>Creatures · 12</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Delver of Secrets">Delver of Secrets</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Nimble Mongoose">Nimble Mongoose</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Tarmogoyf">Tarmogoyf</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Scavenging Ooze">Scavenging Ooze</span></span></div></div><div class="deck-group"><h4>Spells · 30</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Brainstorm">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Ponder">Ponder</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Daze">Daze</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Spell Pierce">Spell Pierce</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Lightning Bolt">Lightning Bolt</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Thought Scour">Thought Scour</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Spell Snare">Spell Snare</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Fire // Ice">Fire // Ice</span></span></div></div><div class="deck-group"><h4>Lands · 18</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Wasteland">Wasteland</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Volcanic Island">Volcanic Island</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Tropical Island">Tropical Island</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Misty Rainforest">Misty Rainforest</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Scalding Tarn">Scalding Tarn</span></span></div></div></div>
+            <div class="deck-column"><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Red Elemental Blast">Red Elemental Blast</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Pyroblast">Pyroblast</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Cursed Totem">Cursed Totem</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Gilded Drake">Gilded Drake</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Submerge">Submerge</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Ancient Grudge">Ancient Grudge</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Surgical Extraction">Surgical Extraction</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Scavenging Ooze">Scavenging Ooze</span></span></div></div></div>
+          </div>
+        </div>
+        <pre id="text-vidugiris-2012" class="deck-text" hidden>Gaudenis Vidugiris — 1st, Grand Prix Atlanta 2012
+
+Creatures · 12
+4 Delver of Secrets
+4 Nimble Mongoose
+3 Tarmogoyf
+1 Scavenging Ooze
+
+Spells · 30
+4 Brainstorm
+4 Ponder
+4 Force of Will
+4 Daze
+4 Spell Pierce
+3 Lightning Bolt
+3 Thought Scour
+2 Spell Snare
+2 Fire // Ice
+
+Lands · 18
+4 Wasteland
+3 Volcanic Island
+3 Tropical Island
+4 Misty Rainforest
+4 Scalding Tarn
+
+Sideboard · 15
+1 Red Elemental Blast
+1 Pyroblast
+2 Cursed Totem
+1 Gilded Drake
+4 Submerge
+2 Ancient Grudge
+3 Surgical Extraction
+1 Scavenging Ooze</pre>
+        <p class="deck-source"><a href="https://articles.starcitygames.com/articles/victory-at-gp-atlanta-1st/">Contemporary source</a></p>
+      </div>
+    </details>
+    
+
+    <details class="deck-accordion" >
+      <summary>
+        <span><strong>July 2012 · Specialist tuning</strong><small>Jonathan Alexander — 24th, Grand Prix Ghent 2012</small></span>
+        <span class="summary-mark">+</span>
+      </summary>
+      <div class="deck-inside">
+        <p>This was a European combo-conscious configuration. It deliberately reduced clunky creatures, added a maindeck Sylvan Library for long games, and used a singleton Counterspell as a universal answer.</p>
+        <div class="deck-shell">
+          <div class="deck-head">
+            <div><h3>Jonathan Alexander — 24th, Grand Prix Ghent 2012</h3><div class="small">Stifle returns, but the flex slots become a laboratory: Library, Counterspell, and only two Tarmogoyfs</div></div>
+            <button class="copy-deck" data-copy-target="text-ghent-2012" type="button">Copy decklist</button>
+          </div>
+          <div class="deck-columns">
+            <div class="deck-column"><div class="deck-group"><h4>Creatures · 10</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Delver of Secrets">Delver of Secrets</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Nimble Mongoose">Nimble Mongoose</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Tarmogoyf">Tarmogoyf</span></span></div></div><div class="deck-group"><h4>Other permanents · 1</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Sylvan Library">Sylvan Library</span></span></div></div><div class="deck-group"><h4>Spells · 31</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Brainstorm">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Ponder">Ponder</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Daze">Daze</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Stifle">Stifle</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Lightning Bolt">Lightning Bolt</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Spell Snare">Spell Snare</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Spell Pierce">Spell Pierce</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Counterspell">Counterspell</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Dismember">Dismember</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Forked Bolt">Forked Bolt</span></span></div></div><div class="deck-group"><h4>Lands · 18</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Wasteland">Wasteland</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Volcanic Island">Volcanic Island</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Tropical Island">Tropical Island</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Scalding Tarn">Scalding Tarn</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Flooded Strand">Flooded Strand</span></span></div></div></div>
+            <div class="deck-column"><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Grafdigger&#x27;s Cage">Grafdigger&#x27;s Cage</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Mind Harness">Mind Harness</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Ancient Grudge">Ancient Grudge</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Flusterstorm">Flusterstorm</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Pyroblast">Pyroblast</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Spell Pierce">Spell Pierce</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Submerge">Submerge</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Surgical Extraction">Surgical Extraction</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Rough // Tumble">Rough // Tumble</span></span></div></div></div>
+          </div>
+        </div>
+        <pre id="text-ghent-2012" class="deck-text" hidden>Jonathan Alexander — 24th, Grand Prix Ghent 2012
+
+Creatures · 10
+4 Delver of Secrets
+4 Nimble Mongoose
+2 Tarmogoyf
+
+Other permanents · 1
+1 Sylvan Library
+
+Spells · 31
+4 Brainstorm
+4 Ponder
+4 Force of Will
+4 Daze
+4 Stifle
+4 Lightning Bolt
+3 Spell Snare
+1 Spell Pierce
+1 Counterspell
+1 Dismember
+1 Forked Bolt
+
+Lands · 18
+4 Wasteland
+4 Volcanic Island
+3 Tropical Island
+4 Scalding Tarn
+3 Flooded Strand
+
+Sideboard · 15
+2 Grafdigger&#x27;s Cage
+1 Mind Harness
+1 Ancient Grudge
+2 Flusterstorm
+3 Pyroblast
+1 Spell Pierce
+2 Submerge
+1 Surgical Extraction
+2 Rough // Tumble</pre>
+        <p class="deck-source"><a href="https://theweeklywars.wordpress.com/2013/11/13/delver-of-secrets-in-legacy-part-1-rug-deckbuilding-theory/">Contemporary source</a></p>
+      </div>
+    </details>
+    
+
+    <details class="deck-accordion" >
+      <summary>
+        <span><strong>2013 · Adapting to Deathrite and Decay</strong><small>Jonathan Alexander / Carsten Linden — Post–Return to Ravnica build</small></span>
+        <span class="summary-mark">+</span>
+      </summary>
+      <div class="deck-inside">
+        <p>Deathrite Shaman attacked threshold and Abrupt Decay made Sylvan Library less dependable. The response was not a wholesale reinvention: one Snapcaster replaced Library, cheap removal stayed high, and the deck accepted that BUG and Jund were difficult structural matchups.</p>
+        <div class="deck-shell">
+          <div class="deck-head">
+            <div><h3>Jonathan Alexander / Carsten Linden — Post–Return to Ravnica build</h3><div class="small">Snapcaster Mage, an eighth dual land, and a sideboard aimed at BUG and Jund</div></div>
+            <button class="copy-deck" data-copy-target="text-post-drs-2013" type="button">Copy decklist</button>
+          </div>
+          <div class="deck-columns">
+            <div class="deck-column"><div class="deck-group"><h4>Creatures · 11</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Delver of Secrets">Delver of Secrets</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Nimble Mongoose">Nimble Mongoose</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Tarmogoyf">Tarmogoyf</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Snapcaster Mage">Snapcaster Mage</span></span></div></div><div class="deck-group"><h4>Spells · 31</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Brainstorm">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Ponder">Ponder</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Daze">Daze</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Stifle">Stifle</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Lightning Bolt">Lightning Bolt</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Spell Snare">Spell Snare</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Spell Pierce">Spell Pierce</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Counterspell">Counterspell</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Dismember">Dismember</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Forked Bolt">Forked Bolt</span></span></div></div><div class="deck-group"><h4>Lands · 18</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Wasteland">Wasteland</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Volcanic Island">Volcanic Island</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Tropical Island">Tropical Island</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Flooded Strand">Flooded Strand</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Polluted Delta">Polluted Delta</span></span></div></div></div>
+            <div class="deck-column"><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Troll Ascetic">Troll Ascetic</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Ancient Grudge">Ancient Grudge</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Flusterstorm">Flusterstorm</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Pyroblast">Pyroblast</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Spell Pierce">Spell Pierce</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Submerge">Submerge</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Surgical Extraction">Surgical Extraction</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Rough // Tumble">Rough // Tumble</span></span></div></div></div>
+          </div>
+        </div>
+        <pre id="text-post-drs-2013" class="deck-text" hidden>Jonathan Alexander / Carsten Linden — Post–Return to Ravnica build
+
+Creatures · 11
+4 Delver of Secrets
+4 Nimble Mongoose
+2 Tarmogoyf
+1 Snapcaster Mage
+
+Spells · 31
+4 Brainstorm
+4 Ponder
+4 Force of Will
+4 Daze
+4 Stifle
+4 Lightning Bolt
+3 Spell Snare
+1 Spell Pierce
+1 Counterspell
+1 Dismember
+1 Forked Bolt
+
+Lands · 18
+4 Wasteland
+4 Volcanic Island
+4 Tropical Island
+3 Flooded Strand
+3 Polluted Delta
+
+Sideboard · 15
+2 Troll Ascetic
+1 Ancient Grudge
+2 Flusterstorm
+2 Pyroblast
+2 Spell Pierce
+3 Submerge
+1 Surgical Extraction
+2 Rough // Tumble</pre>
+        <p class="deck-source"><a href="https://theweeklywars.wordpress.com/2013/11/13/delver-of-secrets-in-legacy-part-1-rug-deckbuilding-theory/">Contemporary source</a></p>
+      </div>
+    </details>
+    
+
+    <details class="deck-accordion" >
+      <summary>
+        <span><strong>August 2014 · No-Stifle burn branch</strong><small>Kale Thompson — 2nd, SCG Legacy Open Syracuse</small></span>
+        <span class="summary-mark">+</span>
+      </summary>
+      <div class="deck-inside">
+        <p>This list accepted a weaker mana-denial identity in exchange for more threats and cleaner topdecks. True-Name Nemesis gave RUG a threat that ignored ordinary spot removal, while Chain Lightning increased reach against Miracles and planeswalkers.</p>
+        <div class="deck-shell">
+          <div class="deck-head">
+            <div><h3>Kale Thompson — 2nd, SCG Legacy Open Syracuse</h3><div class="small">Thirteen threats, True-Name Nemesis, seven burn spells, and zero Stifles</div></div>
+            <button class="copy-deck" data-copy-target="text-thompson-2014" type="button">Copy decklist</button>
+          </div>
+          <div class="deck-columns">
+            <div class="deck-column"><div class="deck-group"><h4>Creatures · 13</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Delver of Secrets">Delver of Secrets</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Nimble Mongoose">Nimble Mongoose</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Tarmogoyf">Tarmogoyf</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="True-Name Nemesis">True-Name Nemesis</span></span></div></div><div class="deck-group"><h4>Spells · 29</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Brainstorm">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Ponder">Ponder</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Daze">Daze</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Lightning Bolt">Lightning Bolt</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Chain Lightning">Chain Lightning</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Spell Snare">Spell Snare</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Spell Pierce">Spell Pierce</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Gitaxian Probe">Gitaxian Probe</span></span></div></div><div class="deck-group"><h4>Lands · 18</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Wasteland">Wasteland</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Volcanic Island">Volcanic Island</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Tropical Island">Tropical Island</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Polluted Delta">Polluted Delta</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Wooded Foothills">Wooded Foothills</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Flooded Strand">Flooded Strand</span></span></div></div></div>
+            <div class="deck-column"><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Sylvan Library">Sylvan Library</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Pyroblast">Pyroblast</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Submerge">Submerge</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Pithing Needle">Pithing Needle</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Ancient Grudge">Ancient Grudge</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Forked Bolt">Forked Bolt</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Flusterstorm">Flusterstorm</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Grafdigger&#x27;s Cage">Grafdigger&#x27;s Cage</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Rough // Tumble">Rough // Tumble</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="True-Name Nemesis">True-Name Nemesis</span></span></div></div></div>
+          </div>
+        </div>
+        <pre id="text-thompson-2014" class="deck-text" hidden>Kale Thompson — 2nd, SCG Legacy Open Syracuse
+
+Creatures · 13
+4 Delver of Secrets
+4 Nimble Mongoose
+4 Tarmogoyf
+1 True-Name Nemesis
+
+Spells · 29
+4 Brainstorm
+4 Ponder
+4 Force of Will
+4 Daze
+4 Lightning Bolt
+3 Chain Lightning
+2 Spell Snare
+2 Spell Pierce
+2 Gitaxian Probe
+
+Lands · 18
+4 Wasteland
+3 Volcanic Island
+3 Tropical Island
+4 Polluted Delta
+2 Wooded Foothills
+2 Flooded Strand
+
+Sideboard · 15
+1 Sylvan Library
+3 Pyroblast
+3 Submerge
+1 Pithing Needle
+1 Ancient Grudge
+1 Forked Bolt
+2 Flusterstorm
+1 Grafdigger&#x27;s Cage
+1 Rough // Tumble
+1 True-Name Nemesis</pre>
+        <p class="deck-source"><a href="https://articles.starcitygames.com/articles/video-plus-analysis-rug-delver-vs-miracles/">Contemporary source</a></p>
+      </div>
+    </details>
+    
+
+    <details class="deck-accordion" >
+      <summary>
+        <span><strong>August 2014 · Mature Stifle RUG</strong><small>Drew Levin — Invitational test list, August 27, 2014</small></span>
+        <span class="summary-mark">+</span>
+      </summary>
+      <div class="deck-inside">
+        <p>Levin argued that Stifle&#x27;s value had been neglected. His list returned to the full mana-denial engine while trimming the fourth Force and using Gitaxian Probe to turn hidden information into exact sequencing.</p>
+        <div class="deck-shell">
+          <div class="deck-head">
+            <div><h3>Drew Levin — Invitational test list, August 27, 2014</h3><div class="small">The late-era reference list: twelve threats, concealed fetchlands, six burn spells, and three Force of Will</div></div>
+            <button class="copy-deck" data-copy-target="text-levin-2014" type="button">Copy decklist</button>
+          </div>
+          <div class="deck-columns">
+            <div class="deck-column"><div class="deck-group"><h4>Creatures · 12</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Delver of Secrets">Delver of Secrets</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Nimble Mongoose">Nimble Mongoose</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Tarmogoyf">Tarmogoyf</span></span></div></div><div class="deck-group"><h4>Spells · 30</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Brainstorm">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Ponder">Ponder</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Lightning Bolt">Lightning Bolt</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Chain Lightning">Chain Lightning</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Daze">Daze</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Stifle">Stifle</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Spell Pierce">Spell Pierce</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Gitaxian Probe">Gitaxian Probe</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Spell Snare">Spell Snare</span></span></div></div><div class="deck-group"><h4>Lands · 18</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Wasteland">Wasteland</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Volcanic Island">Volcanic Island</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Tropical Island">Tropical Island</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Wooded Foothills">Wooded Foothills</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Polluted Delta">Polluted Delta</span></span></div></div></div>
+            <div class="deck-column"><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Sylvan Library">Sylvan Library</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Grim Lavamancer">Grim Lavamancer</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Pyroblast">Pyroblast</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Submerge">Submerge</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Krosan Grip">Krosan Grip</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Sulfur Elemental">Sulfur Elemental</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Vendilion Clique">Vendilion Clique</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Flusterstorm">Flusterstorm</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Grafdigger&#x27;s Cage">Grafdigger&#x27;s Cage</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Rough // Tumble">Rough // Tumble</span></span></div></div></div>
+          </div>
+        </div>
+        <pre id="text-levin-2014" class="deck-text" hidden>Drew Levin — Invitational test list, August 27, 2014
+
+Creatures · 12
+4 Delver of Secrets
+4 Nimble Mongoose
+4 Tarmogoyf
+
+Spells · 30
+4 Brainstorm
+4 Ponder
+4 Lightning Bolt
+2 Chain Lightning
+4 Daze
+4 Stifle
+3 Force of Will
+2 Spell Pierce
+2 Gitaxian Probe
+1 Spell Snare
+
+Lands · 18
+4 Wasteland
+3 Volcanic Island
+3 Tropical Island
+4 Wooded Foothills
+4 Polluted Delta
+
+Sideboard · 15
+1 Sylvan Library
+1 Grim Lavamancer
+3 Pyroblast
+2 Submerge
+2 Krosan Grip
+1 Sulfur Elemental
+1 Vendilion Clique
+1 Flusterstorm
+2 Grafdigger&#x27;s Cage
+1 Rough // Tumble</pre>
+        <p class="deck-source"><a href="https://articles.starcitygames.com/articles/video-rug-delver-in-legacy/">Contemporary source</a></p>
+      </div>
+    </details>
+    
+
+    <details class="deck-accordion" open>
+      <summary>
+        <span><strong>Final take · Perfect hindsight</strong><small>Perfect-Hindsight RUG Delver</small></span>
+        <span class="summary-mark">+</span>
+      </summary>
+      <div class="deck-inside">
+        <p>The mature Stifle shell was already extremely close to optimal. My only maindeck change from Levin&#x27;s list is splitting the sixth burn slot between Chain Lightning and Forked Bolt: Chain preserves reach against Miracles and planeswalkers; Forked Bolt improves Deathrite, Elves, and Death &amp; Taxes games. The sideboard remains a remarkably complete fifteen.</p>
+        <div class="deck-shell">
+          <div class="deck-head">
+            <div><h3>Perfect-Hindsight RUG Delver</h3><div class="small">My recommended 75 for the late-summer 2014 pre–Treasure Cruise gauntlet</div></div>
+            <button class="copy-deck" data-copy-target="text-hindsight" type="button">Copy decklist</button>
+          </div>
+          <div class="deck-columns">
+            <div class="deck-column"><div class="deck-group"><h4>Creatures · 12</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Delver of Secrets">Delver of Secrets</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Nimble Mongoose">Nimble Mongoose</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Tarmogoyf">Tarmogoyf</span></span></div></div><div class="deck-group"><h4>Spells · 30</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Brainstorm">Brainstorm</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Ponder">Ponder</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Lightning Bolt">Lightning Bolt</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Chain Lightning">Chain Lightning</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Forked Bolt">Forked Bolt</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Daze">Daze</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Stifle">Stifle</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Force of Will">Force of Will</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Spell Pierce">Spell Pierce</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Gitaxian Probe">Gitaxian Probe</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Spell Snare">Spell Snare</span></span></div></div><div class="deck-group"><h4>Lands · 18</h4><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Wasteland">Wasteland</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Volcanic Island">Volcanic Island</span></span></div><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Tropical Island">Tropical Island</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Wooded Foothills">Wooded Foothills</span></span></div><div class="deck-row"><span><span class="qty">4</span> <span class="card-name" tabindex="0" data-card="Polluted Delta">Polluted Delta</span></span></div></div></div>
+            <div class="deck-column"><div class="deck-group"><h4>Sideboard · 15</h4><div class="deck-row"><span><span class="qty">3</span> <span class="card-name" tabindex="0" data-card="Pyroblast">Pyroblast</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Submerge">Submerge</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Krosan Grip">Krosan Grip</span></span></div><div class="deck-row"><span><span class="qty">2</span> <span class="card-name" tabindex="0" data-card="Grafdigger&#x27;s Cage">Grafdigger&#x27;s Cage</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Sylvan Library">Sylvan Library</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Grim Lavamancer">Grim Lavamancer</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Rough // Tumble">Rough // Tumble</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Sulfur Elemental">Sulfur Elemental</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Flusterstorm">Flusterstorm</span></span></div><div class="deck-row"><span><span class="qty">1</span> <span class="card-name" tabindex="0" data-card="Vendilion Clique">Vendilion Clique</span></span></div></div></div>
+          </div>
+        </div>
+        <pre id="text-hindsight" class="deck-text" hidden>Perfect-Hindsight RUG Delver
+
+Creatures · 12
+4 Delver of Secrets
+4 Nimble Mongoose
+4 Tarmogoyf
+
+Spells · 30
+4 Brainstorm
+4 Ponder
+4 Lightning Bolt
+1 Chain Lightning
+1 Forked Bolt
+4 Daze
+4 Stifle
+3 Force of Will
+2 Spell Pierce
+2 Gitaxian Probe
+1 Spell Snare
+
+Lands · 18
+4 Wasteland
+3 Volcanic Island
+3 Tropical Island
+4 Wooded Foothills
+4 Polluted Delta
+
+Sideboard · 15
+3 Pyroblast
+2 Submerge
+2 Krosan Grip
+2 Grafdigger&#x27;s Cage
+1 Sylvan Library
+1 Grim Lavamancer
+1 Rough // Tumble
+1 Sulfur Elemental
+1 Flusterstorm
+1 Vendilion Clique</pre>
+        <p class="deck-source"><span>Author’s reconstruction</span></p>
+      </div>
+    </details>
+    
+</section>
+
+<section id="mulligans">
+  <div class="eyebrow">5 · Mulligans and opening turns</div>
+  <h2>Keep a sequence, not a collection of cheap cards</h2>
+  <p>A functional RUG hand needs mana, selection or pressure, and interaction that matches the opponent’s likely first turns. Because the deck contains only eighteen lands, a hand with one fetchland and Brainstorm can be safer than a hand with Volcanic Island and several green cards—but only if the fetchland is not exposed carelessly to opposing Stifle.</p>
+
+  <h3>General keeps</h3>
+  <ul>
+    <li><strong>One land, cantrip, threat, interaction</strong> when the land casts the cantrip and the matchup does not punish a stumble immediately.</li>
+    <li><strong>Two lands and a threat</strong> with Daze, Stifle, Bolt, or Pierce creating a credible first-three-turn plan.</li>
+    <li><strong>Delver plus protection</strong> against combo or slow control, even when the rest of the hand is modest.</li>
+    <li><strong>Mongoose plus cantrips</strong> against removal-heavy decks where shroud is the most important text.</li>
+    <li><strong>Wasteland plus colored land</strong> when denying a specific color or second land will make the rest of the hand function.</li>
+  </ul>
+
+  <h3>Common mulligans</h3>
+  <ul>
+    <li>Wasteland as the only land unless the hand has an exceptional matchup-specific line.</li>
+    <li>One-land hands whose only manipulation is Brainstorm but that cannot safely produce a shuffle.</li>
+    <li>Creatureless reactive hands against fair decks; RUG cannot deny resources indefinitely without a clock.</li>
+    <li>Multiple Tarmogoyfs with one land and no cantrip.</li>
+    <li>Hands full of Daze, Pierce, and Stifle but no way to punish the opponent for waiting.</li>
+  </ul>
+
+  <h3>Opening-turn scripts</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Opponent</th><th>Preferred development</th><th>Central question</th></tr></thead>
+    <tbody>
+      <tr><td>Unknown</td><td>Lead with a fetchland that can find either dual; Delver is the safest proactive opening.</td><td>Will passing for Stifle gain more than establishing a clock?</td></tr>
+      <tr><td>Miracles</td><td>Deploy Delver or Mongoose; avoid treating their basic-heavy mana as the only battlefield.</td><td>Can you protect one threat and stop Counterbalance, Terminus, or Jace?</td></tr>
+      <tr><td>BUG / Deathrite</td><td>Bolt Deathrite when it materially fixes their mana or suppresses threshold; use Wasteland around the result.</td><td>Does killing the Shaman unlock mana denial, Mongoose, or both?</td></tr>
+      <tr><td>Storm</td><td>Present a threat, then preserve free interaction; Probe can determine whether to counter a cantrip.</td><td>How many turns does the clock give them to sculpt?</td></tr>
+      <tr><td>Show and Tell</td><td>Delver or Mongoose followed by maximum untapped interaction.</td><td>Can they force through one key spell, or must they spend turns rebuilding?</td></tr>
+      <tr><td>Death & Taxes</td><td>Respect Vial, Mother, and Thalia; lead on red mana when Bolt/Forked Bolt is required.</td><td>Which permanent makes the rest of your hand stop functioning?</td></tr>
+      <tr><td>RUG mirror</td><td>Fetch carefully, value Mongoose, and do not turn Daze into self-inflicted mana loss without a real payoff.</td><td>Who controls green mana, threshold, and the last meaningful threat?</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout"><strong>Do not keep “all disruption” without damage.</strong> A hand of Stifle, Daze, Force, Wasteland, and lands looks interactive, but every opposing draw step improves once your soft counters begin to age. A one-mana creature is what converts denial into victory.</div>
+</section>
+
+<section id="interactions">
+  <div class="eyebrow">6 · Key interactions</div>
+  <h2>The small exchanges that decide entire games</h2>
+
+  <h3>Stifle and fetchlands</h3>
+  <p>When a fetchland’s activated ability is on the stack, Stifle counters the ability. The land has already been sacrificed as a cost, so the opponent loses the land and does not search. The strategic question is not whether this is powerful; it is whether holding up Stifle costs more tempo than the denial creates.</p>
+
+  <h3>Stifle’s non-land targets</h3>
+  <p>Stifle counters triggered or activated abilities, not spells. In this era it could counter a miracle trigger, cascade, suspend’s final cast trigger, Stoneforge Mystic’s equipment deployment ability, Batterskull’s living weapon trigger, Engineered Explosives’ sacrifice ability, planeswalker abilities, a storm trigger, Emrakul’s annihilator trigger, and many more. It does not counter the permanent or spell that produced the ability.</p>
+
+  <h3>Daze and returning a dual land</h3>
+  <p>Daze’s alternate cost can save a Tropical Island or Volcanic Island from Wasteland. It can also return a land so it can be replayed for a second mana after tapping it, though the lost land development is real. The best Dazes either protect the clock, stop a spell that would stabilize the game, or exploit mana denial already underway.</p>
+
+  <h3>Wasteland is not automatically a spell</h3>
+  <p>If activating Wasteland prevents you from casting Tarmogoyf, holding up Stifle, or representing multiple counters, it may be correct to keep it as a mana source. Wasteland is strongest when it removes a color, keeps the opponent below a key mana threshold, or makes Daze and Pierce live again.</p>
+
+  <h3>Brainstorm, fetchlands, and Delver</h3>
+  <p>Brainstorm can place an instant or sorcery on top to guarantee Delver’s transformation at the next upkeep. It can also hide key cards from discard and exchange dead late-game Dazes or duplicate lands for fresh cards before a fetchland shuffle. Casting it without a purpose risks becoming locked under poor cards.</p>
+
+  <h3>Ponder versus holding up Stifle</h3>
+  <p>Turn-one Ponder improves the hand immediately; passing threatens a devastating Stifle. The correct choice depends on whether the existing hand already has a threat and second land, whether the opponent can fetch a basic, and whether your next turn becomes stronger by knowing their development.</p>
+
+  <h3>Threshold management</h3>
+  <p>Nimble Mongoose needs seven cards in your graveyard to become 3/3. Cantrips, fetchlands, Wasteland, free counters, and cheap burn naturally fill the graveyard, but Deathrite Shaman, Rest in Peace, Relic, and opposing Surgical Extraction interfere. Do not crack fetchlands or cast spells solely for threshold unless the extra power changes the clock or combat.</p>
+
+  <h3>Submerge and a shuffle</h3>
+  <p>Submerge is free when the opponent controls a Forest and you control an Island. Placing a creature on top becomes much closer to removal if you then force a shuffle by Stifling or responding to a fetchland, or if the opponent must crack a fetch to develop. Even without a shuffle, it can remove a blocker and erase a draw step.</p>
+
+  <h3>Pyroblast versus Nimble Mongoose</h3>
+  <p>Pyroblast may legally target a nonblue permanent even though it will not destroy it on resolution; Red Elemental Blast cannot be cast without a blue target. That distinction occasionally matters when growing threshold or creating a spell for Tarmogoyf, which is why contemporary RUG sideboards often preferred Pyroblast.</p>
+
+  <h3>Rough // Tumble</h3>
+  <p>Rough deals two damage to each creature without flying. It normally leaves a transformed Delver untouched and can clear Elves, Goblins, Death & Taxes creatures, or Dredge tokens. Tarmogoyf and thresholded Mongoose frequently survive, making the asymmetry much better than it first appears.</p>
+</section>
+
+<section id="piloting">
+  <div class="eyebrow">7 · How to pilot the deck</div>
+  <h2>Every card changes value according to the clock</h2>
+  <p class="quote">RUG is strongest when the opponent is forced to act before they are ready. Your job is to create that deadline, then make every answer arrive one mana or one turn too late.</p>
+
+  <h3>1. Assign roles immediately</h3>
+  <p>Against Miracles and combo, RUG is the aggressor with disruption. Against Burn or faster creature decks, it may need to trade and stabilize before racing. In the mirror, role can change with each land drop and each Mongoose. Do not equate “tempo deck” with “always attack regardless of combat.”</p>
+
+  <h3>2. Choose what the opponent is allowed to do</h3>
+  <p>You cannot counter everything. Decide which class of card matters: removal for your only threat, a mana creature that invalidates Wasteland, a Stoneforge that produces Batterskull, a Counterbalance, a Show and Tell, or a planeswalker. Let irrelevant spells resolve so interaction remains for the route that beats you.</p>
+
+  <h3>3. Sequence lands to preserve colors</h3>
+  <p>RUG has no basics. A single Wasteland can cut off green threats or red removal. Fetch the color demanded by the hand’s next two turns, not merely the spell being cast now. In the mirror, leaving an uncracked fetchland may protect access to either color, but also exposes you to Stifle.</p>
+
+  <h3>4. Make soft counters hard</h3>
+  <p>Daze and Pierce are strongest when the opponent must tap out. Stifle and Wasteland create those conditions. A threat creates urgency. The pieces are multiplicative: playing them as isolated cards produces an underpowered deck.</p>
+
+  <h3>5. Protect Mongoose differently from Delver</h3>
+  <p>Mongoose does not need countermagic against targeted removal, but it needs graveyard development and help through blockers. Delver needs protection from removal but naturally evades most combat. Tarmogoyf needs the most mana and is vulnerable to both removal and Submerge, but closes creature races fastest.</p>
+
+  <h3>6. Know when burn changes jobs</h3>
+  <p>Lightning Bolt may kill Deathrite, Mother of Runes, Stoneforge, Delver, or the opponent. Before spending it, calculate the remaining clock. If the creature can be ignored for two turns and Bolt represents lethal, preserve reach. If it fixes mana, gains life, equips Batterskull, or blocks Mongoose, remove it.</p>
+
+  <h3>7. Use information aggressively</h3>
+  <p>Gitaxian Probe is not “free air.” It determines whether to expose a dual, whether Stifle is live, which threat can be protected, and whether Force must be held. The life payment matters in races, but the knowledge can prevent far more damage than it costs.</p>
+
+  <h3>8. Accept that some games require imperfect trades</h3>
+  <p>Force-pitching Brainstorm, Dazing while behind on land, or Bolting a one-mana creature can look inefficient. RUG measures exchanges by turns and damage rather than card count alone. The test is whether the exchange preserves a winning timeline.</p>
+
+  <h3>9. Concede the late game before it happens</h3>
+  <p>When Miracles has Top, stable basics, and Jace—or Shardless has resolved multiple cascades—RUG’s nominal outs may no longer justify spending ten minutes. Tournament time matters, and the deck is capable of winning the next game quickly.</p>
+</section>
+
+<section id="sideboarding">
+  <div class="eyebrow">8 · Sideboarding principles</div>
+  <h2>Remove the cards that age worst in the matchup</h2>
+
+  <h3>Stifle is a plan, not an obligation</h3>
+  <p>Keep Stifle when the opponent has greedy mana, fetchlands that matter, or high-impact abilities. Trim or remove it in the mirror and against basic-heavy, Vial, Cavern, or board-centric decks where passing with one mana creates little leverage. Against Miracles, contemporary experts disagreed: Stifle could attack miracle, Explosives, fetchlands, and planeswalkers, but the pure mana-denial plan was weak against many basics.</p>
+
+  <h3>Daze depends on play/draw and game length</h3>
+  <p>Daze is superb when the opponent must tap out early. On the draw against decks with one-mana accelerants or plentiful basics, it deteriorates. In slow post-board games, remove some copies rather than assuming all four belong because they are part of the archetype’s identity.</p>
+
+  <h3>Force is for catastrophic spells</h3>
+  <p>Keep Force against combo, Counterbalance, Chalice, Blood Moon, Natural Order, equipment that cannot be answered, and other cards that make normal play impossible. Trim it in fair attrition matchups where every two-for-one moves you toward defeat and the sideboard offers efficient answers.</p>
+
+  <h3>Sideboard cards must preserve pressure</h3>
+  <p>RUG can overboard into a bad control deck. Bringing in Library, Grip, Clique, Pyroblast, and multiple reactive cards while removing threats and burn may create a hand that answers everything but kills nothing. Most matchups still require at least twelve real sources of pressure counting creatures and direct damage.</p>
+
+  <h3>The perfect-hindsight sideboard by function</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Package</th><th>Cards</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td>Blue warfare</td><td>3 Pyroblast, 1 Flusterstorm, 1 Vendilion Clique</td><td>Miracles, Show and Tell, Storm, High Tide, Reanimator, opposing Delvers, Jace, True-Name.</td></tr>
+      <tr><td>Green creature tempo</td><td>2 Submerge</td><td>RUG, BUG, Maverick, Elves, Jund, Shardless, and any deck exposing a Forest.</td></tr>
+      <tr><td>Permanent locks</td><td>2 Krosan Grip</td><td>Counterbalance/Top, Batterskull or equipment, Sneak Attack, Blood Moon, Chalice, and other must-answer artifacts/enchantments.</td></tr>
+      <tr><td>Graveyard and creature combo</td><td>2 Grafdigger’s Cage</td><td>Dredge, Reanimator, Elves’ Natural Order and Green Sun’s Zenith, and other library/graveyard deployment.</td></tr>
+      <tr><td>Long-game leverage</td><td>1 Sylvan Library</td><td>Miracles and slow control where life total is not under immediate pressure.</td></tr>
+      <tr><td>Small-creature control</td><td>1 Grim Lavamancer, 1 Rough // Tumble, 1 Sulfur Elemental</td><td>Death & Taxes, Elves, Goblins, Delver mirrors, and Deathrite/Stoneforge decks.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="matchups">
+  <div class="eyebrow">9 · Gauntlet-specific matchup guide</div>
+  <h2>The pre–Treasure Cruise field</h2>
+  <p>The recommendations below assume the perfect-hindsight 75. “Trim” indicates priorities rather than an inflexible fifteen-card map; play/draw, revealed sideboard cards, and the opponent’s exact build change the final numbers.</p>
+
+  <div class="table-wrap"><table>
+    <thead><tr><th>Matchup</th><th>Role</th><th>Bring in</th><th>Usually trim</th><th>Plan</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Miracles</strong></td><td><span class="role race">Aggressor</span></td><td>3 Pyroblast, 2 Grip, Library, Clique, Flusterstorm</td><td>Forked Bolt, Chain Lightning, some Daze/Stifle depending play and their list, one Goyf if overloaded</td><td>Protect one threat rather than flooding Terminus. Mongoose is the premier creature. Stop Counterbalance, Jace, and Entreat; pressure makes their cantrips and Top activations costly. Grip is the clean answer to CounterTop.</td></tr>
+      <tr><td><strong>RUG mirror</strong></td><td><span class="role pivot">Position battle</span></td><td>Pyroblasts, Submerge, Lavamancer; Library on play or in slower builds</td><td>Stifle, Spell Pierce, some Force, Probe on life-sensitive draws</td><td>Mongoose is the central threat. Preserve green mana, do not expose Goyf to Submerge without need, and avoid losing tempo to speculative Dazes. Wasteland is often mana, not removal.</td></tr>
+      <tr><td><strong>BUG Delver / Team America</strong></td><td><span class="role tempo">Tempo underdog</span></td><td>Submerge, Lavamancer, Pyroblast, Library</td><td>Force, Pierce, some Stifle depending basics and Deathrite count</td><td>Kill Deathrite when it enables their whole hand. Mongoose is best against Decay but worst against graveyard pressure. Tombstalker must be countered. Avoid a long attrition game with Hymn and Liliana.</td></tr>
+      <tr><td><strong>UWR Delver</strong></td><td><span class="role pivot">Tempo-control</span></td><td>Pyroblasts, Grip, Lavamancer, Sulfur Elemental, Clique</td><td>Some Force, Pierce, Stifle depending manabase</td><td>Stoneforge and True-Name are the cards that break parity. Grip answers equipment through counters. Mongoose dodges Swords and Bolt; Tarmogoyf often dominates combat. Protect against Rest in Peace post-board.</td></tr>
+      <tr><td><strong>UR Delver</strong></td><td><span class="role pivot">Stabilize then race</span></td><td>Pyroblast, Lavamancer, Flusterstorm</td><td>Stifle if their mana is basic-heavy, Force, Probe when life matters</td><td>Your creatures are larger, but their burn density is higher. Trade for Delver and Pyromancer, preserve life, and force them to spend burn on creatures rather than your face.</td></tr>
+      <tr><td><strong>Shardless BUG</strong></td><td><span class="role race">Aggressor</span></td><td>Pyroblast, Submerge, Library, Clique, Lavamancer</td><td>Force, some Stifle/Pierce</td><td>Do not let Ancestral Vision, Shardless Agent, or Jace create an unrecoverable card gap. Spell Snare is excellent. Mongoose avoids Decay, but Baleful Strix blocks it. End the game before their cascades compound.</td></tr>
+      <tr><td><strong>Esper Stoneblade</strong></td><td><span class="role race">Aggressor</span></td><td>Pyroblast, Grip, Library, Clique, Lavamancer</td><td>Some Force, Stifle on basic-heavy lists, Forked Bolt if no small targets</td><td>Stoneforge is often the pivot. Stifle can stop its equipment ability or Batterskull’s Germ trigger. Keep Jace off the board, and do not let Lingering Souls erase your attack step.</td></tr>
+      <tr><td><strong>Deathblade</strong></td><td><span class="role tempo">Tempo</span></td><td>Pyroblast, Grip, Submerge, Lavamancer, Library</td><td>Force, Pierce, selected Stifles</td><td>Their mana is greedier than Esper’s but Deathrite repairs it. Bolt Shaman, Waste a key dual, and keep Stoneforge or True-Name from stabilizing. Avoid trading two cards for ordinary removal.</td></tr>
+      <tr><td><strong>Death & Taxes</strong></td><td><span class="role pivot">Removal deck</span></td><td>Lavamancer, Rough, Sulfur Elemental, 2 Grip</td><td>Stifle, Pierce, Force in part, Probe</td><td>Thalia, Mother, Vial, and equipment each demand different answers. Preserve red mana. Rough can create a one-sided sweep, Sulfur Elemental punishes white x/1s, and Grip solves equipment or Vial.</td></tr>
+      <tr><td><strong>Elves</strong></td><td><span class="role tempo">Disruptive clock</span></td><td>2 Cage, Rough, Lavamancer, Submerge, Flusterstorm</td><td>Stifle in part, Spell Pierce on draw, some Force only if enough replacements</td><td>Counter Glimpse and Natural Order, but kill Symbiote or mana creatures when they enable an immediate chain. Cage hits Zenith and Natural Order. Rough is strongest after they commit without killing you.</td></tr>
+      <tr><td><strong>Maverick</strong></td><td><span class="role tempo">Tempo-control</span></td><td>Submerge, Rough, Lavamancer, Grip, Sulfur Elemental</td><td>Daze on draw, Pierce, some Stifle</td><td>Delver is essential because Knight and Ooze can brick the ground. Kill Mother before removal becomes dead. Submerge Knight after a fetch or in combat. Grip handles equipment and Choke.</td></tr>
+      <tr><td><strong>Jund</strong></td><td><span class="role danger">Race attrition</span></td><td>Submerge, Library, Lavamancer</td><td>Force, Pierce, some Stifle</td><td>A difficult structural matchup: discard, Decay, Punishing Fire, Liliana, and larger creatures all matter. Mongoose and Delver are better than Goyf. Deny green or black mana early and finish before Punishing Fire takes over.</td></tr>
+      <tr><td><strong>Goblins</strong></td><td><span class="role pivot">Contain board</span></td><td>Rough, Lavamancer, Grip, Sulfur Elemental situationally</td><td>Pierce, Stifle in part, Force in part, Probe</td><td>Vial and Cavern blank counters. Delver is the best clock, while Rough buys time. Bolt Lackey and high-impact lords; Grip Vial only when doing so meaningfully slows their deployment.</td></tr>
+      <tr><td><strong>Merfolk</strong></td><td><span class="role pivot">Removal and race</span></td><td>Pyroblast, Rough, Lavamancer, Grip</td><td>Stifle, Pierce, some Force</td><td>Islandwalk makes races unforgiving. Pyroblast is premium removal. Keep Vial or multiple lords from making counters irrelevant, and remember Tarmogoyf may be unable to block once an Island is in play.</td></tr>
+      <tr><td><strong>Burn</strong></td><td><span class="role pivot">Creature control</span></td><td>Flusterstorm, Clique; Pyroblast only for heavy blue splash</td><td>Probe, Force, Stifle, some Daze on draw</td><td>Protect life total and make Tarmogoyf a blocker. Do not pay unnecessary life for Probe or fetches. Counter Price of Progress and Fireblast; use Bolt on creatures when it prevents multiple attacks.</td></tr>
+      <tr><td><strong>Infect</strong></td><td><span class="role tempo">Interactive tempo</span></td><td>Pyroblast, Submerge, Lavamancer, Rough, Flusterstorm</td><td>Slow Goyfs, some Force/Pierce according to build</td><td>Kill creatures on your turn when Invigorate protection is limited, but respect Vines and Daze. Wasteland Inkmoth, Stifle its activation or exalted triggers when useful, and do not tap out into a lethal pump sequence.</td></tr>
+      <tr><td><strong>Sneak and Show</strong></td><td><span class="role race">Clock + stack</span></td><td>Pyroblast, Flusterstorm, Clique, Grip</td><td>Forked Bolt, Chain Lightning, some Goyf/Bolt, Spell Snare</td><td>Deploy one cheap threat and keep mana open. Fight Show and Tell and Sneak Attack, not cantrips indiscriminately. Grip answers Sneak Attack and Defense Grid. Stifle can stop annihilator or Sneak Attack’s sacrifice trigger only tactically; it does not remove the creature.</td></tr>
+      <tr><td><strong>Omni-Tell</strong></td><td><span class="role race">Clock + stack</span></td><td>Pyroblast, Flusterstorm, Clique, Grip</td><td>Creature removal, some Goyfs, Spell Snare</td><td>The fight continues after Show and Tell if Omniscience enters. Preserve multiple layers of countermagic and use Clique at the end step or after setup. Grip is slower but can remove Omniscience if you survive priority.</td></tr>
+      <tr><td><strong>ANT</strong></td><td><span class="role race">Clock + disruption</span></td><td>Flusterstorm, Clique, Pyroblast; Cage if Past in Flames is central</td><td>Forked Bolt, some Bolt/Goyf, Spell Snare</td><td>Probe is exceptional. Counter cantrips when the clock forces them to act soon, but preserve interaction for Infernal Tutor and Past in Flames. Stifle can counter storm or a fetch, yet stopping the spell chain earlier is safer.</td></tr>
+      <tr><td><strong>TES</strong></td><td><span class="role race">Immediate disruption</span></td><td>Flusterstorm, Clique, Pyroblast, Rough if Empty is prominent</td><td>Goyf, Forked Bolt, Spell Snare</td><td>TES is faster and Empty the Warrens is more important. Force aggressively, keep Daze live with mana denial, and retain Rough when Goblin tokens are a realistic route.</td></tr>
+      <tr><td><strong>Reanimator</strong></td><td><span class="role race">Stack + graveyard</span></td><td>2 Cage, Flusterstorm, Clique, Pyroblast</td><td>Forked Bolt, Chain Lightning, Goyfs, some Bolt</td><td>Counter Entomb or the reanimation spell according to hand density. Cage is powerful but cannot replace turn-zero Force. Delver is the preferred threat because it leaves mana open and closes quickly.</td></tr>
+      <tr><td><strong>LED Dredge</strong></td><td><span class="role danger">Contain graveyard</span></td><td>2 Cage, Rough, Lavamancer, Flusterstorm</td><td>Stifle, Pierce in part, Goyf, Chain Lightning</td><td>Force the draw/discard engine when it buys a real turn. Cage stops creatures entering from the graveyard but can be answered. Rough clears Zombie tokens and your Delver survives.</td></tr>
+      <tr><td><strong>Lands / Loam</strong></td><td><span class="role danger">Race the lock</span></td><td>Grip, Clique, Library; Submerge only if green creatures appear</td><td>Creature removal, Spell Snare, some Daze</td><td>A poor matchup because their lands are spells and Loam defeats one-for-one denial. Protect a flyer, counter Exploration or Loam when meaningful, and use Stifle against key land abilities. End the game before Maze/Chasm/Tabernacle control combat.</td></tr>
+      <tr><td><strong>12-Post</strong></td><td><span class="role race">Maximum aggression</span></td><td>Grip, Clique, Pyroblast for blue versions</td><td>Forked Bolt, Spell Snare, some creature removal</td><td>Wasteland and Stifle are central. Deny Cloudpost triggers or Expedition Map, keep them below the mana needed for inevitability, and present the fastest clock possible.</td></tr>
+      <tr><td><strong>MUD / Dragon Stompy</strong></td><td><span class="role danger">Survive prison</span></td><td>2 Grip, Rough against creature-heavy red, Clique situationally</td><td>Spell Snare, Forked Bolt, Probe</td><td>Force Chalice or Blood Moon when the hand cannot function through it. Fetching cannot find basics, so Moon is often lethal. Grip is essential but may be trapped by Chalice or mana denial.</td></tr>
+      <tr><td><strong>Imperial Painter</strong></td><td><span class="role tempo">Disrupt combo</span></td><td>2 Grip, Rough, Lavamancer, Clique</td><td>Pyroblast is risky with Painter, some Stifle/Pierce depending list</td><td>Respect Blood Moon and the Painter–Grindstone kill. Bolt Painter in response to activation when possible; Grip answers either artifact. Painter naming blue turns their blasts into universal removal and counters.</td></tr>
+      <tr><td><strong>High Tide</strong></td><td><span class="role race">Clock + stack</span></td><td>Pyroblast, Flusterstorm, Clique</td><td>Creature removal, Goyfs in part, Spell Snare</td><td>Wasteland is only mana, but Stifle can interact with fetches and some triggers. Present Delver, counter High Tide or key untap/draw spells, and use Pyroblast to prevent them from rebuilding.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="historical-notes">
+  <div class="eyebrow">10 · Historical notes and sources</div>
+  <h2>Why RUG Delver defines this Legacy era</h2>
+  <p>RUG was the format’s reference tempo deck. Other decks were evaluated partly by whether they could function through Delver, Daze, Wasteland, and Stifle; whether their removal could answer Mongoose; and whether their late game arrived before burn ended the race. Its exact flex slots changed, but its core remained recognizable across the entire period.</p>
+  <p>The archetype also captures what made 2012–2014 Legacy distinctive. Games could be decided by a fetchland activation, yet the format supported wildly different strategies. RUG could beat almost anything by sequencing correctly, but it could not simply overpower every matchup. Deathrite Shaman, Abrupt Decay, basic lands, Aether Vial, Punishing Fire, and CounterTop each attacked a different assumption in the deck.</p>
+
+  <h3>My final verdict</h3>
+  <p>With perfect hindsight, I would register the mature Stifle shell. The no-Stifle lists were real and occasionally ideal, but Stifle is the card that gives RUG its widest ceiling: it enables free wins, increases the lifespan of Daze and Pierce, and has meaningful targets in nearly every major archetype. The cost is demanding play. The deck must know when to stop representing Stifle and start using its mana.</p>
+  <p>I would retain three Force of Will rather than four because the deck already has Daze, Pierce, Stifle, and a fast clock; drawing the second Force in a fair game is often punishing. The one Chain Lightning / one Forked Bolt split is the only substantive hindsight change from Drew Levin’s August 2014 maindeck. It acknowledges that the field demanded both reach and a clean answer to Deathrite, Mother, Elves, and small utility creatures.</p>
+
+  <h3>Primary and contemporary sources</h3>
+  <ol class="source-list">
+    <li><a href="https://magic.wizards.com/en/news/feature/innistrad-card-image-gallery-2011-08-29">Wizards of the Coast — Innistrad Card Image Gallery (August 29, 2011)</a><br><span>Contemporary card-gallery record for Delver of Secrets and the set that transformed Canadian Threshold.</span></li>
+    <li><a href="https://articles.starcitygames.com/articles/victory-at-gp-atlanta-1st/">Gaudenis Vidugiris — “Victory at GP Atlanta” (July 17, 2012)</a><br><span>Exact GP-winning no-Stifle 75 and the pilot’s reasoning for Spell Pierce, Thought Scour, Fire // Ice, and Scavenging Ooze.</span></li>
+    <li><a href="https://theweeklywars.wordpress.com/2013/11/13/delver-of-secrets-in-legacy-part-1-rug-deckbuilding-theory/">Jonathan Alexander — “Delver of Secrets in Legacy Part 1: RUG & Deckbuilding Theory” (November 13, 2013)</a><br><span>Detailed history from May 2012 through the Deathrite/Abrupt Decay metagame, exact lists, and contemporary matchup plans.</span></li>
+    <li><a href="https://articles.starcitygames.com/articles/video-plus-analysis-rug-delver-vs-miracles/">Drew Levin — “RUG Delver vs. Miracles” (August 20, 2014)</a><br><span>Kale Thompson’s no-Stifle SCG finalist list and an in-depth explanation of RUG’s role against Miracles.</span></li>
+    <li><a href="https://articles.starcitygames.com/articles/video-rug-delver-in-legacy/">Drew Levin — “RUG Delver in Legacy” (August 27, 2014)</a><br><span>The mature Stifle reference 75, card-count analysis, and generic late-summer 2014 sideboard.</span></li>
+    <li><a href="https://articles.starcitygames.com/articles/the-miracles-primer-part-1/">Philipp Schönegger — “The Miracles Primer: Part 1” (August 7, 2014)</a><br><span>A contemporary opposing perspective on RUG’s role, threats, and the pre-Cruise Delver field.</span></li>
+    <li><a href="https://articles.starcitygames.com/articles/the-shardless-bug-primer/">Maxime Gilles — “The Shardless BUG Primer” (September 3, 2014)</a><br><span>Contemporary discussion of how Shardless approached RUG’s reactive sideboard plans.</span></li>
+    <li><a href="https://magic.wizards.com/en/news/card-image-gallery/ktk-cig-en">Wizards of the Coast — Khans of Tarkir Card Image Gallery (September 12, 2014)</a><br><span>Historical endpoint marking the appearance of Treasure Cruise.</span></li>
+  </ol>
+
+  <h3>Method note</h3>
+  <p class="note">Tournament and test decklists are reproduced as historical deck-construction data. Strategic text is a synthesis of the linked contemporary sources and period-specific analysis. The matchup table is written for the final 75 rather than copied from a single sideboard guide; opposing lists varied substantially across 2012–2014.</p>
+</section>
+</main>
+</div>
+
+<div id="cardPreview" aria-hidden="true"><img alt=""></div>
+
+<footer class="footer">
+  <p><strong>RUG Delver, 2012–2014</strong> · Legacy Golden Era Archive.</p>
+  <p>Magic: The Gathering, card names, frames, and artwork are property of Wizards of the Coast and the credited artists. This independent historical article is not affiliated with or endorsed by Wizards of the Coast.</p>
+</footer>
+
+<script>
+document.querySelectorAll('.copy-deck').forEach(button => {
+  button.addEventListener('click', async () => {
+    const target = document.getElementById(button.dataset.copyTarget);
+    const text = target.textContent;
+    try { await navigator.clipboard.writeText(text); }
+    catch(e) {
+      const area=document.createElement('textarea');area.value=text;document.body.appendChild(area);area.select();document.execCommand('copy');area.remove();
+    }
+    const original=button.textContent;button.textContent='Copied';setTimeout(()=>button.textContent=original,1300);
+  });
+});
+
+const preview=document.getElementById('cardPreview');
+const previewImg=preview.querySelector('img');
+let pinned=false;
+function imageUrl(name) {
+  return 'https://api.scryfall.com/cards/named?exact='+encodeURIComponent(name)+'&format=image&version=normal';
+}
+function positionPreview(x,y) {
+  if (window.matchMedia('(max-width: 680px)').matches) {
+    preview.style.left='50%';
+    preview.style.top='50%';
+    return;
+  }
+  const pad=14,w=preview.offsetWidth||300,h=preview.offsetHeight||418;
+  let left=x+18,top=y+18;
+  if(left+w>window.innerWidth-pad) left=x-w-18;
+  if(top+h>window.innerHeight-pad) top=window.innerHeight-h-pad;
+  left=Math.max(pad,Math.min(left,window.innerWidth-w-pad));
+  top=Math.max(pad,Math.min(top,window.innerHeight-h-pad));
+  preview.style.left=left+'px';
+  preview.style.top=top+'px';
+}
+function showPreview(el,x,y,pin=false) {
+  const name=el.dataset.card;
+  previewImg.src=imageUrl(name);previewImg.alt=name;
+  preview.classList.add('show');preview.setAttribute('aria-hidden','false');
+  positionPreview(x,y);pinned=pin;
+}
+function hidePreview() {
+  if(pinned) return;
+  preview.classList.remove('show');preview.setAttribute('aria-hidden','true');
+}
+document.querySelectorAll('.card-name').forEach(el => {
+  el.addEventListener('mouseenter',e=>showPreview(el,e.clientX,e.clientY));
+  el.addEventListener('mousemove',e=>positionPreview(e.clientX,e.clientY));
+  el.addEventListener('mouseleave',hidePreview);
+  el.addEventListener('focus',()=>{const r=el.getBoundingClientRect();showPreview(el,r.right,r.top);});
+  el.addEventListener('blur',hidePreview);
+  el.addEventListener('click',e=>{
+    if(window.matchMedia('(hover: none)').matches) {
+      e.preventDefault();pinned=!preview.classList.contains('show')||!pinned;
+      showPreview(el,e.clientX||window.innerWidth/2,e.clientY||window.innerHeight/3,true);
+    }
+  });
+});
+document.addEventListener('click',e=>{
+  if(pinned && !e.target.closest('.card-name')) {pinned=false;preview.classList.remove('show');}
+});
+
+const sections=[...document.querySelectorAll('main section[id]')];
+const tocLinks=[...document.querySelectorAll('.toc a')];
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting) tocLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id));
+  });
+},{rootMargin:'-15% 0px -70% 0px',threshold:0});
+sections.forEach(s=>observer.observe(s));
+</script>
+</body>
+</html>
