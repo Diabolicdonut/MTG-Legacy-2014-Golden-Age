@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "project": "MTG-Legacy-2014-Golden-Age",
+  "asOf": "2026-10-26",
+  "revision": "Archive edition 1",
+  "progress": {
+    "label": "Published Legacy archetype dossiers",
+    "completed": 60,
+    "total": 60,
+    "basis": "60 completed archetype dossiers shown in the existing Legacy archive directory.",
+    "note": "100% refers to the presently defined published archive, not a promise against future historical additions."
+  }
+}
